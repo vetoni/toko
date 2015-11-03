@@ -1,0 +1,126 @@
+@import "../variables.less";
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url("http://fonts.gstatic.com/s/opensans/v13/RjgO7rYTmqiVp7vzi-Q5UVtXRa8TVwTICgirnJhmVJw.woff2") format("woff2");
+}
+
+body,
+html {
+  font-family: "Open Sans",sans-serif;
+  height: 100%;
+}
+
+@nav-background: #2A2A2A;
+@nav-hover:  lighten(@nav-background, 15%);
+@nav-color: #FFFAFA;
+@sidebar-width: 250px;
+
+.color(@color) {
+  &, & a { color: @color !important; text-decoration: none; }
+}
+
+// Navigation
+.navbar {
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  width: 100%;
+  background-color: @nav-background;
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 0;
+  .clearfix;
+  .color(@nav-color);
+  a:hover { background-color: @nav-hover !important; }
+  .navbar-brand {width: @sidebar-width; }
+}
+.navbar-nav {
+  @media (max-width: @screen-sm-min){
+    float: none !important;
+    margin: 7.5px -15px;
+  }
+}
+
+.nav-pills {
+  margin-bottom: 15px !important;
+}
+
+// Sidebar
+.wrapper {
+  margin-top: @navbar-height;
+  padding-left: @sidebar-width;
+  transition: all 0.4s ease 0s;
+}
+.sidebar-wrapper {
+  margin-left: -@sidebar-width;
+  width: @sidebar-width;
+  background: @nav-background;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+  .color(@nav-color);
+}
+.page-content-wrapper {
+  width: 100%;
+}
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: @sidebar-width;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    border-top: 1px solid @nav-hover;
+    &.active { background-color: darken(@nav-hover, 10%); }
+    a {
+      display: block;
+      padding: 12px 15px;
+      &:hover  { background-color: @nav-hover; }
+    }
+  }
+}
+@media (max-width:@screen-xs-max) {
+  .wrapper {
+    padding-left: 0;
+  }
+  .sidebar-wrapper {
+    left: 0;
+  }
+  .navbar-brand {
+    width: auto !important;
+  }
+  .wrapper.active #sidebar-wrapper {
+    left: @sidebar-width;
+    width: @sidebar-width;
+    transition: all 0.4s ease 0s;
+  }
+}
+
+// Content
+.content-header {
+  background-color: lighten(@nav-background, 80%);
+  padding: 15px;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+
+// Tree editor
+
+.kv-tree-container {
+  border-top: none;
+}
+.kv-tree-wrapper,
+.kv-detail-container {
+  border: 0;
+  box-shadow: none;
+  //border-color: lighten(@nav-background, 50%);
+  //border-radius: 0;
+}

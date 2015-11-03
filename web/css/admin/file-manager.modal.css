@@ -1,0 +1,51 @@
+.file-manager-list {
+  float: left;
+  width: 61%;
+}
+.file-manager-list .item {
+  float: left;
+}
+.file-manager-list .item a {
+  border: 4px solid transparent;
+  display: block;
+}
+.file-manager-list .item a.selected {
+  border-color: #337AB7;
+}
+.file-manager-list .item a:focus {
+  outline: none;
+}
+.file-manager-list .item a img {
+  width: 120px;
+  height: 120px;
+}
+.file-manager-list .item:last-of-type {
+  margin-bottom: 10px;
+}
+.file-manager-list .pagination {
+  margin-left: 5px;
+  clear: both;
+  display: block;
+}
+.file-manager-details {
+  position: relative;
+  margin-top: 5px;
+  float: left;
+  width: 39%;
+}
+.file-manager-details .loading {
+  position: absolute;
+  left: 85px;
+  top: 120px;
+  text-align: center;
+  font-size: 2em;
+}
+.file-manager-details .info img {
+  margin: 10px 0;
+  width: 200px;
+  height: 200px;
+}
+.file-manager-upload .btn-return {
+  display: block;
+  margin-bottom: 10px;
+}

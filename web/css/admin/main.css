@@ -1,0 +1,123 @@
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url("http://fonts.gstatic.com/s/opensans/v13/RjgO7rYTmqiVp7vzi-Q5UVtXRa8TVwTICgirnJhmVJw.woff2") format("woff2");
+}
+body,
+html {
+  font-family: "Open Sans", sans-serif;
+  height: 100%;
+}
+.navbar {
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  width: 100%;
+  background-color: #2a2a2a;
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 0;
+}
+.navbar:before,
+.navbar:after {
+  content: " ";
+  display: table;
+}
+.navbar:after {
+  clear: both;
+}
+.navbar,
+.navbar a {
+  color: #fffafa !important;
+  text-decoration: none;
+}
+.navbar a:hover {
+  background-color: #505050 !important;
+}
+.navbar .navbar-brand {
+  width: 250px;
+}
+@media (max-width: 768px) {
+  .navbar-nav {
+    float: none !important;
+    margin: 7.5px -15px;
+  }
+}
+.nav-pills {
+  margin-bottom: 15px !important;
+}
+.wrapper {
+  margin-top: 50px;
+  padding-left: 250px;
+  transition: all 0.4s ease 0s;
+}
+.sidebar-wrapper {
+  margin-left: -250px;
+  width: 250px;
+  background: #2a2a2a;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+}
+.sidebar-wrapper,
+.sidebar-wrapper a {
+  color: #fffafa !important;
+  text-decoration: none;
+}
+.page-content-wrapper {
+  width: 100%;
+}
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar-nav li {
+  border-top: 1px solid #505050;
+}
+.sidebar-nav li.active {
+  background-color: #373737;
+}
+.sidebar-nav li a {
+  display: block;
+  padding: 12px 15px;
+}
+.sidebar-nav li a:hover {
+  background-color: #505050;
+}
+@media (max-width: 767px) {
+  .wrapper {
+    padding-left: 0;
+  }
+  .sidebar-wrapper {
+    left: 0;
+  }
+  .navbar-brand {
+    width: auto !important;
+  }
+  .wrapper.active #sidebar-wrapper {
+    left: 250px;
+    width: 250px;
+    transition: all 0.4s ease 0s;
+  }
+}
+.content-header {
+  background-color: #f6f6f6;
+  padding: 15px;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+.kv-tree-container {
+  border-top: none;
+}
+.kv-tree-wrapper,
+.kv-detail-container {
+  border: 0;
+  box-shadow: none;
+}

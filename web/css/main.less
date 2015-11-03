@@ -1,0 +1,168 @@
+@import "variables";
+
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: normal;
+  src: local('Roboto Condensed Regular'), local('RobotoCondensed-Regular'), url("../fonts/RobotoCondensed-Regular.ttf") format('truetype');
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 12px;
+  .font-general;
+}
+* {
+  outline: medium none !important;
+}
+a, a:hover  {
+  text-decoration: none;
+  transition: color 0.25s linear 0s;
+}
+.wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -@footer-height;
+  padding: 0 0 @footer-height;
+}
+.wrap > .container {
+  padding: 30px 15px 20px;
+}
+.footer {
+  height: @footer-height;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+.logo {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+.navbar {
+  margin-bottom: 0;
+  min-height: 0;
+
+  .nav > li > a {
+    color: @navbar-default-color;
+    padding: 0 @nav-height / 4;
+    line-height: @nav-height;
+  }
+}
+@media (max-width: @screen-sm-min) {
+  .nav { float: none !important; }
+}
+.admin-panel .navbar-toggle {
+  display: none !important;
+}
+.header {
+  @media (max-width: @screen-sm-min) {
+    .currencies,
+    .mini-cart { display: none; }
+  }
+}
+.menu {
+  border-bottom: 0;
+  li {
+    a           { text-shadow: none; color: @menu-color !important; font: 14px/40px "Roboto Condensed", Arial, Helvetica, sans-serif; text-transform: uppercase; }
+    & a:hover   { background-color: @menu-hover-color !important; }
+    &.active a  { background-color: @menu-active-color !important; }
+  }
+}
+.bordered {
+  @border-color: #E5E5E5;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px dashed @border-color;
+  border-bottom: 1px dashed @border-color;
+}
+.carousel {
+  @carousel-height: 400px;
+
+  height: @carousel-height;
+  .carousel-caption {
+    z-index: 10;
+  }
+  .item {
+    height: @carousel-height;
+    background-color: #777;
+  }
+  .carousel-inner > .item > img {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: @carousel-height;
+  }
+}
+.jumbotron {
+  text-align: center;
+  background-color: transparent !important;
+}
+
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+.not-set {
+  color: #c55;
+  font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  padding-left: 5px;
+}
+
+a.asc:after {
+  content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+  content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+  content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+  content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+  content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+  content: "\e156";
+}
+
+.grid-view th {
+  white-space: nowrap;
+}
+
+.hint-block {
+  display: block;
+  margin-top: 5px;
+  color: #999;
+}
+
+.error-summary {
+  color: #a94442;
+  background: #fdf7f7;
+  border-left: 3px solid #eed3d7;
+  padding: 10px 20px;
+  margin: 0 0 15px 0;
+}
