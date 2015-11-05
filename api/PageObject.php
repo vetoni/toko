@@ -10,6 +10,8 @@ use app\models\Page;
  * @package app\api
  *
  * @property Page $model
+ * @method string getImageUrl()
+ * @method string thumb(integer $width, integer $height)
  */
 class PageObject extends ApiObject
 {

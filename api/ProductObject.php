@@ -11,6 +11,7 @@ use app\modules\file\models\Image;
  * @package app\api
  *
  * @property Product $model
+ * @method string getImageUrl()
  * @method string thumb(integer $width, integer $height)
  */
 class ProductObject extends ApiObject

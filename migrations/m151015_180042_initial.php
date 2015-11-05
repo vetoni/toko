@@ -39,10 +39,21 @@ class m151015_180042_initial extends Migration
         $this->createIndex('idx_file_attachment_file_id', "{{%file_attachment}}", 'file_id', false);
         $this->addForeignKey('fx_file_attachment_file_id', "{{%file_attachment}}", 'file_id', "{{%file}}", 'id', 'CASCADE', 'CASCADE');
 
+        $this->createTable('{{%currency}}', [
+            'code' => 'varchar(10) NOT NULL PRIMARY KEY',
+            'name' => 'varchar(255) NOT NULL',
+            'is_default' => 'int(10) unsigned NOT NULL',
+            'rate' => 'float NOT NULL',
+            'symbol' => 'varchar(10) NOT NULL',
+        ]);
+
         $this->createTable('{{%country}}', [
             'id' => 'varchar(10) NOT NULL PRIMARY KEY',
             'name' => 'varchar(255) NOT NULL',
+            'currency_code' => 'varchar(10) NOT NULL',
         ],$this->engine);
+        $this->createIndex('idx_country_currency_code', "{{%country}}", 'currency_code', false);
+        $this->addForeignKey('fx_country_currency_code', "{{%country}}", 'currency_code', "{{%currency}}", 'code');
 
         $this->createTable('{{%user}}', [
             'id' => 'int(10) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT',
@@ -62,6 +73,15 @@ class m151015_180042_initial extends Migration
         $this->createIndex('idx_user_email', "{{%user}}", ['email'], true);
         $this->createIndex('idx_user_country_id', "{{%user}}", ['country_id'], false);
         $this->addForeignKey('fx_user_country_id', "{{%user}}", 'country_id', "{{%country}}", 'id', 'CASCADE', 'CASCADE');
+
+        $this->createTable('{{%user_data}}', [
+            'id' => 'int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT',
+            'user_id' => 'int(10) unsigned NOT NULL',
+            'name' => 'varchar(255) NOT NULL',
+            'data' => 'longtext'
+        ],$this->engine);
+        $this->createIndex('idx_user_data', "{{%user_data}}", ['user_id', 'name'], true);
+        $this->addForeignKey('fx_user_data_user_id', "{{%user_data}}", 'user_id', "{{%user}}", 'id', 'CASCADE', 'CASCADE');
 
         $this->createTable('{{%category}}', [
             'id' => 'int(10) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT',
@@ -133,6 +153,7 @@ class m151015_180042_initial extends Migration
             'created_at' => 'int(10) unsigned DEFAULT NULL',
             'updated_at' => 'int(10) unsigned DEFAULT NULL',
             'status' => 'tinyint(1) unsigned NOT NULL DEFAULT 1',
+            'is_system' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
         ], $this->engine);
         $this->createIndex('idx_page_slug', "{{%page}}", 'slug', true);
     }
@@ -146,8 +167,10 @@ class m151015_180042_initial extends Migration
         $this->dropTable('{{%relation}}');
         $this->dropTable('{{%product}}');
         $this->dropTable('{{%category}}');
+        $this->dropTable('{{%user_data}}');
         $this->dropTable('{{%user}}');
         $this->dropTable('{{%country}}');
+        $this->dropTable('{{%currency}}');
         $this->dropTable('{{%file_attachment}}');
         $this->dropTable('{{%file}}');
     }

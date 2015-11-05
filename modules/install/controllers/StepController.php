@@ -41,6 +41,7 @@ class StepController extends Controller
             'admin_password' => 'test'
         ]);
 
+        Yii::$app->cache->flush();
         $this->module->installed = true;
         return $this->render('step2');
     }

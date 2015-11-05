@@ -8,8 +8,9 @@ use app\components\ActiveRecord;
  * Class Country
  * @package app\modules\user\models
  *
- * @property integer $id
+ * @property integer $code
  * @property string $name
+ * @property string $currency_code
  */
 class Country extends ActiveRecord
 {

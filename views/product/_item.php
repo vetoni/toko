@@ -1,6 +1,7 @@
 <?php
 
 use app\api\ProductObject;
+use app\helpers\CurrencyHelper;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
 
@@ -17,6 +18,6 @@ $url = Url::to(['product/view', 'slug' => $product->model->slug]);
         <p class="caption">
             <a href="<?= $url ?>"><?= $product->model->name ?></a>
         </p>
-        <p class="price"><?= $product->asCurrency($product->model->price) ?></p>
+        <p class="price"><?= CurrencyHelper::format($product->model->price) ?></p>
     </div>
 </div>

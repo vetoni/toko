@@ -9,6 +9,7 @@ use app\modules\user\models\ForgotPasswordForm;
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\RegisterForm;
 use app\modules\user\models\User;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
@@ -43,14 +44,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param null $returnUrl
      * @return string|\yii\web\Response
      */
-    public function actionLogin($returnUrl = null)
+    public function actionLogin()
     {
         $model = new LoginForm();
         if ($model->load(\Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack($returnUrl);
+            return $this->goBack();
         }
         return $this->render('login', ['model' => $model]);
     }

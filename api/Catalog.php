@@ -70,7 +70,11 @@ class Catalog extends Api
     public function api_cats($options = [])
     {
         if (!isset($this->_roots)) {
-            $query = Category::find()->roots()->with('image');
+            $query = Category::find()
+                ->roots()
+                ->with('image')
+                ->andWhere(['status' => 1]);
+
             $this->_adp = new ActiveDataProvider([
                 'query' => $query,
                 'pagination' => isset($options['pagination']) ? $options['pagination'] : [],
@@ -101,7 +105,7 @@ class Catalog extends Api
      */
     protected function findCategory($id_slug)
     {
-        $model = Category::find()->where(['OR', ['id' => $id_slug], ['slug' => $id_slug]])->one();
+        $model = Category::find()->where(['AND', ['OR', ['id' => $id_slug], ['slug' => $id_slug]], ['status' => 1]])->one();
         return isset($model) ? new CategoryObject($model) : null;
     }
 

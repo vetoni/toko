@@ -3,23 +3,26 @@
 namespace app\models;
 
 use app\modules\file\behaviors\ImageAttachmentBehavior;
-use app\modules\file\models\Image;
 use kartik\tree\models\Tree;
+use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 
 /**
- * Class Category
- * @package app\models
+ * This is the model class for table "{{%category}}".
  *
  * @property string $slug
  * @property string $announce
  * @property string $description
- * @property int $created_at
- * @property int $updated_at
- * @property int $status
- * @property Image $image
- * @property string $imageUrl
+ * @property string $created_at
+ * @property string $updated_at
+ * @property integer $status
+ * @property Product[] $products
+ * @method boolean isLeaf()
+ * @method ActiveQuery children($depth = null)
+ * @method ActiveQuery parents($depth = null)
+ * @method ActiveQuery roots()
  */
 class Category extends Tree
 {
@@ -29,7 +32,7 @@ class Category extends Tree
     public $encodeNodeNames = false;
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -37,16 +40,29 @@ class Category extends Tree
     }
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public function rules()
     {
-        $rules =  array_merge(parent::rules(), [
+        return array_merge(parent::rules(), [
             [['announce', 'description'], 'string'],
             ['status', 'default', 'value' => 1],
         ]);
+    }
 
-        return $rules;
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'slug' => Yii::t('app', 'Slug'),
+            'announce' => Yii::t('app', 'Announce'),
+            'description' => Yii::t('app', 'Description'),
+            'status' => Yii::t('app', 'Status'),
+        ];
     }
 
     /**

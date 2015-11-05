@@ -12,6 +12,7 @@ class CatalogAsset extends AssetBundle
         'css/catalog.css',
     ];
     public $js = [
+
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -14,24 +14,24 @@ use yii\widgets\Breadcrumbs;
  * @var PageObject $page
  */
 
-$this->title = Html::encode($page->model->name);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Shop'), 'url' => Url::to()];
+$this->title = Yii::t('app', 'Shop');
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to()];
 
 ?>
 
 <div class="catalog-page">
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-md-3">
             <div class="thumb">
-                <?= Html::img($page->model->imageUrl) ?>
+                <?= Html::img($page->getImageUrl()) ?>
             </div>
         </div>
-        <div class="col-lg-9">
+        <div class="col-md-9">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
             <div class="header">
-                <h1><?= $this->title ?></h1>
+                <h1><?= Html::encode($page->model->name) ?></h1>
                 <p><?= $page->model->announce ?></p>
             </div>
         </div>

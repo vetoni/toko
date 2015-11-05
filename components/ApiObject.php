@@ -70,14 +70,4 @@ class ApiObject extends Object
         }
         return parent::__get($name);
     }
-
-    /**
-     * @param $value
-     * @return string
-     * @throws \yii\base\InvalidConfigException
-     */
-    public function asCurrency($value)
-    {
-        return \Yii::$app->formatter->asCurrency($value, 'USD');
-    }
 }

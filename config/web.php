@@ -6,6 +6,7 @@ $modules = require(__DIR__ . '/modules.php');
 
 $config = [
     'id' => 'toko',
+    'name' => 'Toko',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'sourceLanguage' => 'en',

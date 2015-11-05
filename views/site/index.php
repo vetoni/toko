@@ -2,11 +2,6 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Toko';
-
-?>
-
-<?php
 $this->beginBlock('topBanner');
 echo $this->render('/shared/carousel');
 $this->endBlock();

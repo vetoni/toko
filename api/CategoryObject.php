@@ -14,6 +14,7 @@ use yii\widgets\LinkSorter;
  * @package app\api
  *
  * @property Category $model
+ * @method string getImageUrl()
  * @method string thumb(integer $width, integer $height)
  */
 class CategoryObject extends ApiObject
@@ -81,7 +82,8 @@ class CategoryObject extends ApiObject
             $category = $this->model;
             $query = $category
                 ->children(1)
-                ->with('image');
+                ->with('image')
+                ->andWhere(['status' => 1]);
 
             $this->_adp= new ActiveDataProvider([
                 'query' => $query,

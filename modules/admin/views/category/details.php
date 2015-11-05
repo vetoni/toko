@@ -16,6 +16,8 @@ echo $form->field($node, 'slug')->textInput(['readonly' => true]);
 
 echo $form->field($node, 'image')->widget(ImageSelector::className());
 
+echo $form->field($node, 'status')->dropDownList([Yii::t('app', 'No'), Yii::t('app', 'Yes')]);
+
 echo $form->field($node, 'announce')->widget(Redactor::className());
 
 if ($node->isLeaf() && !$node->isNewRecord) {

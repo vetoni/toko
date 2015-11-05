@@ -1,12 +1,3 @@
-/**
- * Bottega file manager JavaScript module.
- *
- * @link https://github.com/vetoni/Bottega
- * @copyright Vetoni (c) 2015
- * @license https://opensource.org/licenses/MIT
- * @author Vetoni <vetoni.github@gmail.com>
- */
-
 (function ($) {
     $(document).ready(function() {
 

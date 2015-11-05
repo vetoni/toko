@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -17,7 +18,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= $this->title ?></title>
+    <title><?= $this->title ? "{$this->title} | " . Yii::$app->name : Yii::$app->name ?></title>
     <?php $this->head() ?>
 </head>
 <body>

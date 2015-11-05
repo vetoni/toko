@@ -2,6 +2,7 @@
 
 use app\api\CategoryObject;
 use app\api\ProductObject;
+use app\helpers\CurrencyHelper;
 use app\models\AddToCartForm;
 use kartik\rating\StarRating;
 use yii\bootstrap\ActiveForm;
@@ -38,9 +39,9 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
             <p class="description"><?= $product->model->announce ?></p>
             <div class="price bordered">
                 <?php if ($product->model->old_price): ?>
-                    <span><?= $product->asCurrency($product->model->old_price) ?></span>
+                    <span><?= CurrencyHelper::format($product->model->old_price) ?></span>
                 <?php endif; ?>
-                <strong><?= $product->asCurrency($product->model->price) ?></strong>
+                <strong><?= CurrencyHelper::format($product->model->price) ?></strong>
             </div>
             <div class="clearfix">
                 <div class="pull-right">

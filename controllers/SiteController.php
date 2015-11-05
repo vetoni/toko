@@ -5,8 +5,15 @@ namespace app\controllers;
 use app\components\Controller;
 use Yii;
 
+/**
+ * Class SiteController
+ * @package app\controllers
+ */
 class SiteController extends Controller
 {
+    /**
+     * @return array
+     */
     public function actions()
     {
         return [
@@ -17,13 +24,11 @@ class SiteController extends Controller
         ];
     }
 
+    /**
+     * @return string
+     */
     public function actionIndex()
     {
         return $this->render('index');
-    }
-
-    public function actionAbout()
-    {
-        return $this->render('about');
     }
 }

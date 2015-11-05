@@ -2,38 +2,38 @@
 
 namespace app\models;
 
-use app\components\ActiveRecord;
 use app\behaviors\RelatedItemsBehavior;
 use app\modules\file\behaviors\ImageAttachmentBehavior;
 use app\modules\file\models\Image;
+use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
- * Class Product
- * @package app\models
+ * This is the model class for table "{{%product}}".
  *
- * @property int $id
- * @property int $category_id
+ * @property string $id
+ * @property string $category_id
  * @property string $name
  * @property string $slug
  * @property string $announce
  * @property string $description
- * @property double $old_price
- * @property double $price
- * @property integer $inventory
- * @property integer $created_at
- * @property integer $updated_at
+ * @property string $created_at
+ * @property string $updated_at
  * @property integer $status
- * @property Category category
+ * @property string $old_price
+ * @property string $price
+ * @property integer $inventory
+ * @property Category $category
+ *
  * @property Image[] $images
- * @property string $imageUrl
  * @property Product[] $related
  */
 class Product extends ActiveRecord
 {
     /**
-     * @return string
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -41,21 +41,42 @@ class Product extends ActiveRecord
     }
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public function rules()
     {
         return [
             [['category_id', 'name', 'slug'], 'required'],
-            ['category_id', 'integer'],
-            [['name', 'slug'], 'string', 'max' => 255],
+            [['category_id', 'created_at', 'updated_at', 'status', 'inventory'], 'integer'],
             [['announce', 'description'], 'string'],
-            [['old_price', 'price'], 'double'],
+            [['old_price', 'price'], 'number'],
             [['old_price', 'price'], 'compare', 'compareValue' => 0, 'operator' => '>='],
             [['price', 'inventory'], 'default', 'value' => 0],
-            ['status', 'integer'],
+            [['name', 'slug'], 'string', 'max' => 255],
+            [['slug'], 'unique'],
             ['status', 'default', 'value' => 1],
             ['relationInfo', 'safe']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'category_id' => Yii::t('app', 'Category ID'),
+            'name' => Yii::t('app', 'Name'),
+            'slug' => Yii::t('app', 'Slug'),
+            'announce' => Yii::t('app', 'Announce'),
+            'description' => Yii::t('app', 'Description'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'status' => Yii::t('app', 'Status'),
+            'old_price' => Yii::t('app', 'Old Price'),
+            'price' => Yii::t('app', 'Price'),
+            'inventory' => Yii::t('app', 'Inventory')
         ];
     }
 

@@ -73,7 +73,7 @@ echo GridView::widget([
             'class' => 'yii\grid\ActionColumn',
             'template' => '{update} {delete}',
             'buttons' => [
-                'update' => function ($url, $model, $key) {
+                'update' => function ($url) {
                     $options = array_merge([
                         'title' => Yii::t('yii', 'Update'),
                         'aria-label' => Yii::t('yii', 'Update'),
@@ -81,7 +81,7 @@ echo GridView::widget([
                     ]);
                     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options);
                 },
-                'delete' => function ($url, $model, $key) {
+                'delete' => function ($url, $model) {
                     $options = array_merge([
                         'title' => Yii::t('yii', 'Delete'),
                         'aria-label' => Yii::t('yii', 'Delete'),
@@ -96,6 +96,4 @@ echo GridView::widget([
         ],
     ]
 ]);
-
-$col = new yii\grid\ActionColumn();
 
