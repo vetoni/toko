@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to()];
 
 ?>
 
-<div class="catalog-page">
+<div class="shop-page">
     <div class="row">
         <div class="col-md-3">
             <div class="thumb">

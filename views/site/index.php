@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use yii\bootstrap\Html;
+
 $this->beginBlock('topBanner');
 echo $this->render('/shared/carousel');
 $this->endBlock();
@@ -15,7 +17,7 @@ $this->endBlock();
         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Check our catalog</a></p>
+        <p><?= Html::a(Yii::t('app', 'Check our catalog'), ['/category/index'], ['class' => 'btn btn-lg btn-success']) ?></p>
     </div>
 
     <div class="body-content">

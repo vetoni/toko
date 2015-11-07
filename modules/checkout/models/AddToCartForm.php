@@ -1,12 +1,12 @@
 <?php
 
-namespace app\models;
+namespace app\modules\checkout\models;
 
 use yii\base\Model;
 
 /**
  * Class AddToCartForm
- * @package app\models
+ * @package app\modules\checkout\models
  */
 class AddToCartForm extends Model
 {
@@ -28,6 +28,7 @@ class AddToCartForm extends Model
         return [
             ['quantity', 'required', 'message' => ''],
             ['quantity', 'integer', 'min' => 1],
+            ['productId', 'integer'],
         ];
     }
 }

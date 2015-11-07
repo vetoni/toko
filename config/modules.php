@@ -28,5 +28,8 @@ return [
         'storageUrl' => '@web/files/uploads',
         'storagePath' => '@webroot/files/uploads',
         'placeholderUrl' => '@web/files/img/placeholder.png',
-    ]
+    ],
+    'checkout' => [
+        'class' => 'app\modules\checkout\CheckoutModule'
+    ],
 ];

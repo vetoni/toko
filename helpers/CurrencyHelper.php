@@ -2,8 +2,9 @@
 
 namespace app\helpers;
 
-use app\api\Shop;
 use app\models\Currency;
+use app\modules\user\models\Country;
+use app\modules\user\models\User;
 use yii\base\InvalidConfigException;
 
 /**
@@ -12,6 +13,83 @@ use yii\base\InvalidConfigException;
  */
 class CurrencyHelper
 {
+    /**
+     * @var array
+     */
+    protected static $_currencies;
+
+    /**
+     * @return Currency[]
+     */
+    public static function all()
+    {
+        if (!isset(static::$_currencies)) {
+            /** @var Currency[] $list */
+            static::$_currencies = Currency::find()->all();
+        }
+        return static::$_currencies;
+    }
+
+    /**
+     * @return Currency
+     */
+    public static function current()
+    {
+        $code = Data::load('currency', function() {
+            /** @var User $user */
+            $user = \Yii::$app->user->identity;
+            return \Yii::$app->user->isGuest
+                ? static::getDefault()->code
+                : Country::findOne($user->country_id)->currency_code;
+        });
+        return static::get($code);
+    }
+
+    /**
+     * @param string $code
+     */
+    public static function change($code)
+    {
+        Data::save('currency', $code);
+    }
+
+    /**
+     * @return Currency
+     */
+    public static function getDefault()
+    {
+        return static::findCurrency('is_default', true);
+    }
+
+    /**
+     * @param $code
+     * @return Currency
+     */
+    public static function get($code)
+    {
+        return static::findCurrency('code', $code);
+    }
+
+    /**
+     * @param $value
+     * @return double
+     */
+    public static function convert($value)
+    {
+        return static::current()->rate * $value;
+    }
+
+    /**
+     * @param $value
+     * @return string
+     * @throws InvalidConfigException
+     */
+    public static function format($value)
+    {
+        $currency = static::current();
+        return \Yii::$app->formatter->asCurrency($currency->rate * $value, $currency->code);
+    }
+
     /**
      * @throws InvalidConfigException
      */
@@ -42,15 +120,18 @@ class CurrencyHelper
     }
 
     /**
-     * @param $value
-     * @param null $currency
-     * @return string
-     * @throws InvalidConfigException
+     * @param $attrName
+     * @param $attrValue
+     * @return Currency
      */
-    public static function format($value, $currency = null)
+    protected static function findCurrency($attrName, $attrValue)
     {
-        $currency = isset($currency) ? $currency : Shop::current_currency();
-        $value = $value * Shop::currency($currency)->rate;
-        return \Yii::$app->formatter->asCurrency($value, $currency);
+        $currencies = static::all();
+        foreach ($currencies as $currency) {
+            if ($currency->{$attrName} == $attrValue) {
+                return $currency;
+            }
+        }
+        throw new \InvalidArgumentException("Currency '{$attrName}={$attrValue}' not found");
     }
 }

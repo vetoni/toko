@@ -12,35 +12,37 @@ use Yii;
 class Data
 {
     /**
-     * @var array
+     * @var UserData[]
      */
-    protected static $_items;
+    protected static $_records;
 
     /**
      * Loads data from database if user is logged in.
      * Otherwise loads from session.
      * @param $name
+     * @param callable $defaultValue
      * @return mixed
      */
-    public static function load($name)
+    public static function load($name, callable $defaultValue = null)
     {
-        if (!isset(static::$_items[$name])) {
-            $key = self::_getSessionKey($name);
-            $data = Yii::$app->session->get($key);
+        $key = self::_sessionKey($name);
+        $data = Yii::$app->session->get($key);
 
-            if (!Yii::$app->user->isGuest) {
-                /** @var UserData $rec */
-                $rec = UserData::findOne(['user_id' => Yii::$app->user->getId(), 'name' => $name]);
-                if ($rec) {
-                    $data = $rec->data;
-                } else {
-                    self::_save($name, $data);
-                }
-                Yii::$app->session->remove($key);
+        if (!Yii::$app->user->isGuest) {
+            $rec = static::findRecord($name);
+            if ($rec) {
+                $data = $rec->data;
             }
-            static::$_items[$name] = isset($data) ? unserialize($data) : null;
+            // Ensures data will be removed from session after user log out
+            Yii::$app->session->remove($key);
         }
-        return static::$_items[$name];
+
+        if (isset($data)) {
+            return unserialize($data);
+        }
+        else {
+            return static::save($name, is_callable($defaultValue) ? $defaultValue() : null);
+        }
     }
 
     /**
@@ -51,15 +53,15 @@ class Data
      */
     public static function save($name, $data)
     {
-        static::$_items[$name] = $data;
-        $data = serialize($data);
+        $json = serialize($data);
         if (!Yii::$app->user->isGuest) {
-            self::_save($name, $data);
+            self::updateRecord($name, $json);
         }
         else {
-            $key = self::_getSessionKey($name);
-            Yii::$app->session->set($key, $data);
+            $key = self::_sessionKey($name);
+            Yii::$app->session->set($key, $json);
         }
+        return $data;
     }
 
     /**
@@ -88,7 +90,7 @@ class Data
      * @param $name
      * @return string
      */
-    protected static function _getSessionKey($name)
+    protected static function _sessionKey($name)
     {
         return "user_data:$name";
     }
@@ -97,17 +99,28 @@ class Data
      * @param $name
      * @param $data
      */
-    protected static function _save($name, $data)
+    protected static function updateRecord($name, $data)
     {
-        /** @var UserData $rec */
-        $uid = Yii::$app->user->getId();
-        $rec = UserData::findOne(['user_id' => $uid]);
+        $rec = static::findRecord($name);
         if (!$rec) {
             $rec = new UserData();
-            $rec->user_id = $uid;
+            $rec->user_id = Yii::$app->user->getId();
             $rec->name = $name;
         }
         $rec->data = $data;
         $rec->save();
+        static::$_records[$name] = $rec;
+    }
+
+    /**
+     * @param $name
+     * @return UserData
+     */
+    protected static function findRecord($name)
+    {
+        if (!isset(static::$_records[$name])) {
+            static::$_records[$name] = UserData::findOne(['user_id' => Yii::$app->user->getId(), 'name' => $name]);
+        }
+        return static::$_records[$name];
     }
 }

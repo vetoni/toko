@@ -4,7 +4,6 @@ namespace app\modules\file\behaviors;
 
 use app\modules\file\FileModule;
 use app\modules\file\models\Image;
-use Imagine\Exception\InvalidArgumentException;
 use ReflectionClass;
 use yii\base\Behavior;
 use yii\db\ActiveQuery;
@@ -189,7 +188,7 @@ class ImageAttachmentBehavior extends Behavior
         $image = new Image();
 
         if (!$image->uploadFrom($path)) {
-            throw new InvalidArgumentException("File can not be copied: $path");
+            return false;
         }
 
         $itemId = $this->owner->primaryKey;

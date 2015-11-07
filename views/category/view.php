@@ -15,7 +15,7 @@ foreach ($category->getNodePath() as $node) {
 }
 ?>
 
-<div class="catalog-page">
+<div class="shop-page">
     <div class="row">
         <div class="col-md-12">
             <?= Breadcrumbs::widget([

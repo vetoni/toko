@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use app\api\Shop;
 use app\components\Controller;
+use app\helpers\CurrencyHelper;
 use Yii;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -24,13 +24,9 @@ class ShopController extends Controller
         if (!Yii::$app->request->isPost) {
             throw new BadRequestHttpException();
         }
-
         $code = Yii::$app->request->post('code');
-        $all = Shop::currencies();
-        if (!array_key_exists($code, $all)) {
-            throw new \InvalidArgumentException("Wrong currency code: $code");
-        }
-        Shop::current_currency($code);
+        $currency = CurrencyHelper::get($code);
+        CurrencyHelper::change($currency->code);
         if (!Yii::$app->request->isAjax) {
             $returnUrl = Yii::$app->request->post('returnUrl');
             if (isset($returnUrl)) {

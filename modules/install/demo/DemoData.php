@@ -149,6 +149,7 @@ class DemoData
     {
         static::saveProducts([
             [
+                'id' => 1,
                 'category_id' => '2',
                 'name' => 'LENOVO H30 Desktop PC',
                 'announce' => '<ul><li>Windows</li><li>AMD A8-6410 APU</li><li>Memory: 8 GB</li><li>Hard drive: 1 TB</li><li>With built-in WiFi</li></ul>',
@@ -158,6 +159,7 @@ class DemoData
                 'inventory' => 50
             ],
             [
+                'id' => 2,
                 'category_id' => '2',
                 'name' => 'HP Pavilion 23-q055na Touchscreen All-in-One PC',
                 'announce' => '<ul><li>Windows</li><li>Intel® Core™ i5-4460T Processor</li><li>Memory: 8 GB</li><li>Hard drive: 1 TB</li><li>With built-in WiFi</li></ul>',
@@ -167,6 +169,7 @@ class DemoData
                 'inventory' => 10
             ],
             [
+                'id' => 3,
                 'category_id' => '2',
                 'name' => 'LENOVO IdeaCentre AIO 700 23.8" Touchscreen',
                 'announce' => '<ul><li>Intel® RealSense™ 3D camera</li><li>Windows 10 (pre-installed)</li><li>Intel® Core™ i5-6400 Processor</li><li>Graphics: NVIDIA GeForce GT 930</li><li>Hard drive: 2 TB</li></ul>',
@@ -182,8 +185,16 @@ class DemoData
     {
         static::savePages([
             [
+                'id' => 1,
                 'name' => 'Shop by category',
                 'type' => 'list',
+                'announce' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br>Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
+                'is_system' => 1,
+            ],
+            [
+                'id' => 2,
+                'name' => 'Shopping cart',
+                'type' => 'show',
                 'announce' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br>Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
                 'is_system' => 1,
             ],

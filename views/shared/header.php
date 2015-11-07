@@ -10,8 +10,8 @@ NavBar::begin([
 Nav::begin([
     'items' => [
         ['label' => 'Wish List', 'url' => ['/shop/wish-list']],
-        ['label' => 'Shopping cart', 'url' => ['/shop/cart']],
-        ['label' => 'Checkout', 'url' => ['/shop/checkout']],
+        ['label' => 'Shopping cart', 'url' => ['/checkout/cart/index']],
+        ['label' => 'Checkout', 'url' => ['/checkout/order/address']],
     ],
     'options' => ['class' =>'navbar-nav']
 ]);

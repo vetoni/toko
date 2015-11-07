@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use app\api\Catalog;
 use app\api\Shop;
-use app\assets\CatalogAsset;
 use app\components\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -14,15 +13,6 @@ use yii\web\NotFoundHttpException;
  */
 class CategoryController extends Controller
 {
-    /**
-     * @throws \yii\base\InvalidConfigException
-     */
-    public function init()
-    {
-        parent::init();
-        $this->view->registerAssetBundle(CatalogAsset::className());
-    }
-
     /**
      * @return string
      */

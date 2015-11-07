@@ -1,11 +1,11 @@
 <?php
 
-use app\api\Shop;
+use app\helpers\CurrencyHelper;
 use yii\bootstrap\Nav;
 use yii\helpers\Url;
 
-$all = Shop::currencies();
-$current = Shop::current_currency();
+$all = CurrencyHelper::all();
+$current = CurrencyHelper::current()->code;
 
 $items = [];
 foreach ($all as $currency) {

@@ -2,13 +2,14 @@
 
 namespace app\modules\file;
 use app\modules\file\models\Image;
+use yii\base\Module;
 
 
 /**
  * Class FileModule
  * @package app\modules\file
  */
-class FileModule extends \yii\base\Module
+class FileModule extends Module
 {
     /**
      * @var array
@@ -62,18 +63,5 @@ class FileModule extends \yii\base\Module
     public static function getInstance()
     {
         return \Yii::$app->getModule('file');
-    }
-
-    /**
-     * Generate all image thumbs
-     */
-    public static function generateThumbnails()
-    {
-        /** @var Image[] $images */
-        $images = Image::find()->all();
-        foreach ($images as $image) {
-            $image->deleteThumbnails();
-            $image->createThumbnails();
-        }
     }
 }

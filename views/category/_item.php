@@ -10,7 +10,7 @@ $url = Url::to(['category/view', 'slug' => $category->model->slug]);
 ?>
 
 <div class="col-md-3">
-    <div class="thumbnail">
+    <div class="thumb">
         <a class="image" href="<?= $url ?>">
             <?= Html::img($category->thumb(300, 300)) ?>
         </a>

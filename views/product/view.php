@@ -3,7 +3,7 @@
 use app\api\CategoryObject;
 use app\api\ProductObject;
 use app\helpers\CurrencyHelper;
-use app\models\AddToCartForm;
+use app\modules\checkout\models\AddToCartForm;
 use kartik\rating\StarRating;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
@@ -26,7 +26,7 @@ $this->title = Html::encode($product->model->name);
 $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->model->id]);
 ?>
 
-<div class="catalog-page">
+<div class="shop-page">
     <div class="row">
         <div class="col-md-3">
             <?= $this->render('_carousel', ['product' => $product->model]) ?>
@@ -53,7 +53,7 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
                 </div>
             </div>
             <div class="bordered clearfix">
-                <?php $form = ActiveForm::begin(['action' => ['cart/action/add'], 'options' => ['class' => 'form-add-to-cart form-inline pull-right']]) ?>
+                <?php $form = ActiveForm::begin(['action' => ['checkout/cart/add'], 'options' => ['class' => 'form-add-to-cart form-inline pull-right']]) ?>
                     <?= $form->field($formModel, 'quantity') ?>
                     <?= $form->field($formModel, 'productId')->hiddenInput()->label('') ?>
                     <?= Html::submitButton(Yii::t('app', 'Add to cart'), ['class' => 'btn btn-primary']) ?>
