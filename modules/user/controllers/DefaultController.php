@@ -3,8 +3,8 @@
 namespace app\modules\user\controllers;
 
 
+use app\api\Shop;
 use app\modules\user\models\ChangePasswordForm;
-use app\modules\user\models\Country;
 use app\modules\user\models\ForgotPasswordForm;
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\RegisterForm;
@@ -73,7 +73,7 @@ class DefaultController extends Controller
         if ($model->load(\Yii::$app->request->post()) && $model->register()) {
             return $this->goHome();
         }
-        return $this->render('register', ['model' => $model, 'countries' => Country::find()->all()]);
+        return $this->render('register', ['model' => $model, 'countries' => Shop::countries()]);
     }
 
     /**
@@ -85,7 +85,7 @@ class DefaultController extends Controller
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
             return $this->goHome();
         }
-        return $this->render('profile', ['model' => $model, 'countries' => Country::find()->all()]);
+        return $this->render('profile', ['model' => $model, 'countries' => Shop::countries()]);
     }
 
     /**

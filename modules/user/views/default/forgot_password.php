@@ -22,7 +22,7 @@ $this->title = Yii::t('app', 'Confirm email');
 <?php } else { ?>
     <div class="well col-md-6">
         <?php $form = ActiveForm::begin(); ?>
-        <?= $form->field($model, 'email'); ?>
+        <?= $form->field($newComment, 'email'); ?>
         <?= Html::submitButton(Yii::t('app', 'Send token'), ['class' => 'btn btn-primary']); ?>
         <?php ActiveForm::end(); ?>
     </div>

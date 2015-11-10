@@ -53,7 +53,7 @@ class m151015_180042_initial extends Migration
             'currency_code' => 'varchar(10) NOT NULL',
         ],$this->engine);
         $this->createIndex('idx_country_currency_code', "{{%country}}", 'currency_code', false);
-        $this->addForeignKey('fx_country_currency_code', "{{%country}}", 'currency_code', "{{%currency}}", 'code');
+        $this->addForeignKey('fx_country_currency_code', "{{%country}}", 'currency_code', "{{%currency}}", 'code', null, 'CASCADE');
 
         $this->createTable('{{%user}}', [
             'id' => 'int(10) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT',
@@ -156,6 +156,58 @@ class m151015_180042_initial extends Migration
             'is_system' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
         ], $this->engine);
         $this->createIndex('idx_page_slug', "{{%page}}", 'slug', true);
+
+        $this->createTable('{{%order}}', [
+            'id' => 'int(10) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT',
+            'user_id' => 'int(10) unsigned',
+            'currency_code' => 'varchar(10) NOT NULL',
+            'discount' => 'decimal(10,2) unsigned NOT NULL',
+            'name' => 'varchar(255) DEFAULT NULL',
+            'country_id' => 'varchar(10) NOT NULL',
+            'address' => 'varchar(255) DEFAULT NULL',
+            'phone' => 'varchar(255) NOT NULL',
+            'email' => 'varchar(255) DEFAULT NULL',
+            'comment' => 'longtext DEFAULT NULL',
+            'token' => 'varbinary(255) NOT NULL',
+            'created_at' => 'int(10) unsigned DEFAULT NULL',
+            'updated_at' => 'int(10) unsigned DEFAULT NULL',
+            'status' => 'tinyint(1) unsigned NOT NULL DEFAULT 0',
+        ], $this->engine);
+        $this->createIndex('idx_order_user_id', "{{%order}}", 'user_id', false);
+        $this->createIndex('idx_order_currency_code', "{{%order}}", 'currency_code', false);
+        $this->createIndex('idx_order_country_id', "{{%order}}", 'country_id', false);
+        $this->createIndex('idx_order_token', "{{%order}}", 'token', true);
+        $this->addForeignKey('fx_order_user_id', "{{%order}}", 'user_id', "{{%user}}", 'id', null, 'CASCADE');
+        $this->addForeignKey('fx_order_currency_code', "{{%order}}", 'currency_code', "{{%currency}}", 'code', null, 'CASCADE');
+        $this->addForeignKey('fx_order_country_id', "{{%order}}", 'country_id', "{{%country}}", 'id', null, 'CASCADE');
+
+        $this->createTable('{{%order_data}}', [
+            'id' => 'int(10) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT',
+            'order_id' => 'int(10) unsigned NOT NULL',
+            'product_id' => 'int(10) unsigned NOT NULL',
+            'quantity' => 'int(10) unsigned NOT NULL',
+            'price' => 'decimal(10,2) unsigned NOT NULL',
+        ], $this->engine);
+        $this->createIndex('idx_order_data_order_id', "{{%order_data}}", 'order_id', false);
+        $this->createIndex('idx_order_data_product_id', "{{%order_data}}", 'product_id', false);
+        $this->createIndex('idx_order_data', "{{%order_data}}", 'order_id, product_id', true);
+        $this->addForeignKey('fx_order_data_order_id', "{{%order_data}}", 'order_id', "{{%order}}", 'id', null, 'CASCADE');
+        $this->addForeignKey('fx_order_data_product_id', "{{%order_data}}", 'product_id', "{{%product}}", 'id', null, 'CASCADE');
+
+        $this->createTable('{{%comment}}', [
+            'id' => 'int(10) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT',
+            'product_id' => 'int(10) unsigned NOT NULL',
+            'user_id' => 'int(10) unsigned NOT NULL',
+            'rating' => 'decimal(10,2) NOT NULL',
+            'body' => 'longtext',
+            'created_at' => 'int(10) unsigned DEFAULT NULL',
+            'updated_at' => 'int(10) unsigned DEFAULT NULL',
+            'status' => 'int(10) unsigned NOT NULL',
+        ], $this->engine);
+        $this->createIndex('idx_comment_product_id', "{{%comment}}", 'product_id', false);
+        $this->createIndex('idx_comment_user_id', "{{%comment}}", 'user_id', false);
+        $this->addForeignKey('fx_comment_product_id', "{{%comment}}", 'product_id', "{{%product}}", 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fx_comment_user_id', "{{%comment}}", 'user_id', "{{%user}}", 'id', 'CASCADE', 'CASCADE');
     }
 
     /**
@@ -163,6 +215,10 @@ class m151015_180042_initial extends Migration
      */
     public function down()
     {
+        $this->dropTable('{{%comment}}');
+        $this->dropTable('{{%order_data}}');
+        $this->dropTable('{{%order}}');
+        $this->dropTable('{{%page}}');
         $this->dropTable('{{%page}}');
         $this->dropTable('{{%relation}}');
         $this->dropTable('{{%product}}');

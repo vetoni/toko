@@ -39,14 +39,11 @@ class Cart extends Model
         }
         else {
             $product = Catalog::product($productId);
-
             if (!$product) {
                 throw new InvalidParamException("Product with id = {$productId} does not exist");
             }
-
             $this->lines[$productId] = new CartLine(['product_id' => $productId, 'price' => $product->model->price, 'quantity' => $quantity]);
         }
-
         $this->save();
     }
 
@@ -90,7 +87,7 @@ class Cart extends Model
     {
         if ($this->discount > 0)
         {
-            return max(0, $this->totalExclDiscount - $this->discount);
+            return $this->totalExclDiscount * (1 - $this->discount);
         }
         return $this->totalExclDiscount;
     }
@@ -118,17 +115,27 @@ class Cart extends Model
     }
 
     /**
+     * Normalize cart. Removes lines with not existing product etc.
+     */
+    public function normalize()
+    {
+        foreach ($this->lines as $line)
+        {
+            if (!$line->product) {
+                $this->remove($line->product_id);
+            }
+        }
+    }
+
+    /**
      * Gets shopping cart
      * @return static
      */
     public static function get()
     {
-        $cart = Data::load('cart');
-        if (!$cart) {
-            $cart = new Cart();
-            $cart->save();
-        }
-        return $cart;
+        return Data::load('shopping_cart', function() {
+            return new static();
+        });
     }
 
     /**
@@ -136,11 +143,6 @@ class Cart extends Model
      */
     public function save()
     {
-        foreach ($this->lines as $id => $line) {
-            if ($line->quantity == 0) {
-                unset($this->lines[$id]);
-            }
-        }
-        Data::save('cart', $this);
+        Data::save('shopping_cart', $this);
     }
 }

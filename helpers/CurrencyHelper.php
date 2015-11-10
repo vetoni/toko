@@ -71,22 +71,28 @@ class CurrencyHelper
     }
 
     /**
+     * Converts price value to the specified currency.
+     * Value should be passed in default currency.
+     * If code argument is not set current currency will be used.
      * @param $value
-     * @return double
+     * @param null $code
+     * @return float
      */
-    public static function convert($value)
+    public static function convert($value, $code = null)
     {
-        return static::current()->rate * $value;
+        $currency = isset($code) ? static::get($code) : static::current();
+        return $currency->rate * $value;
     }
 
     /**
      * @param $value
+     * @param $code
      * @return string
      * @throws InvalidConfigException
      */
-    public static function format($value)
+    public static function format($value, $code = null)
     {
-        $currency = static::current();
+        $currency = isset($code) ? static::get($code) : static::current();
         return \Yii::$app->formatter->asCurrency($currency->rate * $value, $currency->code);
     }
 

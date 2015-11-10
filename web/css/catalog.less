@@ -78,12 +78,7 @@ h1,h2,h3,h4,h5,h6 {
   .caption { text-align: center; height: 20px; overflow: hidden; padding: 0; }
   .price { text-align: center; color: @price-color; }
 }
-.pagination {
-  margin: 0 15px;
-  display: block;
-  float: left;
-  width: 100%;
-}
+
 .form-add-to-cart {
   input {
     width: 50px !important;
@@ -132,7 +127,7 @@ h1,h2,h3,h4,h5,h6 {
     padding: 15px 0;
     text-align: right;
     div { margin: 3px 0; }
-    span { width: 70px; display: inline-block; font-weight: bold; }
+    span { width: 100px; display: inline-block; font-weight: bold; }
   }
   .total {
     border-top: 1px solid #ddd;
@@ -140,4 +135,42 @@ h1,h2,h3,h4,h5,h6 {
 }
 .alert-info {
   margin-bottom: 20px;
+}
+.header-search {
+  margin: 0;
+  float: right;
+
+  @search-header-width: 220px;
+  @search-header-height: 40px;
+  @search-header-color: #CCC;
+
+  button {
+    padding: 0;
+    width: @search-header-height;
+    height: @search-header-height;
+    background: #111 none repeat scroll 0 0;
+    border: medium none;
+    color: @search-header-color;
+    float: left;
+    transition: all 0.25s linear 0s;
+  }
+  input[type="text"] {
+    width: @search-header-width;
+    margin: 0;
+    padding: 5px 10px;
+    background: #555 none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 0;
+    box-shadow: none;
+    .font-roboto;
+    font-size: 1.2em;
+    line-height: @search-header-height - 10px;
+    color: @search-header-color;
+    text-transform: uppercase;
+    float: left;
+  }
+}
+.comment-item {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #E5E5E5;
 }

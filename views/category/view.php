@@ -22,7 +22,7 @@ foreach ($category->getNodePath() as $node) {
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
             <div class="header">
-                <h1><?= Html::encode($category->model->name) ?></h1>
+                <h1><?= $this->title ?></h1>
                 <p><?= $category->model->announce ?></p>
             </div>
         </div>

@@ -13,9 +13,10 @@ use yii\widgets\LinkPager;
  * @package app\api
  *
  * @method static string pager(array $options = [])
- * @method static CategoryObject cat(string $id_slug)
+ * @method static CategoryObject cat($id_slug)
  * @method static CategoryObject[] cats(array $options = [])
- * @method static ProductObject product(string $id_slug)
+ * @method static ProductObject product($id_slug)
+ * @method static ProductObject[] search($q, array $options = [])
  */
 class Catalog extends Api
 {
@@ -33,6 +34,11 @@ class Catalog extends Api
      * @var
      */
     protected $_roots;
+
+    /**
+     * @var
+     */
+    protected $_search_result;
 
     /**
      * @var
@@ -97,6 +103,31 @@ class Catalog extends Api
             $this->_prods[$id_slug] =  $this->findProduct($id_slug);
         }
         return $this->_prods[$id_slug];
+    }
+
+    /**
+     * @param $q
+     * @return \app\models\Product[]
+     */
+    public function api_search($q)
+    {
+        /** @var Product[] $products */
+        $query = Product::find()
+            ->with('image')
+            ->orFilterWhere(['LIKE', 'name', $q])
+            ->orFilterWhere(['LIKE', 'announce', $q])
+            ->orFilterWhere(['LIKE', 'description', $q]);
+
+        $this->_adp = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => isset($options['pagination']) ? $options['pagination'] : [],
+        ]);
+
+        foreach ($this->_adp->models as $model) {
+            $this->_search_result[] = $this->_prods[$model->id] = new ProductObject($model);
+        }
+
+        return $this->_search_result;
     }
 
     /**

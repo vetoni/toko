@@ -27,7 +27,7 @@ class AddToCartForm extends Model
     {
         return [
             ['quantity', 'required', 'message' => ''],
-            ['quantity', 'integer', 'min' => 1],
+            ['quantity', 'integer', 'min' => 1, 'max' => 9999],
             ['productId', 'integer'],
         ];
     }

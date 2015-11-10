@@ -4,6 +4,7 @@ namespace app\modules\checkout\controllers;
 
 use app\api\Shop;
 use app\components\Controller;
+use app\components\Pages;
 use app\modules\checkout\models\AddToCartForm;
 use app\modules\checkout\models\Cart;
 use yii\web\BadRequestHttpException;
@@ -46,6 +47,8 @@ class CartController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index', ['page' => Shop::page(2), 'cart' => Cart::get()]);
+        $cart = Cart::get();
+        $cart->normalize();
+        return $this->render('index', ['page' => Shop::page(Pages::SHOPPING_CART), 'cart' => $cart]);
     }
 }

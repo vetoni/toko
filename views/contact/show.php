@@ -1,1 +1,1 @@
-<h1><?= $model->announce?></h1>
+<h1><?= $newComment->announce?></h1>

@@ -26,9 +26,9 @@ use yii\db\ActiveRecord;
  * @property string $price
  * @property integer $inventory
  * @property Category $category
- *
  * @property Image[] $images
  * @property Product[] $related
+ * @property Comment[] $comments
  */
 class Product extends ActiveRecord
 {
@@ -113,10 +113,11 @@ class Product extends ActiveRecord
     }
 
     /**
-     * @return float
+     * @return \yii\db\ActiveQuery
      */
-    public function getRating()
+    public function getComments()
     {
-        return 4.5;
+        return $this->hasMany(Comment::className(), ['product_id' => 'id'])
+            ->orderBy(['created_at' => SORT_DESC]);
     }
 }

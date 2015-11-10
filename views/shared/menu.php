@@ -1,9 +1,12 @@
 <?php
 
-
 use app\widgets\Nav;
 use yii\bootstrap\NavBar;
+use yii\web\View;
 
+/**
+ * @var View $this
+ */
 ?>
 
 <div class="bordered">
@@ -24,6 +27,7 @@ use yii\bootstrap\NavBar;
         ],
         'options' => ['class' =>'navbar-nav navbar-static-top']
     ]);
+    echo $this->render('search');
     Nav::end();
     NavBar::end();
     ?>

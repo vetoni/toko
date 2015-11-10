@@ -13,10 +13,14 @@ use yii\bootstrap\Html;
         <?php foreach ($categories as $category): ?>
             <?= $this->render('_item', ['category' => $category]) ?>
         <?php endforeach; ?>
-        <?= $pager ?>
     <?php else: ?>
         <div class="col-md-12">
             <?= Html::tag('div', Yii::t('yii', 'No results found.')) ?>
         </div>
     <?php endif; ?>
 </div>
+<?php if (isset($pager)): ?>
+    <div align="right">
+        <?= $pager ?>
+    </div>
+<?php endif; ?>

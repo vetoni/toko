@@ -20,10 +20,10 @@ class Data
      * Loads data from database if user is logged in.
      * Otherwise loads from session.
      * @param $name
-     * @param callable $defaultValue
+     * @param callable $callback
      * @return mixed
      */
-    public static function load($name, callable $defaultValue = null)
+    public static function load($name, callable $callback = null)
     {
         $key = self::_sessionKey($name);
         $data = Yii::$app->session->get($key);
@@ -41,7 +41,7 @@ class Data
             return unserialize($data);
         }
         else {
-            return static::save($name, is_callable($defaultValue) ? $defaultValue() : null);
+            return static::save($name, is_callable($callback) ? $callback() : null);
         }
     }
 
@@ -53,13 +53,13 @@ class Data
      */
     public static function save($name, $data)
     {
-        $json = serialize($data);
+        $str = serialize($data);
         if (!Yii::$app->user->isGuest) {
-            self::updateRecord($name, $json);
+            self::updateRecord($name, $str);
         }
         else {
             $key = self::_sessionKey($name);
-            Yii::$app->session->set($key, $json);
+            Yii::$app->session->set($key, $str);
         }
         return $data;
     }

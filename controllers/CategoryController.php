@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\api\Catalog;
 use app\api\Shop;
 use app\components\Controller;
+use app\components\Pages;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -20,7 +21,7 @@ class CategoryController extends Controller
     {
         return $this->render('/category/index', [
             'categories' => Catalog::cats(),
-            'page' => Shop::page(1)
+            'page' => Shop::page(Pages::SHOP_BY_CATEGORY)
         ]);
     }
 

@@ -36,7 +36,6 @@ $this->title = Html::encode($page->name)
     <p class="alert-info">
         <?= Yii::t('app', 'Your shopping cart is empty'); ?>
     </p>
-    <?= Html::a(Yii::t('app', 'Continue shopping'), ['/category/index'], ['class' => 'btn btn-default']); ?>
 <?php else : ?>
 <div class="shopping-cart">
     <table class="table">

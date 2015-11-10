@@ -5,12 +5,14 @@ namespace app\api;
 use app\components\Api;
 use app\helpers\Data;
 use app\models\Page;
+use app\modules\user\models\Country;
 
 /**
  * Class Shop
  * @package app\api
  *
- * @method static PageObject page(string $id_slug)
+ * @method static PageObject page($id_slug)
+ * @method static Country[] countries()
  */
 class Shop extends Api
 {
@@ -22,6 +24,16 @@ class Shop extends Api
     {
         return Data::cache($this->makeCacheKey($id_slug), function() use ($id_slug) {
             return $this->findPage($id_slug);
+        });
+    }
+
+    /**
+     * @return Country[]
+     */
+    public function api_countries()
+    {
+        return Data::cache($this->makeCacheKey(), function() {
+            return Country::find()->all();
         });
     }
 

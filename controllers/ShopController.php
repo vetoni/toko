@@ -26,7 +26,9 @@ class ShopController extends Controller
         }
         $code = Yii::$app->request->post('code');
         $currency = CurrencyHelper::get($code);
-        CurrencyHelper::change($currency->code);
+        if ($currency) {
+            CurrencyHelper::change($currency->code);
+        }
         if (!Yii::$app->request->isAjax) {
             $returnUrl = Yii::$app->request->post('returnUrl');
             if (isset($returnUrl)) {

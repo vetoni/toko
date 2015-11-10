@@ -11,7 +11,7 @@ Nav::begin([
     'encodeLabels' => false,
     'items' => [
         ['label' => "<strong>" . CurrencyHelper::format($cart->total) . "</strong> ( {$cart->totalCount} )", 'url' => null],
-        ['label' => '<i class="glyphicon glyphicon-shopping-cart"></i>', 'active' => true, 'url' => Url::to(['checkout/cart/index'])]
+        ['label' => '<i class="glyphicon glyphicon-shopping-cart"></i>', 'active' => true, 'url' => Url::to(['/checkout/cart/index'])]
     ],
     'options' => ['class' =>'mini-cart navbar-nav pull-right']
 ]);

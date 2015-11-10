@@ -4,7 +4,7 @@ use app\api\CategoryObject;
 use app\api\ProductObject;
 use app\helpers\CurrencyHelper;
 use app\modules\checkout\models\AddToCartForm;
-use kartik\rating\StarRating;
+use app\widgets\Rating;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 use yii\bootstrap\Tabs;
@@ -37,7 +37,7 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
             ]) ?>
             <h1><?= $this->title ?></h1>
             <p class="description"><?= $product->model->announce ?></p>
-            <div class="price bordered">
+            <div class="price">
                 <?php if ($product->model->old_price): ?>
                     <span><?= CurrencyHelper::format($product->model->old_price) ?></span>
                 <?php endif; ?>
@@ -45,17 +45,14 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
             </div>
             <div class="clearfix">
                 <div class="pull-right">
-                    <?= StarRating::widget([
-                        'attribute' => 'rating',
-                        'model' => $product->model,
-                        'pluginOptions' => ['readonly' => true, 'showClear' => false, 'size' => 'xs']
-                    ])?>
+                    <?= Rating::widget(['name' => 'Product[rating]', 'value' => $product->rating() , 'readonly' => true]) ?>
                 </div>
             </div>
-            <div class="bordered clearfix">
-                <?php $form = ActiveForm::begin(['action' => ['checkout/cart/add'], 'options' => ['class' => 'form-add-to-cart form-inline pull-right']]) ?>
+            <div class="clearfix bordered">
+                <?php $form = ActiveForm::begin(['action' => ['/checkout/cart/add'],
+                    'options' => ['class' => 'form-add-to-cart form-inline pull-right']]) ?>
                     <?= $form->field($formModel, 'quantity') ?>
-                    <?= $form->field($formModel, 'productId')->hiddenInput()->label('') ?>
+                    <?= $form->field($formModel, 'productId')->hiddenInput()->label(false) ?>
                     <?= Html::submitButton(Yii::t('app', 'Add to cart'), ['class' => 'btn btn-primary']) ?>
                 <?php ActiveForm::end() ?>
             </div>
@@ -73,6 +70,13 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
         $items[] = [
             'label' => Yii::t('app', 'Related products'),
             'content' => $this->render('_list', ['products' => $product->related()])
+        ];
+    }
+
+    if (!Yii::$app->user->isGuest || (Yii::$app->user->isGuest && $product->comments())) {
+        $items[] = [
+            'label' => Yii::t('app', 'Comments'),
+            'content' => $this->render('_comments', ['product' => $product])
         ];
     }
 

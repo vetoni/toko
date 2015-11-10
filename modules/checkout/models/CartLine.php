@@ -22,7 +22,7 @@ class CartLine extends Model
     {
         return [
             ['quantity', 'required'],
-            ['quantity', 'number', 'min' => 0, 'max' => 9999, 'integerOnly' => true],
+            ['quantity', 'integer', 'min' => 0, 'max' => 9999],
             [['product_id', 'price'], 'safe'],
         ];
     }

@@ -33,7 +33,7 @@ class Api extends Object
      * @param $params
      * @return string
      */
-    public function makeCacheKey($params)
+    public function makeCacheKey($params = [])
     {
         if (!is_array($params)) {
             $params = [$params];

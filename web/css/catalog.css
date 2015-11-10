@@ -92,12 +92,6 @@ h6 {
   text-align: center;
   color: #00cccc;
 }
-.pagination {
-  margin: 0 15px;
-  display: block;
-  float: left;
-  width: 100%;
-}
 .form-add-to-cart input {
   width: 50px !important;
   text-align: center;
@@ -154,7 +148,7 @@ h6 {
 }
 .shopping-cart .subtotal span,
 .shopping-cart .total span {
-  width: 70px;
+  width: 100px;
   display: inline-block;
   font-weight: bold;
 }
@@ -163,4 +157,38 @@ h6 {
 }
 .alert-info {
   margin-bottom: 20px;
+}
+.header-search {
+  margin: 0;
+  float: right;
+}
+.header-search button {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  background: #111 none repeat scroll 0 0;
+  border: medium none;
+  color: #cccccc;
+  float: left;
+  transition: all 0.25s linear 0s;
+}
+.header-search input[type="text"] {
+  width: 220px;
+  margin: 0;
+  padding: 5px 10px;
+  background: #555 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 1.2em;
+  line-height: 30px;
+  color: #cccccc;
+  text-transform: uppercase;
+  float: left;
+}
+.comment-item {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #E5E5E5;
 }
