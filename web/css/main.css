@@ -92,7 +92,7 @@ a:hover {
 }
 .carousel .item {
   height: 400px;
-  background-color: #777;
+  background-color: #777777;
 }
 .carousel .carousel-inner > .item > img {
   object-fit: cover;
@@ -109,4 +109,10 @@ a:hover {
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
+}
+.my-account p {
+  margin: 3px 0;
+}
+.my-account a {
+  color: #777777;
 }

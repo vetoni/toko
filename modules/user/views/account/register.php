@@ -1,6 +1,5 @@
 <?php
 
-use app\modules\file\ImageSelector;
 use app\modules\user\models\Country;
 use app\modules\user\models\RegisterForm;
 use yii\bootstrap\ActiveForm;
@@ -36,8 +35,6 @@ $this->title = Yii::t('app', 'Sign up');
 <?= $form->field($model, 'address') ?>
 
 <?= $form->field($model, 'phone') ?>
-
-<?= $form->field($model, 'image')->widget(ImageSelector::className()) ?>
 
 <?= Html::submitButton(Yii::t('app', 'Sign up'), ['class' => 'btn btn-primary']) ?>
 

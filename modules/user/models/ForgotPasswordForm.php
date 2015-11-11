@@ -22,6 +22,8 @@ class ForgotPasswordForm extends Model
     {
         return [
             ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'validateEmail'],
         ];
     }
 
@@ -33,6 +35,16 @@ class ForgotPasswordForm extends Model
         return [
             'email' => \Yii::t('app', 'Email'),
         ];
+    }
+
+    /**
+     * Validates email
+     */
+    public function validateEmail()
+    {
+        if (!User::findOne(['email' => $this->email])) {
+            $this->addError('email', \Yii::t('app', 'User with such email does not exist.'));
+        }
     }
 
     /**

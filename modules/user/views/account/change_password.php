@@ -25,6 +25,7 @@ $this->title = Yii::t('app', 'Change password');
     <?= $form->field($model, 'new_password_confirm')->passwordInput() ?>
 
     <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-primary']) ?>
+    <?= Html::a(Yii::t('app', 'Cancel'), ['details']) ?>
 
     <?php ActiveForm::end() ?>
 

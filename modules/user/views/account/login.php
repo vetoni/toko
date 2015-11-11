@@ -26,9 +26,9 @@ $this->title = Yii::t('app', 'Sign in');
 
     <?= Html::submitButton(Yii::t('app', 'Sign in'), ['class' => 'btn btn-primary']) ?>
 
-    <?= Html::a(Yii::t('app', 'Create account'), ['default/register']) ?> |
+    <?= Html::a(Yii::t('app', 'Create account'), ['register']) ?> |
 
-    <?= Html::a(Yii::t('app', 'Forgot password?'), ['default/forgot-password']) ?>
+    <?= Html::a(Yii::t('app', 'Forgot password?'), ['forgot-password']) ?>
 
     <?php ActiveForm::end() ?>
 

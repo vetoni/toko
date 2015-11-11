@@ -102,6 +102,10 @@ h6 {
 .form-add-to-cart .help-block-error {
   display: none;
 }
+.table th,
+.table td {
+  vertical-align: middle !important;
+}
 .shopping-cart {
   color: #666666;
 }
@@ -114,7 +118,6 @@ h6 {
 .shopping-cart .table td {
   padding: 4px;
   text-align: right;
-  vertical-align: middle;
 }
 .shopping-cart .table th,
 .shopping-cart .table td.name {

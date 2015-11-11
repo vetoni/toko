@@ -87,13 +87,17 @@ class CurrencyHelper
     /**
      * @param $value
      * @param $code
+     * @param bool $convert
      * @return string
      * @throws InvalidConfigException
      */
-    public static function format($value, $code = null)
+    public static function format($value, $code = null, $convert = true)
     {
         $currency = isset($code) ? static::get($code) : static::current();
-        return \Yii::$app->formatter->asCurrency($currency->rate * $value, $currency->code);
+        if ($convert)
+            return \Yii::$app->formatter->asCurrency($currency->rate * $value, $currency->code);
+        else
+            return \Yii::$app->formatter->asCurrency($value, $currency->code);
     }
 
     /**

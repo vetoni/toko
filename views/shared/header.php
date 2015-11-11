@@ -1,6 +1,6 @@
 <?php
 
-use yii\bootstrap\Nav;
+use app\widgets\Nav;
 use yii\bootstrap\NavBar;
 
 NavBar::begin([
@@ -26,12 +26,12 @@ Nav::begin([
     'encodeLabels' => false,
     'items' => Yii::$app->user->isGuest
         ? [
-            ['label' => Yii::t('app', 'Sign in'), 'url' => ['/user/default/login']],
-            ['label' => Yii::t('app', 'Sign up'), 'url' => ['/user/default/register']]
+            ['label' => Yii::t('app', 'Sign in'), 'url' => ['/user/account/login']],
+            ['label' => Yii::t('app', 'Sign up'), 'url' => ['/user/account/register']]
         ]
         : [
-            ['label' => Yii::t('app', 'My account'), 'url' => ['/user/default/profile']],
-            ['label' => Yii::t('app', 'Sign out ({0})', Yii::$app->user->identity->name), 'url' => ['/user/default/logout'], 'linkOptions' => ['data-method' => 'post']]
+            ['label' => Yii::t('app', 'My account'), 'url' => ['/user/account/details'], 'scope' => ['account']],
+            ['label' => Yii::t('app', 'Sign out ({0})', Yii::$app->user->identity->name), 'url' => ['/user/account/logout'], 'linkOptions' => ['data-method' => 'post']]
         ],
     'options' => ['class' =>'login-links navbar-nav pull-right']
 ]);

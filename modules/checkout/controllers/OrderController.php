@@ -9,6 +9,7 @@ use app\components\Pages;
 use app\modules\checkout\models\Cart;
 use app\modules\checkout\models\OrderAddress;
 use app\modules\user\models\User;
+use yii\web\NotFoundHttpException;
 
 /**
  * Class OrderController
@@ -44,6 +45,28 @@ class OrderController extends Controller
             'countries' => Shop::countries(),
             'page' => Shop::page(Pages::CHECKOUT)
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function actionList()
+    {
+        return $this->render('list', ['orders' => Checkout::user_orders()]);
+    }
+
+    /**
+     * @param $token
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView($token)
+    {
+        $order = Checkout::order($token);
+        if (!$order) {
+            throw new NotFoundHttpException();
+        }
+        return $this->render('view', ['order' => $order]);
     }
 
     /**

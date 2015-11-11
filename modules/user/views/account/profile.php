@@ -1,6 +1,5 @@
 <?php
 
-use app\modules\file\ImageSelector;
 use app\modules\user\models\Country;
 use app\modules\user\models\User;
 use yii\bootstrap\ActiveForm;
@@ -31,11 +30,8 @@ $this->title = Yii::t('app', 'Profile');
 
     <?= $form->field($model, 'phone') ?>
 
-    <?= $form->field($model, 'image')->widget(ImageSelector::className()) ?>
-
     <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-primary']) ?>
-
-    <?= Html::a(Yii::t('app', 'Change password'), ['default/change-password']) ?>
+    <?= Html::a(Yii::t('app', 'Cancel'), ['details']) ?>
 
     <?php ActiveForm::end() ?>
 

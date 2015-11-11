@@ -9,6 +9,8 @@ use app\modules\checkout\models\Order;
 use app\modules\checkout\models\OrderAddress;
 use app\modules\checkout\models\OrderData;
 use yii\base\Exception;
+use yii\data\ActiveDataProvider;
+use yii\widgets\LinkPager;
 
 /**
  * Class Checkout
@@ -16,6 +18,8 @@ use yii\base\Exception;
  *
  * @method static Order order($id_token)
  * @method static Order place_order()
+ * @method static Order[] user_orders()
+ * @method static string pager($options = [])
  */
 class Checkout extends Api
 {
@@ -25,15 +29,48 @@ class Checkout extends Api
     public $_orders;
 
     /**
-     * @param $id_token
+     * @var ActiveDataProvider
+     */
+    public $_adp;
+
+    /**
+     * @param array $options
+     * @return string
+     * @throws \Exception
+     */
+    public function api_pager($options = [])
+    {
+        return $this->_adp ? LinkPager::widget(array_merge($options, ['pagination' => $this->_adp->pagination])) : '';
+    }
+
+    /**
+     * @param $token
      * @return Order
      */
-    public function api_order($id_token)
+    public function api_order($token)
     {
-        if (!isset($this->_orders[$id_token])) {
-            
+        if (!isset($this->_orders[$token])) {
+            $this->_orders[$token] = $this->findOrder($token);
         }
-        return $this->_orders[$id_token];
+        return $this->_orders[$token];
+    }
+
+    /**
+     * @param array $options
+     * @return $this
+     */
+    public function api_user_orders($options = [])
+    {
+        $query = Order::find()
+            ->where(['user_id' => \Yii::$app->user->id]);
+        $this->_adp = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => isset($options['pagination']) ? $options['pagination'] : [],
+        ]);
+        foreach ($this->_adp->models as $order) {
+            $this->_orders[$order->id] = $order;
+        }
+        return $this->_adp->models;
     }
 
     /**
@@ -73,5 +110,14 @@ class Checkout extends Api
             return false;
         }
         return $order;
+    }
+
+    /**
+     * @param $token
+     * @return Order
+     */
+    protected function findOrder($token)
+    {
+        return Order::findOne(['token' => $token]);
     }
 }

@@ -22,7 +22,7 @@ $comments = $product->comments(['pagination' => ['pageSize' => 4]]);
             <div class="comment-item">
                 <strong><?= $comment->user->name ?></strong> <em><?= Yii::$app->formatter->asDatetime($comment->created_at) ?></em>
                 <p><?= Rating::widget(['name' => "Comments[$comment->id]", 'value' => $comment->rating, 'readonly' => true]) ?></p>
-                <p><?= nl2br($comment->body) ?></p>
+                <p><?= nl2br(Html::encode($comment->body)) ?></p>
             </div>
         <?php endforeach; ?>
         <div align="right">

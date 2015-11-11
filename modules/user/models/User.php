@@ -4,8 +4,6 @@
 namespace app\modules\user\models;
 
 use app\components\ActiveRecord;
-use app\modules\file\behaviors\ImageAttachmentBehavior;
-use app\modules\file\models\Image;
 use app\modules\user\UserModule;
 use Yii;
 use yii\base\NotSupportedException;
@@ -26,7 +24,6 @@ use yii\web\IdentityInterface;
  * @property string $password_reset_token
  * @property string $auth_key
  * @property int $status
- * @property Image $image
  * @property int $created_at
  * @property int $updated_at
  * @property int $role
@@ -65,7 +62,8 @@ class User extends ActiveRecord implements IdentityInterface
             ['address', 'string', 'max' => '255'],
             ['phone', 'string', 'max' => '255'],
             ['role', 'integer'],
-            ['role', 'default', 'value' => self::USER_ROLE_DEFAULT]
+            ['role', 'default', 'value' => self::USER_ROLE_DEFAULT],
+            ['status', 'default', 'value' => self::USER_STATUS_ACTIVE]
         ];
     }
 
@@ -78,9 +76,6 @@ class User extends ActiveRecord implements IdentityInterface
             [
                 'class' => TimestampBehavior::className()
             ],
-            [
-                'class' => ImageAttachmentBehavior::className(),
-            ]
         ];
     }
 
@@ -95,7 +90,6 @@ class User extends ActiveRecord implements IdentityInterface
             'country_id' => \Yii::t('app', 'Country'),
             'address' => \Yii::t('app', 'Address'),
             'phone' => \Yii::t('app', 'Phone'),
-            'image' => \Yii::t('app', 'Photo'),
         ];
     }
 

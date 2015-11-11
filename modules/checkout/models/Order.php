@@ -36,17 +36,17 @@ use yii\behaviors\TimestampBehavior;
 class Order extends ActiveRecord
 {
     /**
-     *
+     * Status is assigned when order created
      */
     const STATUS_NEW = 0;
 
     /**
-     *
+     * Status is assigned when order is closed
      */
     const STATUS_CLOSED = 1;
 
     /**
-     *
+     * Status is assigned when order is canceled
      */
     const STATUS_CANCELED = 2;
 
@@ -164,4 +164,16 @@ class Order extends ActiveRecord
         return $subTotal;
     }
 
+    /**
+     * @return string
+     */
+    public function getStatusText()
+    {
+        if ($this->status == self::STATUS_CLOSED)
+            return Yii::t('app', 'Closed');
+        else if ($this->status == self::STATUS_CANCELED)
+            return Yii::t('app', 'Canceled');
+        else
+            return Yii::t('app', 'New');
+    }
 }

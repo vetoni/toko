@@ -14,10 +14,10 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 
 /**
- * Class DefaultController
+ * Class AccountController
  * @package app\user\controllers
  */
-class DefaultController extends Controller
+class AccountController extends Controller
 {
     /**
      * @return array
@@ -35,7 +35,7 @@ class DefaultController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['logout', 'profile', 'change-password'],
+                        'actions' => ['details', 'logout', 'profile', 'change-password'],
                         'roles' => ['@'],
                     ],
                 ]
@@ -83,7 +83,7 @@ class DefaultController extends Controller
     {
         $model = User::findIdentity(\Yii::$app->user->identity->getId());
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            return $this->goHome();
+            return $this->redirect(['details']);
         }
         return $this->render('profile', ['model' => $model, 'countries' => Shop::countries()]);
     }
@@ -95,7 +95,7 @@ class DefaultController extends Controller
     {
         $model = new ChangePasswordForm();
         if ($model->load(\Yii::$app->request->post()) && $model->changePassword()) {
-            return $this->goHome();
+            return $this->redirect(['details']);
         }
         return $this->render('change_password', ['model' => $model]);
     }
@@ -126,5 +126,13 @@ class DefaultController extends Controller
             \Yii::$app->session->setFlash('message',  \Yii::t('app', 'The supplied token in not valid.'));
         }
         return $this->render('activate');
+    }
+
+    /**
+     * @return string
+     */
+    public function actionDetails()
+    {
+        return $this->render('details');
     }
 }
