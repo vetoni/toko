@@ -24,6 +24,24 @@ echo Menu::widget([
        ],
        [
            'class' => 'active',
+           'url' => ['/admin/order/list'],
+           'label' => '<i class="glyphicon glyphicon-th-list"></i> ' . Yii::t('app', 'Orders'),
+           'scope' => ['order', 'order-items']
+       ],
+       [
+           'class' => 'active',
+           'url' => ['/admin/comment/list'],
+           'label' => '<i class="glyphicon glyphicon-comment"></i> ' . Yii::t('app', 'Comments'),
+           'scope' => ['comment']
+       ],
+       [
+           'class' => 'active',
+           'url' => ['/admin/news/list'],
+           'label' => '<i class="glyphicon glyphicon-list-alt"></i> ' . Yii::t('app', 'News'),
+           'scope' => ['news']
+       ],
+       [
+           'class' => 'active',
            'url' => ['/admin/currency/list'],
            'label' => '<i class="glyphicon glyphicon-rub"></i> ' . Yii::t('app', 'Currencies'),
            'scope' => ['currency']

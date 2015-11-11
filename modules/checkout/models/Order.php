@@ -66,9 +66,10 @@ class Order extends ActiveRecord
         return [
             [['user_id', 'created_at', 'updated_at', 'status'], 'integer'],
             [['currency_code', 'name', 'country_id', 'address', 'phone', 'token', 'status'], 'required'],
-            [['discount'], 'number'],
+            [['discount'], 'number', 'min' => 0, 'max' => 1],
             [['currency_code', 'country_id'], 'string', 'max' => 10],
-            [['name', 'address', 'phone', 'email', 'comment', 'token'], 'string', 'max' => 255]
+            [['name', 'address', 'phone', 'email', 'comment', 'token'], 'string', 'max' => 255],
+            ['email', 'email']
         ];
     }
 
@@ -79,11 +80,11 @@ class Order extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'currency_code' => Yii::t('app', 'Currency code'),
+            'user_id' => Yii::t('app', 'User account'),
+            'currency_code' => Yii::t('app', 'Currency'),
             'discount' => Yii::t('app', 'Discount'),
             'name' => Yii::t('app', 'Name'),
-            'country_id' => Yii::t('app', 'Country ID'),
+            'country_id' => Yii::t('app', 'Country'),
             'address' => Yii::t('app', 'Address'),
             'phone' => Yii::t('app', 'Phone'),
             'email' => Yii::t('app', 'Email'),
@@ -105,6 +106,17 @@ class Order extends ActiveRecord
                 'class' => TimestampBehavior::className()
             ]
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function beforeValidate()
+    {
+        if ($this->isNewRecord) {
+            $this->token = \Yii::$app->security->generateRandomString(32);
+        }
+        return parent::beforeValidate();
     }
 
     /**

@@ -1,15 +1,14 @@
 <?php
 
-use app\models\Page;
+use app\modules\checkout\models\Order;
 use yii\web\View;
 
 /**
  * @var $this View
- * @var $model Page
+ * @var $model Order
  */
 
-$this->title = Yii::t('app', 'Create a page');
-
+$this->title = Yii::t('app', 'Create an order');
 ?>
 
 <div class="product-create">

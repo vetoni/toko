@@ -86,7 +86,6 @@ class Checkout extends Api
         $order->user_id = \Yii::$app->user->id;
         $order->currency_code = CurrencyHelper::current()->code;
         $order->discount = CurrencyHelper::convert($cart->discount);
-        $order->token = \Yii::$app->security->generateRandomString(32);
         $order->status = Order::STATUS_NEW;
 
         try {

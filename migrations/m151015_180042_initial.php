@@ -191,7 +191,7 @@ class m151015_180042_initial extends Migration
         $this->createIndex('idx_order_data_order_id', "{{%order_data}}", 'order_id', false);
         $this->createIndex('idx_order_data_product_id', "{{%order_data}}", 'product_id', false);
         $this->createIndex('idx_order_data', "{{%order_data}}", 'order_id, product_id', true);
-        $this->addForeignKey('fx_order_data_order_id', "{{%order_data}}", 'order_id', "{{%order}}", 'id', null, 'CASCADE');
+        $this->addForeignKey('fx_order_data_order_id', "{{%order_data}}", 'order_id', "{{%order}}", 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('fx_order_data_product_id', "{{%order_data}}", 'product_id', "{{%product}}", 'id', null, 'CASCADE');
 
         $this->createTable('{{%comment}}', [
