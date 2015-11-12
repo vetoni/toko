@@ -11,7 +11,7 @@ use app\models\Page;
  *
  * @property Page $model
  * @method string getImageUrl()
- * @method string thumb(integer $width, integer $height)
+ * @method string thumb($width, $height)
  */
 class PageObject extends ApiObject
 {

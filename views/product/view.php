@@ -10,6 +10,7 @@ use yii\bootstrap\Html;
 use yii\bootstrap\Tabs;
 use yii\web\View;
 use yii\widgets\Breadcrumbs;
+use yii\widgets\Pjax;
 
 /**
  * @var View $this
@@ -45,7 +46,11 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
             </div>
             <div class="clearfix">
                 <div class="pull-right">
-                    <?= Rating::widget(['name' => 'Product[rating]', 'value' => $product->rating() , 'readonly' => true]) ?>
+                    <?php
+                        Pjax::begin(['id' => 'product_avg_rating']);
+                        echo Rating::widget(['name' => 'Product[rating]', 'value' => $product->rating() , 'readonly' => true]);
+                        Pjax::end();
+                    ?>
                 </div>
             </div>
             <div class="clearfix bordered">

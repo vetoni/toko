@@ -24,6 +24,16 @@ use yii\behaviors\TimestampBehavior;
 class Comment extends ActiveRecord
 {
     /**
+     * Inactive comment status
+     */
+    const STATUS_INACTIVE = 0;
+
+    /**
+     * Inactive comment status
+     */
+    const STATUS_ACTIVE = 1;
+
+    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -54,7 +64,7 @@ class Comment extends ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'product_id' => Yii::t('app', 'Product ID'),
-            'user_id' => Yii::t('app', 'User ID'),
+            'user_id' => Yii::t('app', 'User'),
             'rating' => Yii::t('app', 'Rating'),
             'body' => Yii::t('app', 'Body'),
             'created_at' => Yii::t('app', 'Created At'),

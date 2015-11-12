@@ -7,5 +7,9 @@
                 window.location.reload();
             });
         });
+
+        $("#product_comments").on("pjax:end", function() {
+            $.pjax.reload({container:"#product_avg_rating"});
+        });
     });
 })(jQuery);

@@ -9,9 +9,7 @@ use yii\web\View;
  */
 
 $this->title = Yii::t('app', 'Update a page: ') . $model->name;
-
 ?>
-
 <div class="product-update">
     <?= $this->render('_form', ['model' => $model]) ?>
 </div>

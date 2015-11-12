@@ -9,10 +9,6 @@ use yii\web\View;
  */
 
 $this->title = Yii::t('app', 'Create a product');
-
-$this->params['breadcrumb'][] = ['label' => Yii::t('app', 'Products'), 'url' => ['list']];
-$this->params['breadcrumb'][] = $this->title;
-
 ?>
 
 <div class="product-create">

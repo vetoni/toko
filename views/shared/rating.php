@@ -25,7 +25,7 @@
             }
             echo \yii\helpers\Html::input('radio', $name, $i, $inputOptions);
             echo \yii\bootstrap\Html::label('', "$id-star-rating-$i", [
-                'class' => 'star-rating__ico fa fa-star-o fa-lg',
+                'class' => 'star-rating__ico fa fa-star-o fa-lg' . ($readonly ? false : ' editable'),
                 'title' => Yii::t('app', '{0} out of {1} stars', [$i, 5])
             ]);
         }

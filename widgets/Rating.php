@@ -35,7 +35,7 @@ class Rating extends InputWidget
     public function run()
     {
         $this->view->registerAssetBundle(RatingAsset::className());
-        return $this->render('/shared/rating', [
+        return $this->render('//shared/rating', [
             'id' => $this->options['id'],
             'name' => $this->options['name'],
             'value' => isset($this->value) ? $this->value : $this->model->{$this->attribute},

@@ -32,7 +32,7 @@ $comments = $product->comments(['pagination' => ['pageSize' => 4]]);
     <div class="col-md-6">
         <?php if (!Yii::$app->user->isGuest): ?>
             <h2><?= Yii::t('app', 'Leave a comment') ?></h2>
-            <?php $form = ActiveForm::begin(['options' => ['data-pjax' => '']]) ?>
+            <?php $form = ActiveForm::begin(['id' => 'form_add_comment', 'options' => ['data-pjax' => '']]) ?>
             <?= $form->field($newComment, 'rating')->widget(Rating::className())->label(false) ?>
             <?= $form->field($newComment, 'body')->textarea(['rows' => 3, 'placeholder' => Yii::t('app', 'Message')])->label(false) ?>
             <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary']) ?>
