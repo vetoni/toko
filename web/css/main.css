@@ -14,10 +14,24 @@ body {
 * {
   outline: medium none !important;
 }
-a,
+a {
+  text-decoration: none;
+}
+a:focus {
+  text-decoration: none;
+}
 a:hover {
   text-decoration: none;
+}
+a,
+a:hover {
   transition: color 0.25s linear 0s;
+}
+.btn-link {
+  padding: 0;
+}
+.btn-link:hover {
+  text-decoration: none;
 }
 .wrap {
   min-height: 100%;

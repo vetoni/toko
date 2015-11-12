@@ -1,11 +1,11 @@
 <?php
 
 use app\api\ProductObject;
+use app\components\Pjax;
 use app\models\Comment;
 use app\widgets\Rating;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
-use yii\widgets\Pjax;
 
 /**
  * @var ProductObject $product
@@ -15,7 +15,7 @@ $newComment = new Comment();
 $comments = $product->comments(['pagination' => ['pageSize' => 4]]);
 ?>
 
-<?php Pjax::begin(['id' => 'product_comments', 'timeout' => Yii::$app->params['pjax.timeOut']]) ?>
+<?php Pjax::begin(['id' => 'product_comments']) ?>
 <div class="row">
     <div class="col-md-12">
         <?php foreach($comments as $comment): ?>

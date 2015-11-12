@@ -9,7 +9,7 @@ NavBar::begin([
 ]);
 Nav::begin([
     'items' => [
-        ['label' => 'Wish List', 'url' => ['/shop/wish-list']],
+        ['label' => 'Wish List', 'url' => ['/checkout/wish-list/index']],
         ['label' => 'Shopping cart', 'url' => ['/checkout/cart/index']],
         ['label' => 'Checkout', 'url' => ['/checkout/order/address']],
     ],

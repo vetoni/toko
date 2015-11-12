@@ -15,7 +15,7 @@ use yii\widgets\Breadcrumbs;
  * @var Cart $cart
  */
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cart'), 'url' => ['cart/action/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cart'), 'url' => ['/checkout/cart/index']];
 $this->title = Html::encode($page->name)
 ?>
 
@@ -49,9 +49,7 @@ $this->title = Html::encode($page->name)
         </tr>
         </thead>
         <tbody>
-        <?php
-        foreach($cart->lines as $line):
-            ?>
+        <?php foreach($cart->lines as $line): ?>
             <tr>
                 <td class="thumb-mini">
                     <a href="<?= Url::to(['/product/view', 'slug' => $line->product->slug]) ?>">

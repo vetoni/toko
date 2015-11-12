@@ -37,4 +37,9 @@ class Pages
      * Search results page
      */
     const SEARCH_RESULTS = 6;
+
+    /**
+     * Wish list page
+     */
+    const WISH_LIST = 7;
 }

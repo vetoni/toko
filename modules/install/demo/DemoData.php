@@ -225,6 +225,13 @@ class DemoData
                 'type' => 'list',
                 'is_system' => 1,
             ],
+            [
+                'id' => 7,
+                'name' => 'Wish list',
+                'type' => 'list',
+                'announce' => 'The items below are currently in your wish list.',
+                'is_system' => 1,
+            ],
         ]);
     }
 

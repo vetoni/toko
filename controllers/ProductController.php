@@ -7,6 +7,8 @@ use app\api\Shop;
 use app\components\Controller;
 use app\components\Pages;
 use app\models\Comment;
+use app\modules\checkout\models\AddToWishListForm;
+use app\modules\checkout\models\WishList;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -35,8 +37,19 @@ class ProductController extends Controller
             $product->model->link('comments', $comment);
         }
 
+        $wishListModel = new AddToWishListForm();
+        $wishList = WishList::get();
+        if ($wishListModel->load(\Yii::$app->request->post())) {
+            $wishList->add($product->model->id);
+        }
+
         $category = Catalog::cat($product->model->category_id);
-        return $this->render('view', ['product' => $product, 'category' => $category]);
+        return $this->render('view', [
+            'product' => $product,
+            'category' => $category,
+            'wishListModel' => $wishListModel,
+            'inWishList' => $wishList->has($product->model->id),
+        ]);
     }
 
     /**
