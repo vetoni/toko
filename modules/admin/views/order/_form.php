@@ -4,6 +4,7 @@ use app\models\Currency;
 use app\models\Product;
 use app\modules\user\models\Country;
 use app\modules\user\models\User;
+use app\widgets\BackLink;
 use app\widgets\EntityDropDown;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Nav;
@@ -18,14 +19,13 @@ use yii\web\View;
  * @var Product $model
  */
 
-$leftArrow = "<i class=\"glyphicon glyphicon-chevron-left font-12\"></i>";
 
 $items = [
-    ['label' => "$leftArrow " . Yii::t('app', 'Orders'), 'url' => Url::to(['/admin/order/list'])],
+    ['label' => BackLink::widget(['title' => Yii::t('app', 'Orders'), 'textOnly' => true]), 'url' => Url::to(['/admin/order/list'])],
 ];
 
 if (!$model->isNewRecord) {
-    $items[] = ['label' => Yii::t('app', 'View products'), 'url' => Url::to(['/admin/order-items/list', 'node' => $model->id])];
+    $items[] = ['label' => Yii::t('app', 'View items'), 'url' => Url::to(['/admin/order-items/list', 'node' => $model->id])];
 }
 
 $items[count($items) - 1]['active'] = true;

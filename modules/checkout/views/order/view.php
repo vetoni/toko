@@ -2,6 +2,7 @@
 
 use app\helpers\CurrencyHelper;
 use app\modules\checkout\models\Order;
+use app\widgets\BackLink;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
 
@@ -87,4 +88,4 @@ use yii\helpers\Url;
     </tbody>
 </table>
 
-<?= Html::a(Yii::t('app', 'View orders'), ['/checkout/order/list'], ['class' => 'btn btn-success']) ?>
+<?= BackLink::widget(['title' =>  Yii::t('app', 'Order list'), 'url' => ['/checkout/order/list'], 'options' => ['class' => 'btn btn-primary']]) ?>

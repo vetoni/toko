@@ -3,6 +3,7 @@
 use app\helpers\CurrencyHelper;
 use app\modules\admin\models\AddProductForm;
 use app\modules\checkout\models\Order;
+use app\widgets\BackLink;
 use app\widgets\Nav;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
@@ -16,13 +17,12 @@ use yii\helpers\Url;
  */
 
 $this->title = Yii::t('app', 'Order items');
-$leftArrow = "<i class=\"glyphicon glyphicon-chevron-left font-12\"></i>";
 $items = $order->orderLines;
 
 echo Nav::widget([
     'encodeLabels' => false,
     'items' => [
-        ['label' => "$leftArrow " . Yii::t('app', 'Order'), 'url' => Url::to(['/admin/order/update', 'id' => $order->id]), 'active' => true],
+        ['label' => BackLink::widget(['title' => Yii::t('app', 'Order'), 'textOnly' => true]), 'url' => Url::to(['/admin/order/update', 'id' => $order->id]), 'active' => true],
     ],
     'options' => ['class' => 'nav-pills']
 ]);

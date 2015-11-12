@@ -30,9 +30,9 @@ class ProductController extends Controller
 
         $comment = new Comment();
         if (!\Yii::$app->user->isGuest && $comment->load(\Yii::$app->request->post())) {
-            $comment->product_id = $product->model->id;
             $comment->user_id = \Yii::$app->user->id;
-            $comment->save();
+            $comment->status = Comment::STATUS_ACTIVE;
+            $product->model->link('comments', $comment);
         }
 
         $category = Catalog::cat($product->model->category_id);

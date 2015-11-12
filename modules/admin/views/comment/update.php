@@ -3,6 +3,7 @@
 use app\models\Comment;
 use app\models\Product;
 use app\modules\user\models\User;
+use app\widgets\BackLink;
 use app\widgets\EntityDropDown;
 use app\widgets\Rating;
 use yii\bootstrap\ActiveForm;
@@ -16,13 +17,11 @@ $this->title = Yii::t('app', 'Update a comment: ' . $model->id . ' (' .
         Product::findOne($model->product_id)->name) . ' - ' . User::findOne($model->user_id)->name .
     ')';
 
-$leftArrow = "<i class=\"glyphicon glyphicon-chevron-left font-12\"></i>";
-
 echo Nav::widget([
     'encodeLabels' => false,
     'items' => [
         [
-            'label' => "$leftArrow " . Yii::t('app', 'Comments'),
+            'label' => BackLink::widget(['title' => Yii::t('app', 'Comments'), 'textOnly' => true]),
             'url' => Url::to(['/admin/comment/list']),
             'active' => true
         ],

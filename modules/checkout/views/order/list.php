@@ -3,6 +3,7 @@
 use app\api\Checkout;
 use app\helpers\CurrencyHelper;
 use app\modules\checkout\models\Order;
+use app\widgets\BackLink;
 use yii\bootstrap\Html;
 
 /**
@@ -42,4 +43,4 @@ $pager = Checkout::pager();
         <?= $pager ?>
     </div>
 <?php endif; ?>
-<?= Html::a(Yii::t('app', 'My account'), ['/user/account/details'], ['class' => 'btn btn-success']) ?>
+<?= BackLink::widget(['title' => Yii::t('app', 'My account'), 'url' => ['/user/account/details'], 'options' => ['class' => 'btn btn-primary']]) ?>

@@ -2,6 +2,7 @@
 
 use app\models\Category;
 use app\modules\admin\models\ProductSearch;
+use app\widgets\BackLink;
 use app\widgets\EntityDropDown;
 use yii\bootstrap\Nav;
 use yii\data\ActiveDataProvider;
@@ -15,12 +16,11 @@ use yii\helpers\Url;
  */
 
 $this->title = Yii::t('app', 'Products');
-$leftArrow = "<i class=\"glyphicon glyphicon-chevron-left font-12\"></i>";
 
 echo Nav::widget([
     'encodeLabels' => false,
     'items' => [
-        ['label' => "$leftArrow " . Yii::t('app', 'Categories'), 'url' => Url::to(['/admin/category/list', 'node' => $category->id])],
+        ['label' => BackLink::widget(['title' => Yii::t('app', 'Categories'), 'textOnly' => true]), 'url' => Url::to(['/admin/category/list', 'node' => $category->id])],
         ['label' => $category->name, 'url' => Url::to(), 'active' => true],
         ['label' => Yii::t('app', 'Create'), 'url' => Url::to(['/admin/product/create', 'node' => $category->id])],
     ],
