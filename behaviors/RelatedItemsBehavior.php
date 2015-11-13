@@ -4,8 +4,6 @@ namespace app\behaviors;
 
 use app\components\ActiveQuery;
 use app\components\ActiveRecord;
-use app\models\Product;
-use app\modules\file\behaviors\ImageAttachmentBehavior;
 use ReflectionClass;
 use yii\base\Behavior;
 use yii\db\Query;
@@ -61,11 +59,11 @@ class RelatedItemsBehavior extends Behavior
      */
     public function getRelated()
     {
-        $query = $this->owner->hasMany($this->relatedModelClass, ['id' => 'related_id'])
-            ->viaTable("{{%relation}}", ['item_id' => 'id'], function ($query) {
-                /** @var ActiveQuery $query */
-                $query->andOnCondition(['model' => $this->getShortName()]);
-            });
+        $class = $this->relatedModelClass;
+        $query = $class::find()
+            ->from(['p' => $class::tableName()])
+            ->innerJoin(['r' => "{{%relation}}"], "p.id = r.related_id")
+            ->andWhere(['r.item_id' => $this->owner->getPrimaryKey()]);
 
         if ($this->owner->hasProperty('image')) {
             $query->with('image');

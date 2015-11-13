@@ -6,7 +6,6 @@ use app\components\ApiObject;
 use app\models\Comment;
 use app\models\Product;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 use yii\widgets\LinkPager;
 
 /**
