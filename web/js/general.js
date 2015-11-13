@@ -9,7 +9,7 @@
         });
 
         $("#product_comments").on("pjax:end", function() {
-            $.pjax.reload({container:"#product_avg_rating"});
+            $.pjax.reload({container:"#product_avg_rating", "timeout" : 10000});
         });
     });
 })(jQuery);

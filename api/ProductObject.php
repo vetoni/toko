@@ -52,9 +52,10 @@ class ProductObject extends ApiObject
     public function related($options = [])
     {
         if (!isset($this->_related)) {
-
-            $query = $this->model->getRelated();
-
+            $query = $this->model
+                ->getRelated()
+                ->withAvgRating()
+                ->andWhere(['p.status' => 1]);
             $this->_adp= new ActiveDataProvider([
                 'query' => $query,
                 'pagination' => isset($options['pagination']) ? $options['pagination'] : [],
@@ -73,10 +74,8 @@ class ProductObject extends ApiObject
      */
     public function comments($options = [])
     {
-        if (!isset($this->_comments) || $options) {
-
+        if (!isset($this->_comments)) {
             $query = $this->model->getComments()->where(['status' => 1]);
-
             $this->_adp= new ActiveDataProvider([
                 'query' => $query,
                 'pagination' => isset($options['pagination']) ? $options['pagination'] : [],
@@ -85,14 +84,5 @@ class ProductObject extends ApiObject
             $this->_comments = $this->_adp->models;
         }
         return $this->_comments;
-    }
-
-    /**
-     * @return double
-     */
-    public function rating()
-    {
-        $comments = ArrayHelper::getColumn($this->comments(), 'rating');
-        return $comments ? array_sum($comments) / count($comments) : 0;
     }
 }

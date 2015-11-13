@@ -4,6 +4,7 @@ namespace app\behaviors;
 
 use app\components\ActiveQuery;
 use app\components\ActiveRecord;
+use app\models\Product;
 use app\modules\file\behaviors\ImageAttachmentBehavior;
 use ReflectionClass;
 use yii\base\Behavior;

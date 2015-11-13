@@ -16,58 +16,66 @@ body {
 * {
   outline: medium none !important;
 }
+
 a {
   .link-undecorate();
 }
+
 a, a:hover  {
   transition: color 0.25s linear 0s;
 }
+
 .btn-link {
   &:hover {text-decoration: none;}
   padding: 0;
 }
+
 .wrap {
   min-height: 100%;
   height: auto;
   margin: 0 auto -@footer-height;
   padding: 0 0 @footer-height;
 }
+
 .wrap > .container {
   padding: 30px 15px 20px;
 }
+
 .footer {
   height: @footer-height;
   background-color: #f5f5f5;
   border-top: 1px solid #ddd;
   padding-top: 20px;
 }
+
 .logo {
   display: block;
   margin: 10px auto;
   text-align: center;
 }
+
 .navbar {
   margin-bottom: 0;
   min-height: 0;
 
-  .nav > li > a {
-    color: @navbar-default-color;
-    padding: 0 @nav-height / 4;
-    line-height: @nav-height;
-  }
+  .nav > li > a { color: @navbar-default-color; padding: 0 @nav-height / 4; line-height: @nav-height; }
 }
+
 @media (max-width: @screen-sm-min) {
   .nav { float: none !important; }
 }
+
 .admin-panel .navbar-toggle {
   display: none !important;
 }
+
 .header {
   @media (max-width: @screen-sm-min) {
     .currencies,
     .mini-cart { display: none; }
   }
 }
+
 .menu {
   border-bottom: 0;
   li {
@@ -84,17 +92,13 @@ a, a:hover  {
   border-top: 1px dashed @border-color;
   border-bottom: 1px dashed @border-color;
 }
+
 .carousel {
   @carousel-height: 400px;
 
   height: @carousel-height;
-  .carousel-caption {
-    z-index: 10;
-  }
-  .item {
-    height: @carousel-height;
-    background-color: @navbar-default-color;
-  }
+  .carousel-caption { z-index: 10; }
+  .item { height: @carousel-height; background-color: @navbar-default-color; }
   .carousel-inner > .item > img {
     object-fit: cover;
     position: absolute;
@@ -104,6 +108,7 @@ a, a:hover  {
     height: @carousel-height;
   }
 }
+
 .jumbotron {
   text-align: center;
   background-color: transparent !important;
@@ -113,11 +118,57 @@ a, a:hover  {
   font-size: 21px;
   padding: 14px 24px;
 }
+
 .my-account {
-  p {
-    margin: 3px 0;
-  }
-  a {
-    color: @navbar-default-color;
-  }
+  p { margin: 3px 0; }
+  a { color: @navbar-default-color; }
+}
+
+/* add sorting icons to gridview sort links */
+
+.sorter-caption {
+  color:  @menu-hover-color;
+}
+.sorter {
+  display: inline-block;
+  list-style-type: none;
+  padding-left: 10px;
+  .clearfix();
+  a { color: @navbar-default-color;}
+  li { display: inline-block; margin-left: 10px; }
+}
+
+a.asc:after, a.desc:after {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  padding-left: 5px;
+}
+
+a.asc:after {
+  content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+  content: /*"\e114"*/ "\e152";
+}
+
+a[data-sort$="price"].asc:after {
+  content: "\e153";
+}
+
+a[data-sort$="price"].desc:after {
+  content: "\e154";
+}
+
+a[data-sort$="rating"].asc:after {
+  content: "\e155";
+}
+
+a[data-sort$="rating"].desc:after {
+  content: "\e156";
 }

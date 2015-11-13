@@ -7,12 +7,14 @@ use app\models\Category;
 use app\models\Product;
 use yii\data\ActiveDataProvider;
 use yii\widgets\LinkPager;
+use yii\widgets\LinkSorter;
 
 /**
  * Class Catalog
  * @package app\api
  *
  * @method static string pager(array $options = [])
+ * @method static string sorter(array $options = [])
  * @method static CategoryObject cat($id_slug)
  * @method static CategoryObject[] cats(array $options = [])
  * @method static ProductObject product($id_slug)
@@ -53,6 +55,17 @@ class Catalog extends Api
     public function api_pager($options = [])
     {
         return $this->_adp ? LinkPager::widget(array_merge($options, ['pagination' => $this->_adp->pagination])) : '';
+    }
+
+    /**
+     * Renders sorter
+     * @param array $options
+     * @return string
+     * @throws \Exception
+     */
+    public function api_sorter($options = [])
+    {
+        return $this->_adp ? LinkSorter::widget(array_merge($options, ['sort' => $this->_adp->sort])) : '';
     }
 
     /**
@@ -107,20 +120,24 @@ class Catalog extends Api
 
     /**
      * @param $q
+     * @param array $options
      * @return \app\models\Product[]
      */
-    public function api_search($q)
+    public function api_search($q, $options = [])
     {
         /** @var Product[] $products */
         $query = Product::find()
             ->with('image')
-            ->orFilterWhere(['LIKE', 'name', $q])
-            ->orFilterWhere(['LIKE', 'announce', $q])
-            ->orFilterWhere(['LIKE', 'description', $q]);
+            ->withAvgRating()
+            ->orFilterWhere(['LIKE', 'p.name', $q])
+            ->orFilterWhere(['LIKE', 'p.announce', $q])
+            ->orFilterWhere(['LIKE', 'p.description', $q])
+            ->andWhere(['p.status' => 1]);
 
         $this->_adp = new ActiveDataProvider([
             'query' => $query,
             'pagination' => isset($options['pagination']) ? $options['pagination'] : [],
+            'sort' => isset($options['sort']) ? $options['sort'] : [],
         ]);
 
         foreach ($this->_adp->models as $model) {
@@ -146,7 +163,9 @@ class Catalog extends Api
      */
     protected function findProduct($id_slug)
     {
-        $result = Product::find()->where(['AND', ['OR', ['id' => $id_slug], ['slug' => $id_slug]], ['status' => 1]])->one();
+        $query = Product::find()->withAvgRating();
+        $result = $query->where(['AND', ['OR', ['p.id' => $id_slug], ['p.slug' => $id_slug]], ['p.status' => 1]])->one();
+
         return isset($result) ? new ProductObject($result) : null;
     }
 }

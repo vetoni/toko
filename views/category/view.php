@@ -27,14 +27,26 @@ foreach ($category->getNodePath() as $node) {
             </div>
         </div>
     </div>
-    <div class="bordered">
-        <?php
-        if ($category->isLeaf()) {
-            echo $this->render('/product/_list', ['products' => $category->products(), 'pager' => $category->pager()]);
-        }
-        else {
-            echo $this->render('_list', ['categories' => $category->children(), 'pager' => $category->pager()]);
-        }
+
+    <?php if ($category->isLeaf()):
+        $products = $category->products(['sort' => [
+            'attributes' => [ 'name', 'price', 'rating']
+        ]]);
         ?>
-    </div>
+        <div class="product-list-sort">
+            <div class="pull-right">
+                <span class="sorter-caption"><?= Yii::t('app', 'Order by:') ?></span><?= $category->sorter() ?>
+            </div>
+        </div>
+        <div class="bordered">
+            <?= $this->render('/product/_list', [
+                'products' => $products,
+                'pager' => $category->pager(),
+            ]) ?>
+        </div>
+    <?php else: ?>
+        <div class="bordered">
+            <?= $this->render('_list', ['categories' => $category->children(), 'pager' => $category->pager()]) ?>
+        </div>
+    <?php endif; ?>
 </div>

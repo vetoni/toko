@@ -58,7 +58,7 @@ class ProductController extends Controller
      */
     public function actionSearch($q)
     {
-        $products = Catalog::search($q);
+        $products = Catalog::search($q, ['sort' => ['attributes' => [ 'name', 'price', 'rating']]]);
         return $this->render('search', ['products' => $products, 'page' => Shop::page(Pages::SEARCH_RESULTS)]);
     }
 }

@@ -3,12 +3,13 @@
 namespace app\models;
 
 use app\behaviors\RelatedItemsBehavior;
+use app\components\ActiveQuery;
+use app\components\ActiveRecord;
 use app\modules\file\behaviors\ImageAttachmentBehavior;
 use app\modules\file\models\Image;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%product}}".
@@ -27,11 +28,16 @@ use yii\db\ActiveRecord;
  * @property integer $inventory
  * @property Category $category
  * @property Image[] $images
- * @property Product[] $related
  * @property Comment[] $comments
+ * @method ActiveQuery getRelated()
  */
 class Product extends ActiveRecord
 {
+    /**
+     * @var double
+     */
+    public $rating;
+
     /**
      * @inheritdoc
      */

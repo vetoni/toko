@@ -54,6 +54,25 @@ h6 {
 .shop-page .product-row:after {
   clear: both;
 }
+.shop-page .product-list-sort {
+  margin-bottom: 10px;
+}
+.shop-page .product-list-sort:before,
+.shop-page .product-list-sort:after {
+  content: " ";
+  display: table;
+}
+.shop-page .product-list-sort:after {
+  clear: both;
+}
+.shop-page .product-list-sort select {
+  margin-left: 20px;
+  padding: 5px;
+  width: 150px;
+  background: #FFF none repeat scroll 0 0;
+  border: 1px solid #E5E5E5;
+  color: #999;
+}
 .shop-page .tab-content {
   padding-top: 20px;
 }
@@ -113,6 +132,9 @@ h6 {
 .thumb .price {
   text-align: center;
   color: #00cccc;
+}
+.thumb .rating > * {
+  margin: 0 auto;
 }
 .form-add-to-cart input {
   width: 50px !important;

@@ -15,7 +15,7 @@ use yii\widgets\LinkSorter;
  *
  * @property Category $model
  * @method string getImageUrl()
- * @method string thumb(integer $width, integer $height)
+ * @method string thumb($width, $height)
  */
 class CategoryObject extends ApiObject
 {
@@ -108,13 +108,14 @@ class CategoryObject extends ApiObject
             /** @var Category $category */
             $category = $this->model;
             $query = Product::find()
-                ->where(['category_id' => $category->id, 'status' => 1])
-                ->with('image');
+                ->with('image')
+                ->withAvgRating()
+                ->where(['p.category_id' => $category->id, 'p.status' => 1]);
 
             $this->_adp = new ActiveDataProvider([
                 'query' => $query,
                 'pagination' => isset($options['pagination']) ? $options['pagination'] : [],
-                'sort' => isset($options['sort']) ? $options['pagination'] : [],
+                'sort' => isset($options['sort']) ? $options['sort'] : [],
             ]);
 
             foreach ($this->_adp->models as $model) {

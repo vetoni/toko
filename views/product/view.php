@@ -69,7 +69,7 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
                 <div class="pull-right">
                     <?php
                         Pjax::begin(['id' => 'product_avg_rating']);
-                        echo Rating::widget(['name' => 'Product[rating]', 'value' => $product->rating() , 'readonly' => true]);
+                        echo Rating::widget(['name' => 'Product[rating]', 'value' => $product->model->rating , 'readonly' => true]);
                         Pjax::end();
                     ?>
                 </div>

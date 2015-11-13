@@ -130,3 +130,56 @@ a:hover {
 .my-account a {
   color: #777777;
 }
+/* add sorting icons to gridview sort links */
+.sorter-caption {
+  color: #00cccc;
+}
+.sorter {
+  display: inline-block;
+  list-style-type: none;
+  padding-left: 10px;
+}
+.sorter:before,
+.sorter:after {
+  content: " ";
+  display: table;
+}
+.sorter:after {
+  clear: both;
+}
+.sorter a {
+  color: #777777;
+}
+.sorter li {
+  display: inline-block;
+  margin-left: 10px;
+}
+a.asc:after,
+a.desc:after {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  padding-left: 5px;
+}
+a.asc:after {
+  content: "\e151";
+}
+a.desc:after {
+  content: "\e152";
+}
+a[data-sort$="price"].asc:after {
+  content: "\e153";
+}
+a[data-sort$="price"].desc:after {
+  content: "\e154";
+}
+a[data-sort$="rating"].asc:after {
+  content: "\e155";
+}
+a[data-sort$="rating"].desc:after {
+  content: "\e156";
+}

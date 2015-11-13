@@ -9,6 +9,7 @@ use yii\bootstrap\Html;
  * @var string $caption
  */
 ?>
+
 <div class="catalog-list row">
     <?php if (count($products)) : ?>
         <?php foreach ($products as $product): ?>
@@ -25,3 +26,4 @@ use yii\bootstrap\Html;
         <?= $pager ?>
     </div>
 <?php endif; ?>
+
