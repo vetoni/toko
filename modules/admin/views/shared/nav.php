@@ -2,6 +2,7 @@
 
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 
 ?>
 
@@ -14,7 +15,8 @@ use yii\bootstrap\NavBar;
     <?php echo Nav::widget([
         'encodeLabels' => false,
         'items' => [
-            ['label' => '<i class="glyphicon glyphicon-refresh"></i> ' . Yii::t('app', 'Clear cache'), 'url' => '#'],
+            ['label' => '<i class="glyphicon glyphicon-refresh"></i> ' . Yii::t('app', 'Clear cache'), 'url' => '#',
+                'linkOptions' => ['class' => 'btn-clear-cache', 'data-action' => Url::to(['//site/clear-cache']), 'data-message' => Yii::t('app', 'Done')]],
         ],
         'options' => ['class' => 'navbar-nav pull-right']
     ]) ?>
