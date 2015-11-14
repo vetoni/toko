@@ -12,7 +12,7 @@ $url = Url::to(['product/view', 'slug' => $product->model->slug]);
 ?>
 
 <div class="col-md-3">
-    <div class="thumb">
+    <div class="thumbnail">
         <a class="image" href="<?= $url ?>">
             <?= Html::img($product->thumb(300, 300)) ?>
         </a>

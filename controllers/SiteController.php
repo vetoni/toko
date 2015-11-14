@@ -2,7 +2,10 @@
 
 namespace app\controllers;
 
+use app\api\Catalog;
+use app\api\Shop;
 use app\components\Controller;
+use app\components\Pages;
 use Yii;
 
 /**
@@ -29,6 +32,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index', ['new_products' => Catalog::new_products(), 'page' => Shop::page(Pages::HOME_PAGE)]);
     }
 }

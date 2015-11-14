@@ -5,6 +5,7 @@ namespace app\models;
 use app\behaviors\RelatedItemsBehavior;
 use app\components\ActiveQuery;
 use app\components\ActiveRecord;
+use app\components\ProductQuery;
 use app\modules\file\behaviors\ImageAttachmentBehavior;
 use app\modules\file\models\Image;
 use Yii;
@@ -44,6 +45,14 @@ class Product extends ActiveRecord
     public static function tableName()
     {
         return '{{%product}}';
+    }
+
+    /**
+     * @return ProductQuery
+     */
+    public static function find()
+    {
+        return new ProductQuery(get_called_class());
     }
 
     /**

@@ -78,12 +78,24 @@ class RelatedItemsBehavior extends Behavior
     public function saveRelated()
     {
         $ids = explode(';', $this->relationInfo);
-        $this->owner->unlinkAll('related', true);
+
+        $db = \Yii::$app->getDb();
+
+        $db->createCommand()
+            ->delete("{{%relation}}", ['item_id' => $this->owner->getPrimaryKey()])
+            ->execute();
+
         foreach ($ids as $id) {
             $class = $this->owner->className();
             $item = $class::findOne(trim($id));
             if ($item) {
-                $this->owner->link('related', $item, ['model' => $this->getShortName()]);
+                $db->createCommand()
+                    ->insert("{{%relation}}", [
+                        'item_id' => $this->owner->getPrimaryKey(),
+                        'related_id' => $id,
+                        'model' => $this->getShortName()
+                    ])
+                    ->execute();
             }
         }
     }

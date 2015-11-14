@@ -42,4 +42,9 @@ class Pages
      * Wish list page
      */
     const WISH_LIST = 7;
+
+    /**
+     * Home page
+     */
+    const HOME_PAGE = 8;
 }

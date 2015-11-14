@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to()];
             </div>
         </div>
     </div>
-    <div class="product-list-sort">
+    <div class="sort-row">
         <div class="pull-right">
             <span class="sorter-caption"><?= Yii::t('app', 'Order by:') ?></span><?= Catalog::sorter() ?>
         </div>

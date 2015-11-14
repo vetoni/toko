@@ -3,6 +3,7 @@
 namespace app\modules\install\demo;
 
 use app\models\Category;
+use app\models\Comment;
 use app\models\Page;
 use app\models\Product;
 use app\modules\user\models\User;
@@ -58,6 +59,10 @@ class DemoData
         // Products
         $products = "products_{$language}";
         static::$products();
+
+        // Comments
+        $comments = "comments_{$language}";
+        static::$comments();
 
         // Pages
         $pages = "pages_{$language}";
@@ -177,8 +182,35 @@ class DemoData
                 'price' => 54400.00,
                 'inventory' => 25
             ],
+            [
+                'id' => 4,
+                'category_id' => '2',
+                'name' => 'Asus - Desktop - AMD A10-Series - 8GB Memory - 1TB Hard Drive - Gray',
+                'announce' => '<ul><li>Intel Core i7 4790 (3.6 GHz)</li><li>8 GB DDR3 1 TB HDD 8 GB SSD</li><li>Windows 10 Home 64-Bit</li><li>NVIDIA GeForce GTX 760 2 GB</li></ul>',
+                'description' => '<p><b>Microsoft Windows 8.1 operating system preinstalled</b></p><p>Upgrade to Windows 10 for free** - it\'s easy.</p><p><b>AMD A10-7800 Processor with AMD R7 graphics</b></p><p>Helps ensure optimal computing performance.</p><p><b>8GB DDR3 memory</b></p><p>For multitasking power, expandable to 16GB.</p><p><b>Multiformat DVD±RW/CD-RW drive</b></p><p>Create custom DVDs and CDs.</p><p><b>1TB Serial ATA hard drive (7200 rpm)</b></p><p>Offers spacious storage and fast read/write times. Also includes 100GB of Webstorage for up to 1 year.</p><p>The 1TB hard drive provides plenty of room to store pictures, videos, music and other important files.<br></p><p><b>AMD R7 graphics</b></p><p>Deliver clear visuals. HDMI and VGA (D-sub) outputs enable flexible connectivity.</p><p><b>6-in-1 media reader</b></p><p>Supports SD, SDHC, MS, MS PRO, xD-Picture Card and MMC formats.</p><p><b>2 USB 3.0 and 4 USB 2.0 ports</b></p><p>For fast digital video, audio and data transfer.</p><p><b>Built-in high-speed wireless LAN (802.11ac)</b></p><p>Allows you to connect to the Internet without wires.</p><p><b>Built-in 10/100/1000 Mbps Ethernet LAN</b></p><p>With RJ-45 connector for quick and simple wired Web access.</p><p>AMD, AMD Arrow logo, AMD Athlon, QuantiSpeed, AMD PowerNow! and combinations thereof are trademarks of Advanced Micro Devices, Inc.</p><p>With built-in wireless networking, this Asus M32BF-B05 desktop makes it easy to access your favorite Web content.</p>',
+                'price' => 34500.00,
+                'inventory' => 70
+            ],
 
         ]);
+    }
+
+    public static function comments_en()
+    {
+        (new Comment([
+            'product_id' => 3,
+            'user_id' => 1,
+            'rating' => 5.00,
+            'body' => 'Its a cool PC !! :)'
+        ]))->save();
+
+        (new Comment([
+            'product_id' => 2,
+            'user_id' => 1,
+            'rating' => 4.00,
+            'body' => 'Well, microprocessor is not powerful...'
+        ]))->save();
+
     }
 
     public static function pages_en()
@@ -230,6 +262,14 @@ class DemoData
                 'name' => 'Wish list',
                 'type' => 'list',
                 'announce' => 'The items below are currently in your wish list.',
+                'is_system' => 1,
+            ],
+            [
+                'id' => 8,
+                'name' => 'Home',
+                'type' => 'show',
+                'announce' => '<h1>Welcome on Toko demo</h1>',
+                'content' => '<p>Shop provides computer parts and hardware, hard drives, software as well as electronics, tools, appliances, jewelry, watches, gaming etc.</p>',
                 'is_system' => 1,
             ],
         ]);

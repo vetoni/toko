@@ -1,7 +1,6 @@
 <?php
 
 namespace app\components;
-use app\models\Comment;
 
 /**
  * Class ActiveQuery
@@ -44,19 +43,6 @@ class ActiveQuery extends \yii\db\ActiveQuery
     public function sortDate()
     {
         $this->orderBy(['updated_at' => SORT_DESC]);
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function withAvgRating()
-    {
-        $modelClass = $this->modelClass;
-        $this->select('p.*, COALESCE(AVG(rating), 0) as `rating`')
-            ->from(['p' => $modelClass::tableName()])
-            ->leftJoin(Comment::tableName(), 'product_id = p.id')
-            ->groupBy('p.id');
         return $this;
     }
 }

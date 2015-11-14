@@ -98,6 +98,33 @@ a:hover {
   border-top: 1px dashed #e5e5e5;
   border-bottom: 1px dashed #e5e5e5;
 }
+h1,
+h2,
+h3 {
+  font-weight: normal;
+  font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.sort-row {
+  margin-bottom: 10px;
+}
+.sort-row:before,
+.sort-row:after {
+  content: " ";
+  display: table;
+}
+.sort-row:after {
+  clear: both;
+}
+.sort-row select {
+  margin-left: 20px;
+  padding: 5px;
+  width: 150px;
+  background: #FFF none repeat scroll 0 0;
+  border: 1px solid #E5E5E5;
+  color: #999;
+}
 .carousel {
   height: 400px;
 }
@@ -119,6 +146,7 @@ a:hover {
 .jumbotron {
   text-align: center;
   background-color: transparent !important;
+  margin-top: 40px;
 }
 .jumbotron .btn {
   font-size: 21px;
@@ -159,7 +187,7 @@ a.desc:after {
   position: relative;
   top: 1px;
   display: inline-block;
-  font-family: 'Glyphicons Halflings';
+  font-family: 'Glyphicons Halflings', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 1;

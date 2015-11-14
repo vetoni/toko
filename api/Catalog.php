@@ -19,6 +19,7 @@ use yii\widgets\LinkSorter;
  * @method static CategoryObject[] cats(array $options = [])
  * @method static ProductObject product($id_slug)
  * @method static ProductObject[] search($q, array $options = [])
+ * @method static ProductObject[] new_products()
  */
 class Catalog extends Api
 {
@@ -41,6 +42,11 @@ class Catalog extends Api
      * @var
      */
     protected $_search_result;
+
+    /**
+     * @var
+     */
+    protected $_new_products;
 
     /**
      * @var
@@ -145,6 +151,31 @@ class Catalog extends Api
         }
 
         return $this->_search_result;
+    }
+
+
+    /**
+     * @return ProductObject[]
+     */
+    public function api_new_products()
+    {
+        if (!isset($this->_new_products)) {
+            $query = Product::find()
+                ->with('image')
+                ->withAvgRating()
+                ->andWhere(['p.status' => 1])
+                ->sortDate()
+                ->limit(8);
+
+            $this->_adp = new ActiveDataProvider([
+                'query' => $query,
+            ]);
+
+            foreach ($this->_adp->models as $model) {
+                $this->_new_products[] = new ProductObject($model);
+            }
+        }
+        return $this->_new_products;
     }
 
     /**
