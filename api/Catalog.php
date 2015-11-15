@@ -153,7 +153,6 @@ class Catalog extends Api
         return $this->_search_result;
     }
 
-
     /**
      * @return ProductObject[]
      */

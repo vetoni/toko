@@ -37,7 +37,7 @@ echo Nav::widget([
 ]);
 ?>
 
-<div class="product-form">
+<div class="order-form">
     <?php $form = ActiveForm::begin() ?>
 
     <?= $form->field($model, 'currency_code')->widget(EntityDropDown::className(), [

@@ -12,6 +12,6 @@ $this->title = Yii::t('app', 'Update an order: ') . $model->id;
 
 ?>
 
-<div class="product-update">
+<div class="order-update">
     <?= $this->render('_form', ['model' => $model]) ?>
 </div>

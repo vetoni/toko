@@ -19,7 +19,7 @@ use yii\web\View;
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Shop', 'url' => ['/category/index'], 'scope' => ['category', 'product']],
-            ['label' => 'News', 'url' => ['/news/index']],
+            ['label' => 'News', 'url' => ['/news/index'], 'scope' => ['news']],
             ['label' => 'Pages', 'url' => ['/pages/index']],
             ['label' => 'Contact', 'url' => ['page/show', 'id' => '1']],
             ['label' => 'FAQ', 'url' => ['/site/faq']],

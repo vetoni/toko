@@ -13,7 +13,7 @@ use yii\db\Query;
  * @package app\components\behaviors
  *
  * @property ActiveRecord $owner
- * @property string $relationInfo
+ * @property string $related
  */
 class RelatedItemsBehavior extends Behavior
 {
@@ -28,15 +28,15 @@ class RelatedItemsBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_UPDATE => 'saveRelated',
-            ActiveRecord::EVENT_AFTER_DELETE => 'deleteRelated',
+            ActiveRecord::EVENT_AFTER_UPDATE => 'saveRelatedItems',
+            ActiveRecord::EVENT_AFTER_DELETE => 'deleteRelatedItems',
         ];
     }
 
     /**
      * @return string
      */
-    public function getRelationInfo()
+    public function getRelated()
     {
         $list = (new Query())
             ->select('related_id')
@@ -49,15 +49,15 @@ class RelatedItemsBehavior extends Behavior
     /**
      * @param $value
      */
-    public function setRelationInfo($value)
+    public function setRelated($value)
     {
-        $this->relationInfo = $value;
+        $this->related = $value;
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getRelated()
+    public function withRelatedItems()
     {
         $class = $this->relatedModelClass;
         $query = $class::find()
@@ -75,16 +75,12 @@ class RelatedItemsBehavior extends Behavior
     /**
      * Saves related products
      */
-    public function saveRelated()
+    public function saveRelatedItems()
     {
-        $ids = explode(';', $this->relationInfo);
+        $ids = explode(';', $this->related);
 
         $db = \Yii::$app->getDb();
-
-        $db->createCommand()
-            ->delete("{{%relation}}", ['item_id' => $this->owner->getPrimaryKey()])
-            ->execute();
-
+        $this->deleteRelatedItems($db);
         foreach ($ids as $id) {
             $class = $this->owner->className();
             $item = $class::findOne(trim($id));
@@ -102,10 +98,13 @@ class RelatedItemsBehavior extends Behavior
 
     /**
      * Deletes related products
+     * @param \yii\db\Connection $db
      */
-    public function deleteRelated()
+    public function deleteRelatedItems($db)
     {
-        $this->owner->unlinkAll('related', true);
+        $db->createCommand()
+            ->delete("{{%relation}}", ['item_id' => $this->owner->getPrimaryKey()])
+            ->execute();
     }
 
     /**

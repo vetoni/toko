@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Page;
+use app\models\NewsItem;
 use app\modules\file\ImageSelector;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
@@ -10,19 +10,19 @@ use yii\web\View;
 
 /**
  * @var View $this
- * @var Page $model
+ * @var NewsItem $model
  */
 
 ?>
 
-<div class="page-form">
+<div class="news-items-form">
     <?php $form = ActiveForm::begin() ?>
 
     <?= $form->field($model, 'name') ?>
 
     <?= $form->field($model, 'image')->widget(ImageSelector::className()); ?>
 
-    <?= $form->field($model, 'type')->dropDownList(['show' => Yii::t('app', 'Show'), 'list' => Yii::t('app', 'List')]) ?>
+    <?= $form->field($model, 'image_title') ?>
 
     <?= $form->field($model, 'status')->dropDownList([Yii::t('app', 'No'), Yii::t('app', 'Yes')]) ?>
 

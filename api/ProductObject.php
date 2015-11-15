@@ -52,7 +52,7 @@ class ProductObject extends ApiObject
     {
         if (!isset($this->_related)) {
             $query = $this->model
-                ->getRelated()
+                ->withRelatedItems()
                 ->withAvgRating()
                 ->andWhere(['p.status' => 1]);
             $this->_adp= new ActiveDataProvider([

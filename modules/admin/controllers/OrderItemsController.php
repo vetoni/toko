@@ -6,6 +6,7 @@ use app\models\Product;
 use app\modules\admin\models\AddProductForm;
 use app\modules\checkout\models\Order;
 use app\modules\checkout\models\OrderData;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -15,6 +16,21 @@ use yii\web\NotFoundHttpException;
  */
 class OrderItemsController extends Controller
 {
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     /**
      * @param $node
      * @return string

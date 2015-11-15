@@ -31,7 +31,7 @@ echo Nav::widget([
 
 ?>
 
-<div class="comment-update">
+<div class="comment-form">
     <?php $form = ActiveForm::begin() ?>
 
     <?= $form->field($model, 'product_id')->hiddenInput()->label(false) ?>

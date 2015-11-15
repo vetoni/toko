@@ -11,6 +11,6 @@ use yii\web\View;
 $this->title = Yii::t('app', 'Create an order');
 ?>
 
-<div class="product-create">
+<div class="order-create">
     <?= $this->render('_form', ['model' => $model]) ?>
 </div>

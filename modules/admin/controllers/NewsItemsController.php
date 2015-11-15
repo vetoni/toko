@@ -3,17 +3,17 @@
 namespace app\modules\admin\controllers;
 
 use app\components\Controller;
-use app\models\Comment;
-use app\modules\admin\models\CommentSearch;
+use app\models\NewsItem;
+use app\modules\admin\models\NewsItemSearch;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 
 /**
- * Class CommentController
+ * Class NewsItemsController
  * @package app\modules\admin\controllers
  */
-class CommentController extends Controller
+class NewsItemsController extends Controller
 {
     /**
      * @return array
@@ -35,9 +35,27 @@ class CommentController extends Controller
      */
     public function actionList()
     {
-        $model = new CommentSearch();
+        $model = new NewsItemSearch();
         $dataProvider = $model->search(\Yii::$app->request->queryParams);
-        return $this->render('list', ['searchModel' => $model, 'dataProvider' => $dataProvider]);
+        return $this->render('list', [
+            'dataProvider' => $dataProvider,
+            'searchModel' => $model,
+        ]);
+    }
+
+    /**
+     * @return string|\yii\web\Response
+     */
+    public function actionCreate()
+    {
+        $model = new NewsItem();
+        $model->loadDefaultValues();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['list']);
+        }
+        return $this->render('create', [
+            'model' => $model
+        ]);
     }
 
     /**
@@ -47,8 +65,8 @@ class CommentController extends Controller
      */
     public function actionUpdate($id)
     {
-        /** @var Comment $model */
-        $model = Comment::findOne($id);
+        /** @var NewsItem $model */
+        $model = NewsItem::findOne($id);
 
         if (!$model) {
             throw new NotFoundHttpException();
@@ -69,8 +87,8 @@ class CommentController extends Controller
      */
     public function actionDelete($id)
     {
-        /** @var Comment $model */
-        $model = Comment::findOne($id);
+        /** @var NewsItem $model */
+        $model = NewsItem::findOne($id);
         if (!$model) {
             throw new NotFoundHttpException();
         }

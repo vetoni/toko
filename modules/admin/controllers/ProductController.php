@@ -7,6 +7,7 @@ use app\models\Category;
 use app\models\Product;
 use app\modules\admin\models\ProductSearch;
 use Yii;
+use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -15,6 +16,21 @@ use yii\web\NotFoundHttpException;
  */
 class ProductController extends Controller
 {
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     /**
      * @param $node
      * @return string

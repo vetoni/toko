@@ -36,9 +36,9 @@ echo Menu::widget([
        ],
        [
            'class' => 'active',
-           'url' => ['/admin/news/list'],
+           'url' => ['/admin/news-items/list'],
            'label' => '<i class="glyphicon glyphicon-list-alt"></i> ' . Yii::t('app', 'News'),
-           'scope' => ['news']
+           'scope' => ['news-items']
        ],
        [
            'class' => 'active',

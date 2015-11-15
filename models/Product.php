@@ -3,7 +3,6 @@
 namespace app\models;
 
 use app\behaviors\RelatedItemsBehavior;
-use app\components\ActiveQuery;
 use app\components\ActiveRecord;
 use app\components\ProductQuery;
 use app\modules\file\behaviors\ImageAttachmentBehavior;
@@ -30,7 +29,7 @@ use yii\behaviors\TimestampBehavior;
  * @property Category $category
  * @property Image[] $images
  * @property Comment[] $comments
- * @method ActiveQuery getRelated()
+ * @method ProductQuery withRelatedItems()
  */
 class Product extends ActiveRecord
 {
@@ -70,7 +69,7 @@ class Product extends ActiveRecord
             [['name', 'slug'], 'string', 'max' => 255],
             [['slug'], 'unique'],
             ['status', 'default', 'value' => 1],
-            ['relationInfo', 'safe']
+            ['related', 'safe']
         ];
     }
 

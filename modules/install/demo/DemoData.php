@@ -4,6 +4,7 @@ namespace app\modules\install\demo;
 
 use app\models\Category;
 use app\models\Comment;
+use app\models\NewsItem;
 use app\models\Page;
 use app\models\Product;
 use app\modules\user\models\User;
@@ -67,6 +68,10 @@ class DemoData
         // Pages
         $pages = "pages_{$language}";
         static::$pages();
+
+        // News
+        $news = "news_{$language}";
+        static::$news();
 
         // Relations
         $db->createCommand()->batchInsert('{{%relation}}', ['item_id', 'related_id', 'model'], [
@@ -273,6 +278,39 @@ class DemoData
                 'is_system' => 1,
             ],
         ]);
+    }
+
+    public static function news_en()
+    {
+        static::saveNews([
+            [
+                'id' => 1,
+                'author_id' => 1,
+                'name' => 'Virtual reality',
+                'announce' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris.',
+                'content' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris. </p><p> Etiam condimentum tellus nec porta sodales. Sed vel pulvinar magna, eget ornare mauris. Donec eu arcu nisi. Ut lectus est, vestibulum vel pulvinar quis, euismod et purus. Integer vel porttitor ligula, ac dapibus risus. Proin pellentesque lacus a tortor pharetra, quis feugiat lorem luctus. Nullam ut neque diam. Etiam id elit in nisl mattis ullamcorper. </p><p> Suspendisse sapien ex, elementum et turpis sed, viverra efficitur ex. Vivamus dui massa, vulputate sit amet luctus in, molestie sed turpis. Suspendisse a luctus neque. Cras id vestibulum erat, vitae ultricies nisi. Sed tempus diam non gravida vulputate. Sed aliquam leo sed blandit vestibulum. Aliquam molestie ultricies viverra. Cras sit amet viverra ante. Nullam viverra turpis quis tempor tempor. Praesent hendrerit tristique nunc quis accumsan. Curabitur eleifend, lorem nec commodo auctor, lacus ipsum tempor felis, ullamcorper facilisis est metus nec libero. Fusce porta mauris vitae mauris posuere finibus. </p><p> Nullam tempus, libero sed tincidunt egestas, nunc ipsum fringilla risus, laoreet egestas nisi mi in lacus. Nulla elementum ipsum vestibulum velit porta, non ornare dolor porttitor. Vivamus sagittis sagittis tincidunt. Donec in nisl ut quam laoreet volutpat. Ut molestie enim dignissim, pretium tellus in, vulputate nisl. Pellentesque vel condimentum quam. Suspendisse ex dolor, vulputate eget lacus et, pulvinar fermentum erat. Nulla et tincidunt urna. Vivamus consectetur ante varius risus iaculis, nec consequat lacus hendrerit. Aliquam vel auctor tellus. Phasellus pretium nisl sed fermentum molestie. Morbi dui elit, venenatis vitae ipsum vitae, finibus pellentesque nunc. Quisque facilisis lacinia elit non vulputate. </p><p> Integer lacinia rutrum libero in euismod. Quisque posuere non ligula sit amet hendrerit. Etiam cursus dolor at orci ultrices aliquet. Vestibulum urna nibh, cursus sed ultrices eu, consequat a tortor. Duis in nunc ornare, aliquet risus nec, tristique orci. Vestibulum vel lacinia libero. Integer viverra metus ullamcorper, porta quam sit amet, lacinia nunc. Ut fermentum porta dui id euismod. Aenean gravida, risus eget interdum viverra, sem justo eleifend lacus, ultricies fermentum mi turpis non nibh. Praesent vel lacus sed velit convallis venenatis eu suscipit ligula. Maecenas pretium imperdiet sodales. </p>',
+                'image_title' => 'Is virtual reality going to catch on? That\'s the billion dollar question right now.'
+            ],
+            [
+                'id' => 2,
+                'author_id' => 1,
+                'name' => 'Watch Star Wars Celebration Anaheim Live',
+                'announce' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris.',
+                'content' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris. </p><p> Etiam condimentum tellus nec porta sodales. Sed vel pulvinar magna, eget ornare mauris. Donec eu arcu nisi. Ut lectus est, vestibulum vel pulvinar quis, euismod et purus. Integer vel porttitor ligula, ac dapibus risus. Proin pellentesque lacus a tortor pharetra, quis feugiat lorem luctus. Nullam ut neque diam. Etiam id elit in nisl mattis ullamcorper. </p><p> Suspendisse sapien ex, elementum et turpis sed, viverra efficitur ex. Vivamus dui massa, vulputate sit amet luctus in, molestie sed turpis. Suspendisse a luctus neque. Cras id vestibulum erat, vitae ultricies nisi. Sed tempus diam non gravida vulputate. Sed aliquam leo sed blandit vestibulum. Aliquam molestie ultricies viverra. Cras sit amet viverra ante. Nullam viverra turpis quis tempor tempor. Praesent hendrerit tristique nunc quis accumsan. Curabitur eleifend, lorem nec commodo auctor, lacus ipsum tempor felis, ullamcorper facilisis est metus nec libero. Fusce porta mauris vitae mauris posuere finibus. </p><p> Nullam tempus, libero sed tincidunt egestas, nunc ipsum fringilla risus, laoreet egestas nisi mi in lacus. Nulla elementum ipsum vestibulum velit porta, non ornare dolor porttitor. Vivamus sagittis sagittis tincidunt. Donec in nisl ut quam laoreet volutpat. Ut molestie enim dignissim, pretium tellus in, vulputate nisl. Pellentesque vel condimentum quam. Suspendisse ex dolor, vulputate eget lacus et, pulvinar fermentum erat. Nulla et tincidunt urna. Vivamus consectetur ante varius risus iaculis, nec consequat lacus hendrerit. Aliquam vel auctor tellus. Phasellus pretium nisl sed fermentum molestie. Morbi dui elit, venenatis vitae ipsum vitae, finibus pellentesque nunc. Quisque facilisis lacinia elit non vulputate. </p><p> Integer lacinia rutrum libero in euismod. Quisque posuere non ligula sit amet hendrerit. Etiam cursus dolor at orci ultrices aliquet. Vestibulum urna nibh, cursus sed ultrices eu, consequat a tortor. Duis in nunc ornare, aliquet risus nec, tristique orci. Vestibulum vel lacinia libero. Integer viverra metus ullamcorper, porta quam sit amet, lacinia nunc. Ut fermentum porta dui id euismod. Aenean gravida, risus eget interdum viverra, sem justo eleifend lacus, ultricies fermentum mi turpis non nibh. Praesent vel lacus sed velit convallis venenatis eu suscipit ligula. Maecenas pretium imperdiet sodales. </p>',
+            ]
+        ]);
+    }
+
+    /**
+     * @param $list
+     */
+    protected static function saveNews($list)
+    {
+        foreach($list as $item) {
+            $newsItem = new NewsItem($item);
+            $newsItem->save();
+            $newsItem->attachImage( __DIR__ . '/images/news/' . $newsItem->id. '.jpg');
+        }
     }
 
     /**

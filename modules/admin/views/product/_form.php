@@ -43,7 +43,7 @@ use yii\web\View;
 
     <?php
     if (!$model->isNewRecord) {
-        echo $form->field($model, 'relationInfo');
+        echo $form->field($model, 'related');
     }
     ?>
 

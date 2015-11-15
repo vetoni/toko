@@ -208,6 +208,22 @@ class m151015_180042_initial extends Migration
         $this->createIndex('idx_comment_user_id', "{{%comment}}", 'user_id', false);
         $this->addForeignKey('fx_comment_product_id', "{{%comment}}", 'product_id', "{{%product}}", 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('fx_comment_user_id', "{{%comment}}", 'user_id', "{{%user}}", 'id', 'CASCADE', 'CASCADE');
+
+        $this->createTable('{{%news_item}}', [
+            'id' => 'int(10) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT',
+            'author_id' => 'int(10) unsigned NOT NULL',
+            'name' => 'varchar(255) NOT NULL',
+            'slug' => 'varchar(255) NOT NULL',
+            'announce' => 'text DEFAULT NULL',
+            'content' => 'longtext DEFAULT NULL',
+            'image_title' => 'varchar(255) DEFAULT NULL',
+            'created_at' => 'int(10) unsigned DEFAULT NULL',
+            'updated_at' => 'int(10) unsigned DEFAULT NULL',
+            'status' => 'int(10) unsigned NOT NULL',
+        ]);
+        $this->createIndex('idx_news_item_slug', "{{%news_item}}", 'slug', true);
+        $this->createIndex('idx_news_item_author_id', "{{%news_item}}", 'author_id', false);
+        $this->addForeignKey('fx_news_item_author_id', "{{%news_item}}", 'author_id', "{{%user}}", 'id', 'CASCADE', 'CASCADE');
     }
 
     /**
@@ -215,6 +231,7 @@ class m151015_180042_initial extends Migration
      */
     public function down()
     {
+        $this->dropTable('{{%news_item}}');
         $this->dropTable('{{%comment}}');
         $this->dropTable('{{%order_data}}');
         $this->dropTable('{{%order}}');

@@ -39,16 +39,22 @@
   font-size: 40px;
   line-height: 40px;
 }
-.shop-page .header .thumbnail {
-  border: 0;
-}
-.shop-page .header .thumbnail img {
-  margin-top: 10px;
-  display: block;
-  max-width: 100%;
-}
 .shop-page .header .announce p {
   margin-bottom: 25px;
+}
+.shop-page .item {
+  margin-top: 30px;
+}
+.shop-page .item:before,
+.shop-page .item:after {
+  content: " ";
+  display: table;
+}
+.shop-page .item:after {
+  clear: both;
+}
+.shop-page .item .user {
+  color: #00cccc;
 }
 .shop-page .highlight {
   font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;

@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to()];
     <div class="header">
         <div class="row">
             <div class="col-md-3">
-                <div class="thumbnail">
+                <div class="thumbnail no-border">
                     <?= Html::img($page->getImageUrl()) ?>
                 </div>
             </div>
