@@ -41,48 +41,35 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
             ]) ?>
             <h1><?= $this->title ?></h1>
             <p class="description"><?= $product->model->announce ?></p>
-            <div class="product-row">
-                <div class="pull-right">
-                    <?php Pjax::begin() ?>
-                        <?php if ($inWishList): ?>
-                            <?= Html::a(Yii::t('app', "In wish list"), ['/checkout/wish-list/index'], ['class' => 'highlight green']) ?>
-                        <?php else: ?>
-                            <?php $form = ActiveForm::begin(['options' => ['data-pjax' => '', 'class' => 'form-add-to-wish-list']]) ?>
-                                <?= $form->field($wishListModel, 'productId')->hiddenInput()->label(false) ?>
-                                <?= Html::submitButton('+ ' . Yii::t('app', 'Add to wish list'), ['class' => 'highlight blue']) ?>
-                            <?php ActiveForm::end() ?>
-                        <?php endif; ?>
-                    <?php Pjax::end() ?>
-                </div>
+            <div class="add-to-wish-list">
+                <?php Pjax::begin() ?>
+                    <?php if ($inWishList): ?>
+                        <?= Html::a(Yii::t('app', "In wish list"), ['/checkout/wish-list/index'], ['class' => 'highlight green']) ?>
+                    <?php else: ?>
+                        <?php $form = ActiveForm::begin(['options' => ['data-pjax' => '']]) ?>
+                        <?= $form->field($wishListModel, 'productId')->hiddenInput()->label(false) ?>
+                        <?= Html::submitButton('+ ' . Yii::t('app', 'Add to wish list'), ['class' => 'highlight blue']) ?>
+                        <?php ActiveForm::end() ?>
+                    <?php endif; ?>
+                <?php Pjax::end() ?>
             </div>
-            <div class="product-row">
-                <div class="pull-right">
-                    <div class="price">
-                        <?php if ($product->model->old_price): ?>
-                            <span><?= CurrencyHelper::format($product->model->old_price) ?></span>
-                        <?php endif; ?>
-                        <strong><?= CurrencyHelper::format($product->model->price) ?></strong>
-                    </div>
-                </div>
+            <div class="price">
+                <?php if ($product->model->old_price): ?>
+                    <span><?= CurrencyHelper::format($product->model->old_price) ?></span>
+                <?php endif; ?>
+                <strong><?= CurrencyHelper::format($product->model->price) ?></strong>
             </div>
-            <div class="product-row">
-                <div class="pull-right">
-                    <?php
-                        Pjax::begin(['id' => 'product_avg_rating']);
-                        echo Rating::widget(['name' => 'Product[rating]', 'value' => $product->model->rating , 'readonly' => true]);
-                        Pjax::end();
-                    ?>
-                </div>
-            </div>
-            <div class="product-row bordered">
-                <div class="pull-right">
-                    <?php $form = ActiveForm::begin(['action' => ['/checkout/cart/add'],
-                        'options' => ['class' => 'form-add-to-cart form-inline']]) ?>
-                        <?= $form->field($formModel, 'quantity') ?>
-                        <?= $form->field($formModel, 'productId')->hiddenInput()->label(false) ?>
-                        <?= Html::submitButton(Yii::t('app', 'Add to cart'), ['class' => 'btn btn-primary']) ?>
-                    <?php ActiveForm::end() ?>
-                </div>
+            <?php
+                Pjax::begin(['id' => 'product_avg_rating', 'options' => ['class' => 'avg-rating']]);
+                echo Rating::widget(['name' => 'Product[rating]', 'value' => $product->model->rating , 'readonly' => true]);
+                Pjax::end();
+            ?>
+            <div class="bordered">
+                <?php $form = ActiveForm::begin(['action' => ['/checkout/cart/add'], 'options' => ['class' => 'form-add-to-cart form-inline']]) ?>
+                    <?= $form->field($formModel, 'quantity') ?>
+                    <?= $form->field($formModel, 'productId')->hiddenInput()->label(false) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Add to cart'), ['class' => 'btn btn-primary']) ?>
+                <?php ActiveForm::end() ?>
             </div>
         </div>
     </div>

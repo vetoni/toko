@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: normal;
+  src: local('Roboto Condensed Regular'), local('RobotoCondensed-Regular'), url("../fonts/RobotoCondensed-Regular.ttf") format('truetype');
+}
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url("http://fonts.gstatic.com/s/opensans/v13/RjgO7rYTmqiVp7vzi-Q5UVtXRa8TVwTICgirnJhmVJw.woff2") format("woff2");
+}

@@ -25,13 +25,10 @@ $this->endBlock();
     </div>
 
     <div class="body-content">
-
-        <div class="new-products">
-            <h2><?= Yii::t('app', '<span>New</span> products') ?></h2>
+        <div class="section-header">
+            <h2><?= Yii::t('app', 'New <span>products</span>') ?></h2>
             <?= $this->render('/product/_list', ['products' => $new_products]) ?>
         </div>
-
         <?= $this->render('/shared/brands') ?>
-
     </div>
 </div>

@@ -33,10 +33,8 @@ foreach ($category->getNodePath() as $node) {
             'attributes' => [ 'name', 'price', 'rating']
         ]]);
         ?>
-        <div class="sort-row">
-            <div class="pull-right">
-                <span class="sorter-caption"><?= Yii::t('app', 'Order by:') ?></span><?= $category->sorter() ?>
-            </div>
+        <div class="link-sorter">
+            <span class="caption"><?= Yii::t('app', 'Order by:') ?></span><?= $category->sorter() ?>
         </div>
         <div class="bordered">
             <?= $this->render('/product/_list', ['products' => $products, 'pager' => $category->pager()]) ?>

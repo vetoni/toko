@@ -1,11 +1,26 @@
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: normal;
+  src: local('Roboto Condensed Regular'), local('RobotoCondensed-Regular'), url("../fonts/RobotoCondensed-Regular.ttf") format('truetype');
+}
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url("http://fonts.gstatic.com/s/opensans/v13/RjgO7rYTmqiVp7vzi-Q5UVtXRa8TVwTICgirnJhmVJw.woff2") format("woff2");
+}
 .file-manager-images {
   list-style-type: none;
   display: block;
   padding: 0;
 }
+.file-manager-images:before,
 .file-manager-images:after {
-  content: '';
-  display: block;
+  content: " ";
+  display: table;
+}
+.file-manager-images:after {
   clear: both;
 }
 .file-manager-images li {

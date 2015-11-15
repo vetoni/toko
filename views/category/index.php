@@ -20,19 +20,21 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => Url::to()];
 ?>
 
 <div class="shop-page">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="header-thumbnail">
-                <?= Html::img($page->getImageUrl()) ?>
+    <div class="header">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <?= Html::img($page->getImageUrl()) ?>
+                </div>
             </div>
-        </div>
-        <div class="col-md-9">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <div class="header">
-                <h1><?= Html::encode($page->model->name) ?></h1>
-                <p><?= $page->model->announce ?></p>
+            <div class="col-md-9">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <div class="announce">
+                    <h1><?= Html::encode($page->model->name) ?></h1>
+                    <p><?= $page->model->announce ?></p>
+                </div>
             </div>
         </div>
     </div>

@@ -1,27 +1,49 @@
 @import "../../vendor/bower/bootstrap/less/mixins.less";
 @import "../../vendor/bower/bootstrap/less/variables.less";
 
-@nav-height: 40px;
-@menu-color: #fff;
-@menu-active-color: #FC0;
-@menu-hover-color: #0CC;
-@footer-height: 60px;
+@menu-text-color: #fff;
+@active-color: #FC0;
+@hover-color: #0CC;
+@footer-color: #f5f5f5;
+@font-size-default: 12px;
+@font-size-bigger: 14px;
 
-.font-roboto() {
-  font-family: "Roboto Condensed",Arial,Helvetica,sans-serif;
-  font-weight: 400;
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: normal;
+  src: local('Roboto Condensed Regular'), local('RobotoCondensed-Regular'), url("../fonts/RobotoCondensed-Regular.ttf") format('truetype');
 }
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url("http://fonts.gstatic.com/s/opensans/v13/RjgO7rYTmqiVp7vzi-Q5UVtXRa8TVwTICgirnJhmVJw.woff2") format("woff2");
+}
+
 .font-general() {
   font-family: Arial,Helvetica,sans-serif;
   font-weight: 400;
 }
-.font-sort-links() {
+.font-condensed() {
+  font-family: "Roboto Condensed",Arial,Helvetica,sans-serif;
+  font-weight: 400;
+}
+.font-half-lings() {
   font-family: 'Glyphicons Halflings',Arial,Helvetica,sans-serif;
   font-style: normal;
   font-weight: normal;
 }
-.link-undecorate() {
-  text-decoration: none;
-  &:focus { text-decoration: none; }
-  &:hover { text-decoration: none; }
+.font-condensed-upper() {
+  .font-condensed();
+  text-transform: uppercase;
+
+}
+.font-condensed-bigger() {
+  .font-condensed-upper();
+  font-size: @font-size-bigger;
+}
+.font-open-sans() {
+  font-family: "Open Sans",sans-serif;
 }

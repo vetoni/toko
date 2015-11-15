@@ -4,7 +4,7 @@ use yii\helpers\Url;
 
 ?>
 
-<form action="<?= Url::to(['/product/search']) ?>" class="header-search">
+<form action="<?= Url::to(['/product/search']) ?>" class="search-box">
     <fieldset>
         <input name="q" placeholder="Search" value="<?= Yii::$app->request->get('q') ?>" type="text">
         <button><i class="glyphicon glyphicon-search"></i></button>

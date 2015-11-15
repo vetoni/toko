@@ -8,7 +8,7 @@ use yii\bootstrap\Html;
  * @var string $pager
  */
 ?>
-<div class="catalog-list-content row">
+<div class="row">
     <?php if (count($categories)) : ?>
         <?php foreach ($categories as $category): ?>
             <?= $this->render('_item', ['category' => $category]) ?>
