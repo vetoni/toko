@@ -108,7 +108,28 @@ class Checkout extends Api
             \Yii::warning($e->getMessage());
             return false;
         }
+
+        $adminEmail = \Yii::$app->params['admin.email'];
+        $this->sendOrderEmail($order, $order->email);
+        if ($order->email != $adminEmail) {
+            $this->sendOrderEmail($order, $adminEmail);
+        }
         return $order;
+    }
+
+    /**
+     * @param $order
+     * @param $email
+     */
+    protected function sendOrderEmail($order, $email)
+    {
+        \Yii::$app->mailer->compose('order/confirmation', [
+            'order' => $order
+        ])
+        ->setTo($email)
+        ->setFrom(\Yii::$app->params['shop.email'])
+        ->setSubject(\Yii::t('mail', 'Order confirmation'))
+        ->send();
     }
 
     /**

@@ -91,7 +91,7 @@ class SiteController extends Controller
             $model->name = $identity->name;
             $model->email = $identity->email;
         }
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['user.adminEmail'])) {
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['shop.email'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
             return $this->refresh();
         }

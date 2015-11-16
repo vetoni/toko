@@ -2,17 +2,15 @@
 
 use app\helpers\CurrencyHelper;
 use app\modules\checkout\models\Order;
-use app\widgets\BackLink;
 use yii\bootstrap\Html;
-use yii\helpers\Url;
 
 /**
  * @var Order $order
  */
-
 ?>
-<h1><?= Yii::t('app', 'Order details') ?></h1>
-<table class="table table-bordered table-striped">
+
+<h1><?= Yii::t('app', 'Thanks for the order') ?></h1>
+<table>
     <tbody>
     <tr>
         <th><?= Yii::t('app', 'ID') ?></th>
@@ -61,14 +59,13 @@ use yii\helpers\Url;
     </tbody>
 </table>
 <h2><?= Yii::t('app', 'Products') ?></h2>
-<table class="table">
+<table>
     <thead>
     <tr>
-        <th></th>
-        <th><?= Yii::t('app', 'Name') ?></th>
-        <th><?= Yii::t('app', 'Price') ?></th>
-        <th><?= Yii::t('app', 'Quantity') ?></th>
-        <th><?= Yii::t('app', 'Subtotal') ?></th>
+        <th align="left"><?= Yii::t('app', 'Name') ?></th>
+        <th align="left"><?= Yii::t('app', 'Price') ?></th>
+        <th align="left"><?= Yii::t('app', 'Quantity') ?></th>
+        <th align="left"><?= Yii::t('app', 'Subtotal') ?></th>
         <th></th>
     </tr>
     </thead>
@@ -78,17 +75,11 @@ use yii\helpers\Url;
         $product = $line->product;
         ?>
         <tr>
-            <td>
-                <a href="<?= Url::to(['/product/view', 'slug' => $product->slug]) ?>">
-                    <?= Html::img($product->thumb(64,64)) ?>
-                </a>
-            </td>
-            <td><?= Html::a($product->name, ['/product/view', 'slug' => $product->slug]) ?></td>
-            <td><?= CurrencyHelper::format($line->price, $order->currency_code, false) ?></td>
-            <td><?= $line->quantity ?></td>
-            <td><?= CurrencyHelper::format($line->subtotal, $order->currency_code, false) ?></td>
+            <td align="left"><?= $product->name ?></td>
+            <td align="left"><?= CurrencyHelper::format($line->price, $order->currency_code, false) ?></td>
+            <td align="left"><?= $line->quantity ?></td>
+            <td align="left"><?= CurrencyHelper::format($line->subtotal, $order->currency_code, false) ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
-<?= BackLink::widget(['title' =>  Yii::t('app', 'Order list'), 'url' => ['/checkout/order/list'], 'options' => ['class' => 'btn btn-primary']]) ?>

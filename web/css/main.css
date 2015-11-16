@@ -52,6 +52,9 @@ a:hover {
   text-decoration: none;
   color: #00cccc;
 }
+.table th {
+  border-bottom: 0 !important;
+}
 .btn-link {
   padding: 0;
 }

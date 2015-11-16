@@ -15,16 +15,18 @@ $pager = Checkout::pager();
 
 <h1><?= Yii::t('app', 'My orders') ?></h1>
 <table class="table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th><?= Yii::t('app', 'Name') ?></th>
+        <th><?= Yii::t('app', 'Address') ?></th>
+        <th><?= Yii::t('app', 'Total') ?></th>
+        <th><?= Yii::t('app', 'Date') ?></th>
+        <th><?= Yii::t('app', 'Status') ?></th>
+        <th></th>
+    </tr>
+    </thead>
     <tbody>
-        <tr>
-            <th>#</th>
-            <th><?= Yii::t('app', 'Name') ?></th>
-            <th><?= Yii::t('app', 'Address') ?></th>
-            <th><?= Yii::t('app', 'Total') ?></th>
-            <th><?= Yii::t('app', 'Date') ?></th>
-            <th><?= Yii::t('app', 'Status') ?></th>
-            <th></th>
-        </tr>
         <?php foreach($orders as $order): ?>
             <tr>
                 <td><?= $order->id ?></td>

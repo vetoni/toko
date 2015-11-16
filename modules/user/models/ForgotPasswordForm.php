@@ -71,7 +71,7 @@ class ForgotPasswordForm extends Model
                 'token' => $user->password_reset_token,
                 'new_password' => $new_password
             ])
-            ->setFrom(\Yii::$app->params['user.adminEmail'])
+            ->setFrom(\Yii::$app->params['shop.email'])
             ->setTo($this->email)
             ->setSubject(\Yii::t('mail', 'New password activation'))
             ->send();

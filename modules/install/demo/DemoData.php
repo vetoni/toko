@@ -285,7 +285,7 @@ class DemoData
             [
                 'id' => Pages::ABOUT,
                 'name' => 'About us',
-                'content' => '<p><strong>Address</strong>: USA, 331 S Patrick StAlexandria, VA 22314-3501</p><p><strong>ZIP</strong>: 123456</p><p><strong>Phone</strong>: +1 234 56-78</p><p><strong>E-mail</strong>: toko.webshop@example.com</p>',
+                'content' => '<p><strong>Address</strong>: USA, 331 S Patrick StAlexandria, VA 22314-3501</p><p><strong>ZIP</strong>: 123456</p><p><strong>Phone</strong>: +1 234 56-78</p><p><strong>E-mail</strong>: %SHOP_EMAIL%</p>',
                 'is_system' => 1,
             ],
             [

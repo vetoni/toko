@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'user.adminEmail' => 'admin@toko-webshop.com',
+    'shop.email' => 'demo.toko-webshop@gmail.com',
+    'admin.email' => 'admin.toko-webshop@gmail.com',
 ];
