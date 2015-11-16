@@ -1,1 +1,0 @@
-<h1><?= $newComment->announce?></h1>

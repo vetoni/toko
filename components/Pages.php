@@ -47,4 +47,19 @@ class Pages
      * Home page
      */
     const HOME_PAGE = 8;
+
+    /**
+     * Contact page
+     */
+    const CONTACT = 9;
+
+    /**
+     * FAQ page
+     */
+    const FAQ = 10;
+
+    /**
+     * About page
+     */
+    const ABOUT = 11;
 }

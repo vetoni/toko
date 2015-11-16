@@ -2,6 +2,7 @@
 
 namespace app\modules\install\demo;
 
+use app\components\Pages;
 use app\models\Category;
 use app\models\Comment;
 use app\models\NewsItem;
@@ -222,61 +223,79 @@ class DemoData
     {
         static::savePages([
             [
-                'id' => 1,
+                'id' => Pages::SHOP_BY_CATEGORY,
                 'name' => 'Shop by category',
                 'announce' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br>Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
                 'is_system' => 1,
             ],
             [
-                'id' => 2,
+                'id' => Pages::SHOPPING_CART,
                 'name' => 'Shopping cart',
                 'announce' => 'The items below are currently in your shopping cart. To checkout, please click \'Checkout\'.',
                 'is_system' => 1,
             ],
             [
-                'id' => 3,
+                'id' => Pages::CHECKOUT,
                 'name' => 'Checkout',
                 'announce' => 'Please fill your contact information.',
                 'is_system' => 1,
             ],
             [
-                'id' => 4,
+                'id' => Pages::ORDER_SUCCESS,
                 'name' => 'Order success',
                 'announce' => 'Your order successfully created. Our manager will contact you as soon as possible.',
                 'is_system' => 1,
             ],
             [
-                'id' => 5,
+                'id' => Pages::ORDER_FAILED,
                 'name' => 'Order failed',
                 'announce' => 'Can not process order. Please try again later or contact our administration.',
                 'is_system' => 1,
             ],
             [
-                'id' => 6,
+                'id' => Pages::SEARCH_RESULTS,
                 'name' => 'Search results',
                 'is_system' => 1,
             ],
             [
-                'id' => 7,
+                'id' => Pages::WISH_LIST,
                 'name' => 'Wish list',
                 'announce' => 'The items below are currently in your wish list.',
                 'is_system' => 1,
             ],
             [
-                'id' => 8,
+                'id' => Pages::HOME_PAGE,
                 'name' => 'Home',
                 'announce' => '<h1>Welcome on Toko demo</h1>',
                 'content' => '<p>Shop provides computer parts and hardware, hard drives, software as well as electronics, tools, appliances, jewelry, watches, gaming etc.</p>',
                 'is_system' => 1,
             ],
             [
-                'id' => 9,
+                'id' => Pages::CONTACT,
+                'name' => 'Contact',
+                'announce' => 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::FAQ,
+                'name' => 'FAQ',
+                'content' => '<p><strong>Question:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><blockquote><strong>Answer:</strong> Nulla in rhoncus arcu. Integer in justo mauris. Suspendisse ac nunc bibendum, malesuada ipsum egestas, viverra metus. Donec congue nisi molestie, pharetra orci volutpat, porttitor nulla. Aenean ut velit mollis, aliquam sem et, sollicitudin metus. Sed blandit orci quis justo ornare posuere.</blockquote><p><strong>Question:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><blockquote><strong>Answer:</strong> Nulla in rhoncus arcu. Integer in justo mauris. Suspendisse ac nunc bibendum, malesuada ipsum egestas, viverra metus. Donec congue nisi molestie, pharetra orci volutpat, porttitor nulla. Aenean ut velit mollis, aliquam sem et, sollicitudin metus. Sed blandit orci quis justo ornare posuere.</blockquote><p><strong>Question:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><blockquote><strong>Answer:</strong> Nulla in rhoncus arcu. Integer in justo mauris. Suspendisse ac nunc bibendum, malesuada ipsum egestas, viverra metus. Donec congue nisi molestie, pharetra orci volutpat, porttitor nulla. Aenean ut velit mollis, aliquam sem et, sollicitudin metus. Sed blandit orci quis justo ornare posuere.</blockquote>',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::ABOUT,
+                'name' => 'About us',
+                'content' => '<p><strong>Address</strong>: USA, 331 S Patrick StAlexandria, VA 22314-3501</p><p><strong>ZIP</strong>: 123456</p><p><strong>Phone</strong>: +1 234 56-78</p><p><strong>E-mail</strong>: toko.webshop@example.com</p>',
+                'is_system' => 1,
+            ],
+            [
+                'id' => 1001,
                 'name' => 'Welcome on Toko demo',
                 'announce' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br>Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
                 'content' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris. </p><p> Etiam condimentum tellus nec porta sodales. Sed vel pulvinar magna, eget ornare mauris. Donec eu arcu nisi. Ut lectus est, vestibulum vel pulvinar quis, euismod et purus. Integer vel porttitor ligula, ac dapibus risus. Proin pellentesque lacus a tortor pharetra, quis feugiat lorem luctus. Nullam ut neque diam. Etiam id elit in nisl mattis ullamcorper. </p><p> Suspendisse sapien ex, elementum et turpis sed, viverra efficitur ex. Vivamus dui massa, vulputate sit amet luctus in, molestie sed turpis. Suspendisse a luctus neque. Cras id vestibulum erat, vitae ultricies nisi. Sed tempus diam non gravida vulputate. Sed aliquam leo sed blandit vestibulum. Aliquam molestie ultricies viverra. Cras sit amet viverra ante. Nullam viverra turpis quis tempor tempor. Praesent hendrerit tristique nunc quis accumsan. Curabitur eleifend, lorem nec commodo auctor, lacus ipsum tempor felis, ullamcorper facilisis est metus nec libero. Fusce porta mauris vitae mauris posuere finibus. </p><p> Nullam tempus, libero sed tincidunt egestas, nunc ipsum fringilla risus, laoreet egestas nisi mi in lacus. Nulla elementum ipsum vestibulum velit porta, non ornare dolor porttitor. Vivamus sagittis sagittis tincidunt. Donec in nisl ut quam laoreet volutpat. Ut molestie enim dignissim, pretium tellus in, vulputate nisl. Pellentesque vel condimentum quam. Suspendisse ex dolor, vulputate eget lacus et, pulvinar fermentum erat. Nulla et tincidunt urna. Vivamus consectetur ante varius risus iaculis, nec consequat lacus hendrerit. Aliquam vel auctor tellus. Phasellus pretium nisl sed fermentum molestie. Morbi dui elit, venenatis vitae ipsum vitae, finibus pellentesque nunc. Quisque facilisis lacinia elit non vulputate. </p><p> Integer lacinia rutrum libero in euismod. Quisque posuere non ligula sit amet hendrerit. Etiam cursus dolor at orci ultrices aliquet. Vestibulum urna nibh, cursus sed ultrices eu, consequat a tortor. Duis in nunc ornare, aliquet risus nec, tristique orci. Vestibulum vel lacinia libero. Integer viverra metus ullamcorper, porta quam sit amet, lacinia nunc. Ut fermentum porta dui id euismod. Aenean gravida, risus eget interdum viverra, sem justo eleifend lacus, ultricies fermentum mi turpis non nibh. Praesent vel lacus sed velit convallis venenatis eu suscipit ligula. Maecenas pretium imperdiet sodales. </p>',
             ],
             [
-                'id' => 10,
+                'id' => 1002,
                 'name' => 'What is that?',
                 'announce' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br>Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
                 'content' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris. </p><p> Etiam condimentum tellus nec porta sodales. Sed vel pulvinar magna, eget ornare mauris. Donec eu arcu nisi. Ut lectus est, vestibulum vel pulvinar quis, euismod et purus. Integer vel porttitor ligula, ac dapibus risus. Proin pellentesque lacus a tortor pharetra, quis feugiat lorem luctus. Nullam ut neque diam. Etiam id elit in nisl mattis ullamcorper. </p><p> Suspendisse sapien ex, elementum et turpis sed, viverra efficitur ex. Vivamus dui massa, vulputate sit amet luctus in, molestie sed turpis. Suspendisse a luctus neque. Cras id vestibulum erat, vitae ultricies nisi. Sed tempus diam non gravida vulputate. Sed aliquam leo sed blandit vestibulum. Aliquam molestie ultricies viverra. Cras sit amet viverra ante. Nullam viverra turpis quis tempor tempor. Praesent hendrerit tristique nunc quis accumsan. Curabitur eleifend, lorem nec commodo auctor, lacus ipsum tempor felis, ullamcorper facilisis est metus nec libero. Fusce porta mauris vitae mauris posuere finibus. </p><p> Nullam tempus, libero sed tincidunt egestas, nunc ipsum fringilla risus, laoreet egestas nisi mi in lacus. Nulla elementum ipsum vestibulum velit porta, non ornare dolor porttitor. Vivamus sagittis sagittis tincidunt. Donec in nisl ut quam laoreet volutpat. Ut molestie enim dignissim, pretium tellus in, vulputate nisl. Pellentesque vel condimentum quam. Suspendisse ex dolor, vulputate eget lacus et, pulvinar fermentum erat. Nulla et tincidunt urna. Vivamus consectetur ante varius risus iaculis, nec consequat lacus hendrerit. Aliquam vel auctor tellus. Phasellus pretium nisl sed fermentum molestie. Morbi dui elit, venenatis vitae ipsum vitae, finibus pellentesque nunc. Quisque facilisis lacinia elit non vulputate. </p><p> Integer lacinia rutrum libero in euismod. Quisque posuere non ligula sit amet hendrerit. Etiam cursus dolor at orci ultrices aliquet. Vestibulum urna nibh, cursus sed ultrices eu, consequat a tortor. Duis in nunc ornare, aliquet risus nec, tristique orci. Vestibulum vel lacinia libero. Integer viverra metus ullamcorper, porta quam sit amet, lacinia nunc. Ut fermentum porta dui id euismod. Aenean gravida, risus eget interdum viverra, sem justo eleifend lacus, ultricies fermentum mi turpis non nibh. Praesent vel lacus sed velit convallis venenatis eu suscipit ligula. Maecenas pretium imperdiet sodales. </p>',

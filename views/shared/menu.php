@@ -17,13 +17,13 @@ use yii\web\View;
     ]);
     Nav::begin([
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Shop', 'url' => ['/category/index'], 'scope' => ['category', 'product']],
-            ['label' => 'News', 'url' => ['/news/index'], 'scope' => ['news']],
-            ['label' => 'Pages', 'url' => ['/page/index'], 'scope' => ['page']],
-            ['label' => 'Contact', 'url' => ['page/show', 'id' => '1']],
-            ['label' => 'FAQ', 'url' => ['/site/faq']],
-            ['label' => 'About', 'url' => ['page/about']],
+            ['label' => 'Home', 'url' => ['//site/index']],
+            ['label' => 'Shop', 'url' => ['//category/index'], 'scope' => ['category', 'product']],
+            ['label' => 'News', 'url' => ['//news/index'], 'scope' => ['news']],
+            ['label' => 'Pages', 'url' => ['//page/index'], 'scope' => ['page']],
+            ['label' => 'Contact', 'url' => ['//site/contact']],
+            ['label' => 'FAQ', 'url' => ['//site/faq']],
+            ['label' => 'About', 'url' => ['//site/about']],
         ],
         'options' => ['class' =>'navbar-nav navbar-static-top']
     ]);
