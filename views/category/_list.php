@@ -15,7 +15,7 @@ use yii\bootstrap\Html;
         <?php endforeach; ?>
     <?php else: ?>
         <div class="col-md-12">
-            <?= Html::tag('div', Yii::t('yii', 'No results found.')) ?>
+            <?= Html::tag('div', Yii::t('yii', 'No results found.'), ['class' => 'no-results']) ?>
         </div>
     <?php endif; ?>
 </div>

@@ -109,7 +109,7 @@ class Catalog extends Api
                 $this->_roots[] = $this->_cats[$model->id] = new CategoryObject($model);
             }
         }
-        return $this->_roots;
+        return $this->_roots ?: [];
     }
 
     /**
@@ -150,7 +150,7 @@ class Catalog extends Api
             $this->_search_result[] = $this->_prods[$model->id] = new ProductObject($model);
         }
 
-        return $this->_search_result;
+        return $this->_search_result ?: [];
     }
 
     /**
@@ -174,7 +174,7 @@ class Catalog extends Api
                 $this->_new_products[] = new ProductObject($model);
             }
         }
-        return $this->_new_products;
+        return $this->_new_products ?: [];
     }
 
     /**

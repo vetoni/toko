@@ -37,17 +37,6 @@ echo GridView::widget([
             'format' => 'text',
         ],
         [
-            'attribute' => 'type',
-            'filter' => EntityDropDown::widget([
-                'model' => $searchModel,
-                'attribute' => 'type',
-                'items' => ['show' => Yii::t('app', 'Show'), 'list' => Yii::t('app', 'List')],
-            ]),
-            'value' => function($data) {
-                return $data->type == 'show' ? Yii::t('app', 'Show') : Yii::t('app', 'List');
-            }
-        ],
-        [
             'attribute' => 'is_system',
             'filter' => EntityDropDown::widget([
                 'model' => $searchModel,

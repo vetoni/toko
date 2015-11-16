@@ -94,7 +94,7 @@ class CategoryObject extends ApiObject
                 $this->_children[] = new static($model);
             }
         }
-        return $this->_children;
+        return $this->_children ?: [];
     }
 
     /**
@@ -122,7 +122,7 @@ class CategoryObject extends ApiObject
                 $this->_products[] = new ProductObject($model);
             }
         }
-        return $this->_products;
+        return $this->_products ?: [];
     }
 
     /**

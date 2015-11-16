@@ -25,9 +25,6 @@
 .table td {
   vertical-align: middle !important;
 }
-.alert-info {
-  margin-bottom: 20px;
-}
 .shop-page a[rel="fancybox"]:first-of-type img {
   display: block;
   max-width: 100%;
@@ -41,6 +38,9 @@
 }
 .shop-page .header .announce p {
   margin-bottom: 25px;
+}
+.shop-page .no-results.bordered {
+  margin-top: 20px;
 }
 .shop-page .item {
   margin-top: 30px;

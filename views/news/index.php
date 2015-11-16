@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'News'), 'url' => ['/
                     <em class="date">
                         <?= Yii::t('app', 'by <span class="user">{0}</span> on {1}', [
                             $newsItem->model->author->name,
-                            Yii::$app->formatter->asDatetime($newsItem->model->created_at)
+                            Yii::$app->formatter->asDatetime($newsItem->model->updated_at)
                         ]) ?>
                     </em>
                     <h3>
@@ -51,5 +51,8 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'News'), 'url' => ['/
     <div align="right">
         <?= Shop::pager() ?>
     </div>
+    <?php if (!$newsItems): ?>
+        <?= Html::tag('div', Yii::t('yii', 'No results found.'), ['class' => 'no-results bordered']) ?>
+    <?php endif; ?>
 </div>
 

@@ -20,7 +20,7 @@ class PageRule extends Object implements UrlRuleInterface
     {
         $page = Shop::page($request->pathInfo);
         if ($page) {
-            return ["page/{$page->model->type}", ['slug' => $page->model->slug]];
+            return ["page/view", ['slug' => $page->model->slug]];
         }
         return false;
     }
@@ -33,7 +33,7 @@ class PageRule extends Object implements UrlRuleInterface
      */
     public function createUrl($manager, $route, $params)
     {
-        if ($route === 'page/show' || $route === 'page/list') {
+        if ($route === 'page/view') {
 
             $id_slug = null;
 

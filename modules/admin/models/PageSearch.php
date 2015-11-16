@@ -25,11 +25,6 @@ class PageSearch extends Model
     /**
      * @var
      */
-    public $type;
-
-    /**
-     * @var
-     */
     public $slug;
 
     /**
@@ -49,7 +44,7 @@ class PageSearch extends Model
     {
         return [
             [['id', 'status', 'is_system'], 'integer'],
-            [['name', 'type', 'slug'], 'string']
+            [['name', 'slug'], 'string']
         ];
     }
 
@@ -76,7 +71,6 @@ class PageSearch extends Model
                 'attributes' => [
                     'id',
                     'name',
-                    'type',
                     'slug',
                     'status',
                     'is_system'
@@ -93,7 +87,6 @@ class PageSearch extends Model
 
         $query->andFilterWhere([
             'status' => $this->status,
-            'type' => $this->type,
             'is_system' => $this->is_system
         ]);
 

@@ -64,7 +64,7 @@ class ProductObject extends ApiObject
                 $this->_related[] = new static($product);
             }
         }
-        return $this->_related;
+        return $this->_related ?: [];
     }
 
     /**
@@ -82,6 +82,6 @@ class ProductObject extends ApiObject
 
             $this->_comments = $this->_adp->models;
         }
-        return $this->_comments;
+        return $this->_comments ?: [];
     }
 }

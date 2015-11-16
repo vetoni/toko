@@ -78,7 +78,14 @@ class Shop extends Api
     public function api_pages($options = [])
     {
         if (!isset($this->_pages)) {
+
             $query = Page::find();
+
+            if (!empty($options['nonSystemOnly'])) {
+                $query->andWhere(['is_system' => 0]);
+            }
+
+            $query->sortDate();
 
             $this->_adp = new ActiveDataProvider([
                 'query' => $query,
@@ -89,7 +96,7 @@ class Shop extends Api
                 $this->_pages[] = new PageObject($model);
             }
         }
-        return $this->_pages;
+        return $this->_pages ?: [];
     }
 
     /**
@@ -111,7 +118,7 @@ class Shop extends Api
     public function api_news_items($options = [])
     {
         if (!isset($this->_news_items)) {
-            $query = NewsItem::find();
+            $query = NewsItem::find()->sortDate();
             $this->_adp = new ActiveDataProvider([
                 'query' => $query,
                 'pagination' => isset($options['pagination']) ? $options['pagination'] : [],
@@ -120,7 +127,7 @@ class Shop extends Api
                 $this->_news_items[] = new NewsItemObject($model);
             }
         }
-        return $this->_news_items;
+        return $this->_news_items ?: [];
     }
 
     /**

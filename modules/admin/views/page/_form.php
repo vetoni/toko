@@ -22,8 +22,6 @@ use yii\web\View;
 
     <?= $form->field($model, 'image')->widget(ImageSelector::className()); ?>
 
-    <?= $form->field($model, 'type')->dropDownList(['show' => Yii::t('app', 'Show'), 'list' => Yii::t('app', 'List')]) ?>
-
     <?= $form->field($model, 'status')->dropDownList([Yii::t('app', 'No'), Yii::t('app', 'Yes')]) ?>
 
     <?= $form->field($model, 'announce')->widget(Redactor::className()); ?>

@@ -18,7 +18,7 @@ class NewsController extends Controller
     public function actionIndex()
     {
         $newsItems = Shop::news_items();
-        return $this->render('list', ['newsItems' => $newsItems]);
+        return $this->render('index', ['newsItems' => $newsItems]);
     }
 
     /**

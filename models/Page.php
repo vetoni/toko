@@ -12,7 +12,6 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "{{%page}}".
  *
  * @property string $id
- * @property string $type
  * @property string $name
  * @property string $slug
  * @property string $announce
@@ -38,10 +37,9 @@ class Page extends ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'name', 'slug'], 'required'],
+            [['name', 'slug'], 'required'],
             [['announce', 'content'], 'string'],
             [['created_at', 'updated_at', 'status', 'is_system'], 'integer'],
-            [['type'], 'string', 'max' => 45],
             [['name', 'slug'], 'string', 'max' => 255],
             [['slug'], 'unique'],
             ['status', 'default', 'value' => 1],
@@ -56,7 +54,6 @@ class Page extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'type' => Yii::t('app', 'Type'),
             'name' => Yii::t('app', 'Name'),
             'slug' => Yii::t('app', 'Slug'),
             'announce' => Yii::t('app', 'Announce'),
