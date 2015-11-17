@@ -56,7 +56,9 @@ class NewsItem extends ActiveRecord
      */
     public function beforeSave($insert)
     {
-        $this->author_id = Yii::$app->user->id;
+        if (!isset($this->author_id)) {
+            $this->author_id = Yii::$app->user->id;
+        }
         return parent::beforeSave($insert);
     }
 

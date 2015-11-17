@@ -4,6 +4,7 @@ namespace app\api;
 
 use app\components\Api;
 use app\helpers\CurrencyHelper;
+use app\models\Settings;
 use app\modules\checkout\models\Cart;
 use app\modules\checkout\models\Order;
 use app\modules\checkout\models\OrderAddress;
@@ -110,11 +111,7 @@ class Checkout extends Api
             return false;
         }
 
-        $adminEmail = \Yii::$app->params['admin.email'];
         $this->sendOrderEmail($order, $order->email);
-        if ($order->email != $adminEmail) {
-            $this->sendOrderEmail($order, $adminEmail);
-        }
         return $order;
     }
 
@@ -141,7 +138,7 @@ class Checkout extends Api
             'order' => $order
         ])
         ->setTo($email)
-        ->setFrom(\Yii::$app->params['shop.email'])
+        ->setFrom(Settings::value('general', 'shopEmail'))
         ->setSubject(\Yii::t('mail', 'Order confirmation'))
         ->send();
     }

@@ -2,6 +2,7 @@
 
 namespace app\modules\user\models;
 
+use app\models\Settings;
 use yii\base\Model;
 
 /**
@@ -71,7 +72,7 @@ class ForgotPasswordForm extends Model
                 'token' => $user->password_reset_token,
                 'new_password' => $new_password
             ])
-            ->setFrom(\Yii::$app->params['shop.email'])
+            ->setFrom(Settings::value('general', 'shopEmail'))
             ->setTo($this->email)
             ->setSubject(\Yii::t('mail', 'New password activation'))
             ->send();

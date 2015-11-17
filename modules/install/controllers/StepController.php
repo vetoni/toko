@@ -3,10 +3,10 @@
 namespace app\modules\install\controllers;
 
 use app\components\Controller;
-
 use app\helpers\Migrations;
 use app\modules\install\demo\DemoData;
 use app\modules\install\InstallModule;
+use app\modules\install\models\Configuration;
 use Yii;
 
 /**
@@ -30,20 +30,21 @@ class StepController extends Controller
      */
     public function actionSecond()
     {
-        if (!$this->checkDbConnection())
-        {
-            return $this->showError('Cannot establish database connection. Please check your db connection settings.');
-        }
-
-        Migrations::run();
-
-        DemoData::create([
-            'admin_password' => 'test'
+        $config = new Configuration([
+            'shopEmail' => 'demo.toko-webshop@gmail.com',
+            'adminEmail' => 'admin.toko-webshop@gmail.com',
+            'adminPassword' => 'demo',
         ]);
 
-        Yii::$app->cache->flush();
-        $this->module->installed = true;
-        return $this->render('step2');
+        if ($config->load(Yii::$app->request->post()) && $config->validate()) {
+            Migrations::run();
+            DemoData::create($config);
+            Yii::$app->cache->flush();
+            $this->module->installed = true;
+            return $this->redirect('finish');
+        }
+
+        return $this->render('step2', ['config' => $config]);
     }
 
     /**
@@ -57,9 +58,9 @@ class StepController extends Controller
     /**
      * @return bool
      */
-    protected function checkDbConnection()
+    public function checkDbConnection()
     {
-        try{
+        try {
             Yii::$app->db->open();
             return true;
         }

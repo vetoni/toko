@@ -18,6 +18,11 @@ use yii\base\InvalidParamException;
 class Settings extends ActiveRecord
 {
     /**
+     * @var array
+     */
+    protected static $_settings = [];
+
+    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -48,6 +53,10 @@ class Settings extends ActiveRecord
      */
     public static function get($group, $name)
     {
-        return static::findOne(['group' => $group, 'name' => $name]);
+        $key = "{$group}.{$name}";
+        if (!isset(static::$_settings[$key])) {
+            static::$_settings[$key] = static::findOne(['group' => $group, 'name' => $name]);
+        }
+        return static::$_settings[$key];
     }
 }

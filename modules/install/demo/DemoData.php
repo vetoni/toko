@@ -8,6 +8,7 @@ use app\models\Comment;
 use app\models\NewsItem;
 use app\models\Page;
 use app\models\Product;
+use app\modules\install\models\Configuration;
 use app\modules\user\models\User;
 use Yii;
 
@@ -18,11 +19,11 @@ use Yii;
 class DemoData
 {
     /**
-     * @param $params
+     * @param Configuration $config
      * @throws \yii\base\Exception
      * @throws \yii\base\InvalidConfigException
      */
-    public static function create($params)
+    public static function create($config)
     {
         $language = substr(Yii::$app->language, 0, 2);
         $db = Yii::$app->getDb();
@@ -31,6 +32,8 @@ class DemoData
         $db->createCommand()->batchInsert('{{%settings}}', ['group','name','value'], [
             ['stock', 'outofstock', 0],
             ['stock', 'lowstock', 10],
+            ['general', 'shopEmail', $config->shopEmail],
+            ['general', 'adminEmail', $config->adminEmail],
         ])->execute();
 
         // Currencies
@@ -47,9 +50,9 @@ class DemoData
 
         // Users
         $root_auth_key = Yii::$app->security->generateRandomString();
-        $root_password = Yii::$app->security->generatePasswordHash($params['admin_password']);
+        $root_password = Yii::$app->security->generatePasswordHash($config->adminPassword);
         $user = new User([
-            'email' => 'admin.toko-webshop@gmail.com',
+            'email' => $config->adminEmail,
             'name' => 'admin',
             'country_id' => 'us',
             'address' => '7805 Southcrest Parkway, Southaven, MS(Mississippi) 38671',

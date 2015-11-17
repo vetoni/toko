@@ -18,10 +18,13 @@ $this->title = Yii::t('app', 'General settings');
 
 <section>
     <?php $form = ActiveForm::begin() ?>
-    <h4><?= Yii::t('app', 'Stock indicators') ?></h4>
-    <?= $form->field($model, 'stock.lowstock') ?>
-    <?= $form->field($model, 'stock.outofstock') ?>
-    <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-primary']) ?>
+        <h4><?= Yii::t('app', 'Shop settings') ?></h4>
+        <?= $form->field($model, 'general.shopEmail') ?>
+        <?= $form->field($model, 'general.adminEmail') ?>
+        <h4><?= Yii::t('app', 'Stock indicators') ?></h4>
+        <?= $form->field($model, 'stock.lowstock') ?>
+        <?= $form->field($model, 'stock.outofstock') ?>
+        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-primary']) ?>
     <?php ActiveForm::end() ?>
 </section>
 

@@ -1,0 +1,14 @@
+.star-rating {
+  direction: rtl;
+  width: 6.25em;
+}
+.star-rating__input {
+  display: none;
+}
+.editable.star-rating__ico:hover:before,
+.editable.star-rating__ico:hover ~ .editable.star-rating__ico:before,
+.star-rating__input:checked ~ .star-rating__ico:before {
+  cursor: pointer;
+  color: #FFB300;
+  content: "\f005";
+}

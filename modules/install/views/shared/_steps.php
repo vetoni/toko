@@ -9,7 +9,7 @@ use app\modules\install\assets\InstallAsset;
 $steps = [
     '1' => Yii::t('app', 'Check requirements'),
     '2' => Yii::t('app', 'Configure settings'),
-    '3' => Yii::t('app', 'Create demo data'),
+    '3' => Yii::t('app', 'Finish'),
 ];
 
 InstallAsset::register($this)

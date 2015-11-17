@@ -14,8 +14,10 @@ class GeneralSettings extends SettingsBase
     public function rules()
     {
         return [
-            [['stock.lowstock', 'stock.outofstock'], 'required'],
+            [['stock.lowstock', 'stock.outofstock', 'general.shopEmail', 'general.adminEmail'], 'required'],
             [['stock.lowstock', 'stock.outofstock'], 'integer'],
+            [['general.shopEmail', 'general.adminEmail'], 'string', 'max' => 255],
+            [['general.shopEmail', 'general.adminEmail'], 'email'],
         ];
     }
 
@@ -27,6 +29,8 @@ class GeneralSettings extends SettingsBase
         return [
             'stock.lowstock' => \Yii::t('app', 'Low stock'),
             'stock.outofstock' => \Yii::t('app', 'Out of stock'),
+            'general.shopEmail' => \Yii::t('app', 'Shop email'),
+            'general.adminEmail' => \Yii::t('app', 'Admin email'),
         ];
     }
 }

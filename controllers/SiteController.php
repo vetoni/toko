@@ -7,6 +7,7 @@ use app\api\Shop;
 use app\components\Controller;
 use app\components\Pages;
 use app\models\ContactForm;
+use app\models\Settings;
 use app\modules\user\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -91,7 +92,7 @@ class SiteController extends Controller
             $model->name = $identity->name;
             $model->email = $identity->email;
         }
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['shop.email'])) {
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Settings::value('general', 'shopEmail'))) {
             Yii::$app->session->setFlash('contactFormSubmitted');
             return $this->refresh();
         }
