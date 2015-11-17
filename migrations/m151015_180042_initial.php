@@ -17,6 +17,14 @@ class m151015_180042_initial extends Migration
      */
     public function up()
     {
+        $this->createTable('{{%settings}}', [
+            'id' => 'int(10) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT',
+            'group' => 'varchar(45) NOT NULL',
+            'name' => 'varchar(45) NOT NULL',
+            'value' => 'TEXT DEFAULT NULL',
+        ], $this->engine);
+        $this->createIndex('idx_settings', "{{%settings}}", ['group', 'name'], true);
+
         $this->createTable('{{%file}}', [
             'id' => 'int(10) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT',
             'name' => 'varchar(255) NOT NULL',
@@ -245,5 +253,6 @@ class m151015_180042_initial extends Migration
         $this->dropTable('{{%currency}}');
         $this->dropTable('{{%file_attachment}}');
         $this->dropTable('{{%file}}');
+        $this->dropTable('{{%settings}}');
     }
 }

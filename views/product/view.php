@@ -4,9 +4,11 @@ use app\api\CategoryObject;
 use app\api\ProductObject;
 use app\components\Pjax;
 use app\helpers\CurrencyHelper;
+use app\models\Settings;
 use app\modules\checkout\models\AddToCartForm;
 use app\modules\checkout\models\AddToWishListForm;
 use app\widgets\Rating;
+use app\widgets\StockIndicator;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 use yii\bootstrap\Tabs;
@@ -40,6 +42,7 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []
             ]) ?>
             <h1><?= $this->title ?></h1>
+            <?= StockIndicator::widget(['inventory' => $product->model->inventory]) ?>
             <p class="description"><?= $product->model->announce ?></p>
             <div class="add-to-wish-list">
                 <?php Pjax::begin() ?>
@@ -64,6 +67,7 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
                 echo Rating::widget(['name' => 'Product[rating]', 'value' => $product->model->rating , 'readonly' => true]);
                 Pjax::end();
             ?>
+            <?php if ($product->model->inventory > Settings::value('stock', 'outofstock')): ?>
             <div class="bordered">
                 <?php $form = ActiveForm::begin(['action' => ['/checkout/cart/add'], 'options' => ['class' => 'form-add-to-cart form-inline']]) ?>
                     <?= $form->field($formModel, 'quantity') ?>
@@ -71,6 +75,7 @@ $formModel = new AddToCartForm(['quantity' => '1', 'productId' => $product->mode
                     <?= Html::submitButton(Yii::t('app', 'Add to cart'), ['class' => 'btn btn-primary']) ?>
                 <?php ActiveForm::end() ?>
             </div>
+            <?php endif; ?>
         </div>
     </div>
     <?php

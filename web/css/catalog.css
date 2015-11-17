@@ -193,3 +193,12 @@
 .wish-list .total {
   border-top: 1px solid #dddddd;
 }
+.out-of-stock {
+  color: #ff3333;
+}
+.low-stock {
+  color: #ffcc00;
+}
+.in-stock {
+  color: #aadd00;
+}

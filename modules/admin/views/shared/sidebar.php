@@ -46,6 +46,12 @@ echo Menu::widget([
            'label' => '<i class="glyphicon glyphicon-rub"></i> ' . Yii::t('app', 'Currencies'),
            'scope' => ['currency']
        ],
+       [
+           'class' => 'active',
+           'url' => ['/admin/settings/index'],
+           'label' => '<i class="glyphicon glyphicon-cog"></i> ' . Yii::t('app', 'Settings'),
+           'scope' => ['settings']
+       ],
    ],
    'encodeLabels' => false,
    'options' => [

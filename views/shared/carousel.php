@@ -9,23 +9,10 @@ echo Carousel::widget([
     'items' => [
         [
             'content' => @Html::img("@web/files/img/carousel-item.jpg"),
-            'caption' => '<h1>Headline title</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique arcu urna, at malesuada dui accumsan sed. Aliquam sit amet lectus a nisl imperdiet volutpat.</p>
-<p><a class="btn btn-lg btn-primary">Learn more</a></p>',
             'options' => [],
         ],
         [
-            'content' => @Html::img("@web/files/img/carousel-item.jpg"),
-            'caption' => '<h1>Headline title</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique arcu urna, at malesuada dui accumsan sed. Aliquam sit amet lectus a nisl imperdiet volutpat. </p>
-<p><a class="btn btn-lg btn-primary">Learn more</a></p>',
-            'options' => [],
-        ],
-        [
-            'content' => @Html::img("@web/files/img/carousel-item.jpg"),
-            'caption' => '<h1>Headline title</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique arcu urna, at malesuada dui accumsan sed. Aliquam sit amet lectus a nisl imperdiet volutpat. </p>
-<p><a class="btn btn-lg btn-primary">Learn more</a></p>',
+            'content' => @Html::img("@web/files/img/carousel-item2.jpg"),
             'options' => [],
         ],
     ],

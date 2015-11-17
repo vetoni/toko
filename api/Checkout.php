@@ -102,6 +102,7 @@ class Checkout extends Api
                 $orderLine->price = CurrencyHelper::convert($line->price);
                 $order->link('orderLines', $orderLine);
             }
+            $this->reduceStocks($order);
             $cart->clear();
         }
         catch (Exception $e) {
@@ -115,6 +116,19 @@ class Checkout extends Api
             $this->sendOrderEmail($order, $adminEmail);
         }
         return $order;
+    }
+
+    /**
+     * @param Order $order
+     */
+    protected function reduceStocks($order)
+    {
+        foreach ($order->orderLines as $line) {
+            if ($line->product) {
+                $line->product->inventory -= $line->quantity;
+                $line->product->save();
+            }
+        }
     }
 
     /**

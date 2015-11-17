@@ -27,6 +27,12 @@ class DemoData
         $language = substr(Yii::$app->language, 0, 2);
         $db = Yii::$app->getDb();
 
+        // Settings
+        $db->createCommand()->batchInsert('{{%settings}}', ['group','name','value'], [
+            ['stock', 'outofstock', 0],
+            ['stock', 'lowstock', 10],
+        ])->execute();
+
         // Currencies
         $db->createCommand()->batchInsert('{{%currency}}', ['code', 'name', 'is_default', 'rate', 'symbol'], [
             ['EUR', 'Euro', 0, 0.0145, '€'],
