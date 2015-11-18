@@ -5,6 +5,7 @@ namespace app\helpers;
 use app\models\Currency;
 use app\modules\user\models\Country;
 use app\modules\user\models\User;
+use yii\base\Exception;
 use yii\base\InvalidConfigException;
 
 /**
@@ -120,6 +121,9 @@ class CurrencyHelper
             else {
                 $url = 'http://finance.yahoo.com/d/quotes.csv?e=.csv&f=sl1d1t1&s='. $defaultCurrency->code . $currency->code .'=X';
                 $handle = @fopen($url, 'r');
+                if ($handle === false) {
+                    throw new Exception('Can not connect to exchange rates provider service.');
+                }
                 $result = fgets($handle, 4096);
                 fclose($handle);
                 $currencyData = explode(',', $result);

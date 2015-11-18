@@ -9,9 +9,9 @@ NavBar::begin([
 ]);
 Nav::begin([
     'items' => [
-        ['label' => 'Wish List', 'url' => ['/checkout/wish-list/index']],
-        ['label' => 'Shopping cart', 'url' => ['/checkout/cart/index']],
-        ['label' => 'Checkout', 'url' => ['/checkout/order/address']],
+        ['label' => Yii::t('app', 'Wish List'), 'url' => ['/checkout/wish-list/index']],
+        ['label' => Yii::t('app', 'Shopping cart'), 'url' => ['/checkout/cart/index']],
+        ['label' => Yii::t('app', 'Checkout'), 'url' => ['/checkout/order/address']],
     ],
     'options' => ['class' =>'navbar-nav']
 ]);

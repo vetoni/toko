@@ -45,8 +45,7 @@ class DemoData
         ])->execute();
 
         // Countries
-        $countries = "countries_{$language}";
-        static::$countries($db);
+        static::callLocalized('countries', $language);
 
         // Users
         $root_auth_key = Yii::$app->security->generateRandomString();
@@ -64,24 +63,19 @@ class DemoData
         $user->save();
 
         // Categories
-        $categories = "categories_{$language}";
-        static::$categories();
+        static::callLocalized('categories', $language);
 
         // Products
-        $products = "products_{$language}";
-        static::$products();
+        static::callLocalized('products', $language);
 
         // Comments
-        $comments = "comments_{$language}";
-        static::$comments();
+        static::callLocalized('comments', $language);
 
         // Pages
-        $pages = "pages_{$language}";
-        static::$pages();
+        static::callLocalized('pages', $language);
 
         // News
-        $news = "news_{$language}";
-        static::$news();
+        static::callLocalized('news', $language);
 
         // Relations
         $db->createCommand()->batchInsert('{{%relation}}', ['item_id', 'related_id', 'model'], [
@@ -92,6 +86,20 @@ class DemoData
         ])->execute();
     }
 
+    public static function countries_ru()
+    {
+        $db = Yii::$app->getDb();
+        $db->createCommand()->batchInsert('{{%country}}',
+            ['id', 'name', 'currency_code'],
+            [
+                ['ru', 'Россия', 'RUB'],
+                ['ua', 'Украина', 'UAH'],
+                ['de', 'Германия', 'EUR'],
+                ['us', 'Соединённые Штаты Америки', 'USD'],
+            ]
+        )->execute();
+    }
+
     public static function countries_en()
     {
         $db = Yii::$app->getDb();
@@ -100,10 +108,69 @@ class DemoData
             [
                 ['ru', 'Russia', 'RUB'],
                 ['ua', 'Ukraine', 'UAH'],
-                ['uk', 'United Kingdom', 'EUR'],
+                ['de', 'Germany', 'EUR'],
                 ['us', 'United States', 'USD'],
             ]
         )->execute();
+    }
+
+    public static function categories_ru()
+    {
+        static::buildCategoryTree([
+            [
+                'name' => 'Ноутбуки и компьютеры',
+                'nodes' => [
+                    ['name' => 'Настольные ПК'],
+                    ['name' => 'Ноутбуки'],
+                    ['name' => 'Планшеты'],
+                ]
+            ],
+            [
+                'name' => 'Аксессуары',
+                'nodes' => [
+                    ['name' => 'Мыши'],
+                    ['name' => 'Клавиатуры'],
+                    ['name' => 'Мониторы'],
+                    ['name' => 'Акустика'],
+                ]
+            ],
+            [
+                'name' => 'Компьютерное железо',
+                'nodes' => [
+                    [
+                        'name' => 'Компьютерные компоненты',
+                        'nodes' => [
+                            ['name' => 'Процессоры'],
+                            ['name' => 'Материнские платы'],
+                            ['name' => 'Видео карты'],
+                        ]
+                    ],
+                    [
+                        'name' => 'Устройства хранения данных',
+                        'nodes' => [
+                            ['name' => 'Внутренние жесткие диски'],
+                            ['name' => 'SSD-накопители'],
+                            ['name' => 'Внешние жесткие диски'],
+                        ]
+                    ],
+                    [
+                        'name' => 'Сетевое оборудывание',
+                        'nodes' => [
+                            ['name' => 'Беспроводные сети'],
+                            ['name' => 'Маршрутизаторы'],
+                        ]
+                    ],
+                ]
+            ],
+            [
+                'name' => 'Игровые устройства',
+                'nodes' => [
+                    ['name' => 'Xbox One'],
+                    ['name' => 'PlayStation 4'],
+                    ['name' => 'PS Vita'],
+                ]
+            ],
+        ]);
     }
 
     public static function categories_en()
@@ -165,6 +232,51 @@ class DemoData
         ]);
     }
 
+    public static function products_ru()
+    {
+        static::saveProducts([
+            [
+                'id' => 1,
+                'category_id' => '2',
+                'name' => 'LENOVO H30 настольный ПК',
+                'announce' => '<ul><li>ОС: Windows</li><li>Процессор: AMD A8-6410 APU</li><li>Память: 8 GB</li><li>Жесткий диск: 1 TB</li><li>Встроенный WiFi</li></ul>',
+                'description' => '<p>Компактный дизайн и надежный процессор от AMD делает <strong>Lenovo H30</strong> настольный ПК хорошим выбором на сегодня.<strong></strong></p><p><strong>Windows 10</strong><br> Если вы опытный пользователь Windows, вы будете рады возвращению кнопки Пуск и знакомого меню, в то время как каждый выиграет от многочисленных новых и интересных функций, предназначенных для того, чтобы сделать работу с ПК быстрой и легкой. Windows 10 представляет новый браузер Edge, который дает вам гораздо большую область обзора для наслаждения онлайн-контентом. Вы можете написать заметки прямо внутри веб-страницы и делиться ими с кем то - идеально подходит для студентов или бизнеса. Работа с разными программами или следжение в социальных сетях стало простым как никогда. Теперь можно привязать до четырех приложений в любое место на экране для легкой многозадачности. Вы даже можете создать отдельные рабочие столы для конкретных проектов и задач.Что бы вы не делали, Windows 10 заставит ваш компьютер работать так, как вы хотите.<strong><br> <br> <strong>Надежные вычисления</strong></strong>  <br> Наслаждайтесь быстрыми и надежными вычислениями, начиная от эссе и заканчивая работой над проектами с процессором AMD A8-6410 quad-core.<br>Имея 8 Гб оперативной памяти, вы сможете эффективно запускать множество приложений, таких как фото редакторы, или играть компьютерные игры.</p>',
+                'old_price' => 22200.00,
+                'price' => 30000.00,
+                'inventory' => 50
+            ],
+            [
+                'id' => 2,
+                'category_id' => '2',
+                'name' => 'HP Pavilion 23-q055na ПК с сенсорным экраном',
+                'announce' => '<ul><li>Windows</li><li>Intel® Core™ i5-4460T процессор</li><li>Память: 8 GB</li><li>Жесткий диск: 1 TB</li><li>Встроенный WiFi</li></ul>',
+                'description' => '<p>Красиво спроектирован и в комплекте со стильным стендом с алюминиевым покрытием, <strong>HP Pavilion 23-q055na </strong>ПК с сенсорным экраном<strong> </strong>обеспечивает мощные вычислительные возможности каждый день.</p><p><strong>Intel® Core™ i-5 процессор</strong></p><p>Оснащен процессором <strong>Intel® Core™ i5-4460T quad-core</strong> и 8 Гб оперативной памяти, <strong>23-q055na </strong>выводит вашу мультизадачость на следующий уровень. Если вы просматриваете страницы в интернете, самый новый блокбастер или работаете с более требовательными программами, <strong>23-q055na </strong>удовлетворит<strong> </strong>все ваши нужды. Идеальный для домашнего пользования, вы можете спокойно переключаться между множеством программ без опасений, что ваш компьютер сломается.</p><p><strong>Развлечения на полную</strong></p><p><strong></strong>23-q055na сенсорный экран<strong> </strong>может похвастаться 23 дюймовым стеклянным IPS экраном, который оживляет картинку. С Full HD экраном вы можете наслаждаться вашими любимыми фильмами и ТВ шоу в прекрасном качестве.</p><p><strong>HP Connected Music</strong></p><p>Наслаждайтесь неограниченным доступом к вашим радио плейлистам на целых 12 месяцев с HP Connected Music, полностью бесплатно. Слушайте новейшие треки, без рекламы и даже с шансом получения билета на концерты любимых исполнителей.<strong></strong></p><p><strong>Windows 10</strong><br> Если вы опытный пользователь Windows, вы будете рады возвращению кнопки Пуск и знакомого меню, в то время как каждый выиграет от многочисленных новых и интересных функций, предназначенных для того, чтобы сделать работу с ПК быстрой и легкой. Windows 10 представляет новый браузер Edge, который дает вам гораздо большую область обзора для наслаждения онлайн-контентом. Вы можете написать заметки прямо внутри веб-страницы и делиться ими с кем то - идеально подходит для студентов или бизнеса.Работа с разными программами или следжение в социальных сетях стало простым как никогда; Теперь можно привязать до четырех приложений в любое место на экране для легкой многозадачности. Вы даже можете создать отдельные рабочие столы для конкретных проектов и задач. Что бы вы не делали, Windows 10 заставит ваш компьютер работать так, как вы хотите.</p>',
+                'old_price' => 36500.00,
+                'price' => 38000.00,
+                'inventory' => 10
+            ],
+            [
+                'id' => 3,
+                'category_id' => '2',
+                'name' => 'LENOVO IdeaCentre AIO 700 23.8" ПК с сенсорным экраном',
+                'announce' => '<ul><li>Камера Intel® RealSense™ 3D</li><li>Windows 10 (пред-установлена)</li><li>Intel® Core™ i5-6400 процессор</li><li>Видео: NVIDIA GeForce GT 930</li><li>Жесткий диск: 2 TB</li></ul>',
+                'description' => '<p>Наслаждайтесь быстрыми вычислительными возможностями и обработкой графики с домашним ПК <strong>Lenovo IdeaCentre</strong> <strong>AIO 700 23.8"</strong>. <br> <strong><strong><br>Мощные вычислительные</strong> возможности</strong><br>Комбинация 6-го поколения процессоров quad-core Intel® Core™ i5 и видеократы от NVIDIA обеспечивает вам потрясающие возможности для графического дизайна. Работает быстрее и надежнее с технологией Intel® Turbo Boost, которая ускоряет вашу производительность в разы. Начиная от редактирования фото и заканчивая написанием эссе, вы сможете убедится в том, настолько это быстро. Также компьютер оснащен 2 гигабайтами жесткого диска, позволяя вам забыть об экономии свободного места для хранения ваших фотографий и видео. Резервное копирование благодаря USB 3.0 тоже проще простого, даже в случае больших объемов данных.<strong><br> <br> <strong><strong><strong>Камера</strong></strong> Intel® RealSense™ </strong><br> </strong><strong><strong>IdeaCentre</strong> 700 </strong>и <strong>Intel® RealSense™</strong>. Эта передовая технология работает через веб камеру и дает полноту свободы действий. Вы можете использовать камеру RealSense™ для сканирования объектов и людей в 3D, снимать фотографии с отображением всех необходимых измерений, рефокусировать фотографии после съемки и другое.<strong><br> <br> Звук и визуальные эффекты<strong></strong></strong> <br>Благодаря сенсорному Full HD экрану вы сможете насладиться потрясающим качеством картинки. Разрешение в 1080p как раз идет в ногу с множеством новейших HD фильмов, то есть вы можете просматривать фильмы без потери качества в сравнении с вашим ТВ экраном - идеальный вариант если вы не поделили .<strong><br> <br> Сенсорный экран<strong></strong></strong><br> Навигация по документам, в интернете и программах очень проста с использованием сенсорных экранов. Просто дотрагивайтесь, нажимайте и проводите пальцем по экрану так же как вы делаете это в вашем планшете или смартфоне. Не важно что вы делаете, играете или работаете, сенсорный экран приносит порою так необходимую простоту вашим действиям.<br></p>',
+                'price' => 54400.00,
+                'inventory' => 25
+            ],
+            [
+                'id' => 4,
+                'category_id' => '2',
+                'name' => 'Asus AMD A10-Series - 8GB Memory - 1TB Hard Drive - Домашний ПК, Серый',
+                'announce' => '<ul><li>Intel Core i7 4790 (3.6 GHz)</li><li>8 GB DDR3 1 TB HDD 8 GB SSD</li><li>Windows 10 Home 64-Bit</li><li>NVIDIA GeForce GTX 760 2 GB</li></ul>',
+                'description' => '<p><b>Операционная система Microsoft Windows 8.1</b></p><p>Вы можете обновиться к Windows 10 бесплатно.</p><p><b>Процессор AMD A10-7800 с графикой AMD R7</b></p><p>Дает необходимую производительность.</p><p><b>Память 8GB DDR3</b></p><p>Для многозадачности, может быть легко расширена до 16GB.</p><p><b>Multiformat DVD±RW/CD-RW drive</b></p><p>Создавайте свои DVD и CD.</p><p><b>Жесткий диск 1TB Serial ATA (7200 rpm)</b></p><p>Предлагает просторное хранилище с очень быстрым временем чтения/записи. Так же включает 100GB веб хранилища на 1 год для хранения фотографий, видео и других данных.<br></p><p><b>Графика AMD R7</b></p><p>Дает чистую картинку. HDMI и VGA (D-sub) выходы дают возможности гибкого подключения.</p><p><b>6-in-1 кард ридер</b></p><p>Поддерживает SD, SDHC, MS, MS PRO, xD-Picture Card и MMC форматы.</p><p><b>2 USB 3.0 и 4 USB 2.0 порты</b></p><p>Для быстрого обмена цифровым видео, аудио и данными.</p><p><b>Встроенный адаптер к <b>высокоскоростных и беспроводных сетей </b>LAN (802.11ac)</b></p><p>Позволяет вам подключаться к интернету без проводов.</p><p><b>Встроенная сетевая карта 10/100/1000 Mbps Ethernet LAN</b></p><p>С RJ-45 проводами для быстрого и простого проводного доступа к интернету.</p>',
+                'price' => 34500.00,
+                'inventory' => 70
+            ],
+
+        ]);
+    }
+
     public static function products_en()
     {
         static::saveProducts([
@@ -210,6 +322,24 @@ class DemoData
         ]);
     }
 
+    public static function comments_ru()
+    {
+        (new Comment([
+            'product_id' => 3,
+            'user_id' => 1,
+            'rating' => 5.00,
+            'body' => 'Какой крутой ПК !! :)'
+        ]))->save();
+
+        (new Comment([
+            'product_id' => 2,
+            'user_id' => 1,
+            'rating' => 4.00,
+            'body' => 'Ну.. с таким микрпроцессором могло быть и подешевле.'
+        ]))->save();
+
+    }
+
     public static function comments_en()
     {
         (new Comment([
@@ -226,6 +356,91 @@ class DemoData
             'body' => 'Well, microprocessor is not powerful...'
         ]))->save();
 
+    }
+
+    public static function pages_ru()
+    {
+        static::savePages([
+            [
+                'id' => Pages::SHOP_BY_CATEGORY,
+                'name' => 'Магазин по категориям',
+                'announce' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br>Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::SHOPPING_CART,
+                'name' => 'Корзина покупок',
+                'announce' => 'Товары ниже уже в вашей корзине. Для заказа нажмите \'Оформление заказа\'.',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::CHECKOUT,
+                'name' => 'Оформление заказа',
+                'announce' => 'Пожалуйста заполните ваши контактные данные.',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::ORDER_SUCCESS,
+                'name' => 'Успешный заказ',
+                'announce' => 'Ваш заказ успешно создан. Наш менедже свяжется с вами как можно скорее.',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::ORDER_FAILED,
+                'name' => 'Заказ отменен',
+                'announce' => 'Мы не можем обработать ваш заказ. Пожалуйста попробуйте позже или свяжитесь с нашей администрацией.',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::SEARCH_RESULTS,
+                'name' => 'Результаты поиска',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::WISH_LIST,
+                'name' => 'Список пожеланий',
+                'announce' => 'Продукты ниже уже есть в списке ваших пожеланий.',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::HOME_PAGE,
+                'name' => 'Home',
+                'announce' => '<h1>Добро пожаловать в Toko</h1>',
+                'content' => '<p>Магазин предоставляет компютерные аксессуары и оборудование, жесткие диски, накопители, программы, игровые устройства.</p>',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::CONTACT,
+                'name' => 'Contact',
+                'announce' => 'Если у вас есть деловые предложения или другие вопросы, пожалуйста заполните форму ниже. Спасобо.',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::FAQ,
+                'name' => 'Вопросы и ответы',
+                'content' => '<p><strong>Question:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><blockquote><strong>Answer:</strong> Nulla in rhoncus arcu. Integer in justo mauris. Suspendisse ac nunc bibendum, malesuada ipsum egestas, viverra metus. Donec congue nisi molestie, pharetra orci volutpat, porttitor nulla. Aenean ut velit mollis, aliquam sem et, sollicitudin metus. Sed blandit orci quis justo ornare posuere.</blockquote><p><strong>Question:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><blockquote><strong>Answer:</strong> Nulla in rhoncus arcu. Integer in justo mauris. Suspendisse ac nunc bibendum, malesuada ipsum egestas, viverra metus. Donec congue nisi molestie, pharetra orci volutpat, porttitor nulla. Aenean ut velit mollis, aliquam sem et, sollicitudin metus. Sed blandit orci quis justo ornare posuere.</blockquote><p><strong>Question:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><blockquote><strong>Answer:</strong> Nulla in rhoncus arcu. Integer in justo mauris. Suspendisse ac nunc bibendum, malesuada ipsum egestas, viverra metus. Donec congue nisi molestie, pharetra orci volutpat, porttitor nulla. Aenean ut velit mollis, aliquam sem et, sollicitudin metus. Sed blandit orci quis justo ornare posuere.</blockquote>',
+                'is_system' => 1,
+            ],
+            [
+                'id' => Pages::ABOUT,
+                'name' => 'О нас',
+                'announce' => '<p><strong>Адрес</strong>: Россия, Краснодар, ул. Северная 123</p><p><strong>Почтовый индекс</strong>: 123456</p><p><strong>Телефон</strong>: +1 234 56-78</p><p><strong>E-mail</strong>: %SHOP_EMAIL%</p>',
+                'content' => '<img src="https://api-maps.yandex.ru/services/constructor/1.0/static/?sid=QtHQOIuPwPbamKVt5PSNsCFDls2UZuXI&width=500&height=400&lang=ru_UA&sourceType=constructor" alt=""/>',
+                'is_system' => 1,
+            ],
+            [
+                'id' => 1001,
+                'name' => 'Добро пожаловать в магазин TOKO',
+                'announce' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br>Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
+                'content' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris. </p><p> Etiam condimentum tellus nec porta sodales. Sed vel pulvinar magna, eget ornare mauris. Donec eu arcu nisi. Ut lectus est, vestibulum vel pulvinar quis, euismod et purus. Integer vel porttitor ligula, ac dapibus risus. Proin pellentesque lacus a tortor pharetra, quis feugiat lorem luctus. Nullam ut neque diam. Etiam id elit in nisl mattis ullamcorper. </p><p> Suspendisse sapien ex, elementum et turpis sed, viverra efficitur ex. Vivamus dui massa, vulputate sit amet luctus in, molestie sed turpis. Suspendisse a luctus neque. Cras id vestibulum erat, vitae ultricies nisi. Sed tempus diam non gravida vulputate. Sed aliquam leo sed blandit vestibulum. Aliquam molestie ultricies viverra. Cras sit amet viverra ante. Nullam viverra turpis quis tempor tempor. Praesent hendrerit tristique nunc quis accumsan. Curabitur eleifend, lorem nec commodo auctor, lacus ipsum tempor felis, ullamcorper facilisis est metus nec libero. Fusce porta mauris vitae mauris posuere finibus. </p><p> Nullam tempus, libero sed tincidunt egestas, nunc ipsum fringilla risus, laoreet egestas nisi mi in lacus. Nulla elementum ipsum vestibulum velit porta, non ornare dolor porttitor. Vivamus sagittis sagittis tincidunt. Donec in nisl ut quam laoreet volutpat. Ut molestie enim dignissim, pretium tellus in, vulputate nisl. Pellentesque vel condimentum quam. Suspendisse ex dolor, vulputate eget lacus et, pulvinar fermentum erat. Nulla et tincidunt urna. Vivamus consectetur ante varius risus iaculis, nec consequat lacus hendrerit. Aliquam vel auctor tellus. Phasellus pretium nisl sed fermentum molestie. Morbi dui elit, venenatis vitae ipsum vitae, finibus pellentesque nunc. Quisque facilisis lacinia elit non vulputate. </p><p> Integer lacinia rutrum libero in euismod. Quisque posuere non ligula sit amet hendrerit. Etiam cursus dolor at orci ultrices aliquet. Vestibulum urna nibh, cursus sed ultrices eu, consequat a tortor. Duis in nunc ornare, aliquet risus nec, tristique orci. Vestibulum vel lacinia libero. Integer viverra metus ullamcorper, porta quam sit amet, lacinia nunc. Ut fermentum porta dui id euismod. Aenean gravida, risus eget interdum viverra, sem justo eleifend lacus, ultricies fermentum mi turpis non nibh. Praesent vel lacus sed velit convallis venenatis eu suscipit ligula. Maecenas pretium imperdiet sodales. </p>',
+            ],
+            [
+                'id' => 1002,
+                'name' => 'Что это?',
+                'announce' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br>Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
+                'content' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris. </p><p> Etiam condimentum tellus nec porta sodales. Sed vel pulvinar magna, eget ornare mauris. Donec eu arcu nisi. Ut lectus est, vestibulum vel pulvinar quis, euismod et purus. Integer vel porttitor ligula, ac dapibus risus. Proin pellentesque lacus a tortor pharetra, quis feugiat lorem luctus. Nullam ut neque diam. Etiam id elit in nisl mattis ullamcorper. </p><p> Suspendisse sapien ex, elementum et turpis sed, viverra efficitur ex. Vivamus dui massa, vulputate sit amet luctus in, molestie sed turpis. Suspendisse a luctus neque. Cras id vestibulum erat, vitae ultricies nisi. Sed tempus diam non gravida vulputate. Sed aliquam leo sed blandit vestibulum. Aliquam molestie ultricies viverra. Cras sit amet viverra ante. Nullam viverra turpis quis tempor tempor. Praesent hendrerit tristique nunc quis accumsan. Curabitur eleifend, lorem nec commodo auctor, lacus ipsum tempor felis, ullamcorper facilisis est metus nec libero. Fusce porta mauris vitae mauris posuere finibus. </p><p> Nullam tempus, libero sed tincidunt egestas, nunc ipsum fringilla risus, laoreet egestas nisi mi in lacus. Nulla elementum ipsum vestibulum velit porta, non ornare dolor porttitor. Vivamus sagittis sagittis tincidunt. Donec in nisl ut quam laoreet volutpat. Ut molestie enim dignissim, pretium tellus in, vulputate nisl. Pellentesque vel condimentum quam. Suspendisse ex dolor, vulputate eget lacus et, pulvinar fermentum erat. Nulla et tincidunt urna. Vivamus consectetur ante varius risus iaculis, nec consequat lacus hendrerit. Aliquam vel auctor tellus. Phasellus pretium nisl sed fermentum molestie. Morbi dui elit, venenatis vitae ipsum vitae, finibus pellentesque nunc. Quisque facilisis lacinia elit non vulputate. </p><p> Integer lacinia rutrum libero in euismod. Quisque posuere non ligula sit amet hendrerit. Etiam cursus dolor at orci ultrices aliquet. Vestibulum urna nibh, cursus sed ultrices eu, consequat a tortor. Duis in nunc ornare, aliquet risus nec, tristique orci. Vestibulum vel lacinia libero. Integer viverra metus ullamcorper, porta quam sit amet, lacinia nunc. Ut fermentum porta dui id euismod. Aenean gravida, risus eget interdum viverra, sem justo eleifend lacus, ultricies fermentum mi turpis non nibh. Praesent vel lacus sed velit convallis venenatis eu suscipit ligula. Maecenas pretium imperdiet sodales. </p>',
+            ],
+        ]);
     }
 
     public static function pages_en()
@@ -294,7 +509,8 @@ class DemoData
             [
                 'id' => Pages::ABOUT,
                 'name' => 'About us',
-                'content' => '<p><strong>Address</strong>: USA, 331 S Patrick StAlexandria, VA 22314-3501</p><p><strong>ZIP</strong>: 123456</p><p><strong>Phone</strong>: +1 234 56-78</p><p><strong>E-mail</strong>: %SHOP_EMAIL%</p>',
+                'announce' => '<p><strong>Address</strong>: USA, 331 S Patrick StAlexandria, VA 22314-3501</p><p><strong>ZIP</strong>: 123456</p><p><strong>Phone</strong>: +1 234 56-78</p><p><strong>E-mail</strong>: %SHOP_EMAIL%</p>',
+                'content' => '<img src="https://api-maps.yandex.ru/services/constructor/1.0/static/?sid=E9vXA6vPbvlWDLvnMTMeXoB0B3EV46lX&width=500&height=400&lang=ru_UA&sourceType=constructor" alt=""/>',
                 'is_system' => 1,
             ],
             [
@@ -309,6 +525,27 @@ class DemoData
                 'announce' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br>Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
                 'content' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris. </p><p> Etiam condimentum tellus nec porta sodales. Sed vel pulvinar magna, eget ornare mauris. Donec eu arcu nisi. Ut lectus est, vestibulum vel pulvinar quis, euismod et purus. Integer vel porttitor ligula, ac dapibus risus. Proin pellentesque lacus a tortor pharetra, quis feugiat lorem luctus. Nullam ut neque diam. Etiam id elit in nisl mattis ullamcorper. </p><p> Suspendisse sapien ex, elementum et turpis sed, viverra efficitur ex. Vivamus dui massa, vulputate sit amet luctus in, molestie sed turpis. Suspendisse a luctus neque. Cras id vestibulum erat, vitae ultricies nisi. Sed tempus diam non gravida vulputate. Sed aliquam leo sed blandit vestibulum. Aliquam molestie ultricies viverra. Cras sit amet viverra ante. Nullam viverra turpis quis tempor tempor. Praesent hendrerit tristique nunc quis accumsan. Curabitur eleifend, lorem nec commodo auctor, lacus ipsum tempor felis, ullamcorper facilisis est metus nec libero. Fusce porta mauris vitae mauris posuere finibus. </p><p> Nullam tempus, libero sed tincidunt egestas, nunc ipsum fringilla risus, laoreet egestas nisi mi in lacus. Nulla elementum ipsum vestibulum velit porta, non ornare dolor porttitor. Vivamus sagittis sagittis tincidunt. Donec in nisl ut quam laoreet volutpat. Ut molestie enim dignissim, pretium tellus in, vulputate nisl. Pellentesque vel condimentum quam. Suspendisse ex dolor, vulputate eget lacus et, pulvinar fermentum erat. Nulla et tincidunt urna. Vivamus consectetur ante varius risus iaculis, nec consequat lacus hendrerit. Aliquam vel auctor tellus. Phasellus pretium nisl sed fermentum molestie. Morbi dui elit, venenatis vitae ipsum vitae, finibus pellentesque nunc. Quisque facilisis lacinia elit non vulputate. </p><p> Integer lacinia rutrum libero in euismod. Quisque posuere non ligula sit amet hendrerit. Etiam cursus dolor at orci ultrices aliquet. Vestibulum urna nibh, cursus sed ultrices eu, consequat a tortor. Duis in nunc ornare, aliquet risus nec, tristique orci. Vestibulum vel lacinia libero. Integer viverra metus ullamcorper, porta quam sit amet, lacinia nunc. Ut fermentum porta dui id euismod. Aenean gravida, risus eget interdum viverra, sem justo eleifend lacus, ultricies fermentum mi turpis non nibh. Praesent vel lacus sed velit convallis venenatis eu suscipit ligula. Maecenas pretium imperdiet sodales. </p>',
             ],
+        ]);
+    }
+
+    public static function news_ru()
+    {
+        static::saveNews([
+            [
+                'id' => 1,
+                'author_id' => 1,
+                'name' => 'Виртуальная реальность',
+                'announce' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris.',
+                'content' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris. </p><p> Etiam condimentum tellus nec porta sodales. Sed vel pulvinar magna, eget ornare mauris. Donec eu arcu nisi. Ut lectus est, vestibulum vel pulvinar quis, euismod et purus. Integer vel porttitor ligula, ac dapibus risus. Proin pellentesque lacus a tortor pharetra, quis feugiat lorem luctus. Nullam ut neque diam. Etiam id elit in nisl mattis ullamcorper. </p><p> Suspendisse sapien ex, elementum et turpis sed, viverra efficitur ex. Vivamus dui massa, vulputate sit amet luctus in, molestie sed turpis. Suspendisse a luctus neque. Cras id vestibulum erat, vitae ultricies nisi. Sed tempus diam non gravida vulputate. Sed aliquam leo sed blandit vestibulum. Aliquam molestie ultricies viverra. Cras sit amet viverra ante. Nullam viverra turpis quis tempor tempor. Praesent hendrerit tristique nunc quis accumsan. Curabitur eleifend, lorem nec commodo auctor, lacus ipsum tempor felis, ullamcorper facilisis est metus nec libero. Fusce porta mauris vitae mauris posuere finibus. </p><p> Nullam tempus, libero sed tincidunt egestas, nunc ipsum fringilla risus, laoreet egestas nisi mi in lacus. Nulla elementum ipsum vestibulum velit porta, non ornare dolor porttitor. Vivamus sagittis sagittis tincidunt. Donec in nisl ut quam laoreet volutpat. Ut molestie enim dignissim, pretium tellus in, vulputate nisl. Pellentesque vel condimentum quam. Suspendisse ex dolor, vulputate eget lacus et, pulvinar fermentum erat. Nulla et tincidunt urna. Vivamus consectetur ante varius risus iaculis, nec consequat lacus hendrerit. Aliquam vel auctor tellus. Phasellus pretium nisl sed fermentum molestie. Morbi dui elit, venenatis vitae ipsum vitae, finibus pellentesque nunc. Quisque facilisis lacinia elit non vulputate. </p><p> Integer lacinia rutrum libero in euismod. Quisque posuere non ligula sit amet hendrerit. Etiam cursus dolor at orci ultrices aliquet. Vestibulum urna nibh, cursus sed ultrices eu, consequat a tortor. Duis in nunc ornare, aliquet risus nec, tristique orci. Vestibulum vel lacinia libero. Integer viverra metus ullamcorper, porta quam sit amet, lacinia nunc. Ut fermentum porta dui id euismod. Aenean gravida, risus eget interdum viverra, sem justo eleifend lacus, ultricies fermentum mi turpis non nibh. Praesent vel lacus sed velit convallis venenatis eu suscipit ligula. Maecenas pretium imperdiet sodales. </p>',
+                'image_title' => 'Виртуальная реальность покорит мир? Это вопрос на миллион долларов.'
+            ],
+            [
+                'id' => 2,
+                'author_id' => 1,
+                'name' => 'Смортите мероприятия по Star Wars в Anaheim Live',
+                'announce' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris.',
+                'content' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus mollis justo ut congue. Morbi ipsum nulla, rutrum sit amet leo vitae, accumsan viverra nulla. Curabitur metus augue, accumsan quis porta ac, viverra sed diam. Suspendisse auctor risus iaculis euismod iaculis. Cras mauris nunc, faucibus ut tincidunt ac, eleifend euismod tellus. Aenean lobortis urna quis venenatis mattis. Integer sem tortor, porttitor nec elit sit amet, posuere malesuada lectus. In eget nisl posuere massa hendrerit ultrices sed quis velit. Praesent eget tincidunt ipsum. Nulla vitae aliquam diam, quis mattis mauris. </p><p> Etiam condimentum tellus nec porta sodales. Sed vel pulvinar magna, eget ornare mauris. Donec eu arcu nisi. Ut lectus est, vestibulum vel pulvinar quis, euismod et purus. Integer vel porttitor ligula, ac dapibus risus. Proin pellentesque lacus a tortor pharetra, quis feugiat lorem luctus. Nullam ut neque diam. Etiam id elit in nisl mattis ullamcorper. </p><p> Suspendisse sapien ex, elementum et turpis sed, viverra efficitur ex. Vivamus dui massa, vulputate sit amet luctus in, molestie sed turpis. Suspendisse a luctus neque. Cras id vestibulum erat, vitae ultricies nisi. Sed tempus diam non gravida vulputate. Sed aliquam leo sed blandit vestibulum. Aliquam molestie ultricies viverra. Cras sit amet viverra ante. Nullam viverra turpis quis tempor tempor. Praesent hendrerit tristique nunc quis accumsan. Curabitur eleifend, lorem nec commodo auctor, lacus ipsum tempor felis, ullamcorper facilisis est metus nec libero. Fusce porta mauris vitae mauris posuere finibus. </p><p> Nullam tempus, libero sed tincidunt egestas, nunc ipsum fringilla risus, laoreet egestas nisi mi in lacus. Nulla elementum ipsum vestibulum velit porta, non ornare dolor porttitor. Vivamus sagittis sagittis tincidunt. Donec in nisl ut quam laoreet volutpat. Ut molestie enim dignissim, pretium tellus in, vulputate nisl. Pellentesque vel condimentum quam. Suspendisse ex dolor, vulputate eget lacus et, pulvinar fermentum erat. Nulla et tincidunt urna. Vivamus consectetur ante varius risus iaculis, nec consequat lacus hendrerit. Aliquam vel auctor tellus. Phasellus pretium nisl sed fermentum molestie. Morbi dui elit, venenatis vitae ipsum vitae, finibus pellentesque nunc. Quisque facilisis lacinia elit non vulputate. </p><p> Integer lacinia rutrum libero in euismod. Quisque posuere non ligula sit amet hendrerit. Etiam cursus dolor at orci ultrices aliquet. Vestibulum urna nibh, cursus sed ultrices eu, consequat a tortor. Duis in nunc ornare, aliquet risus nec, tristique orci. Vestibulum vel lacinia libero. Integer viverra metus ullamcorper, porta quam sit amet, lacinia nunc. Ut fermentum porta dui id euismod. Aenean gravida, risus eget interdum viverra, sem justo eleifend lacus, ultricies fermentum mi turpis non nibh. Praesent vel lacus sed velit convallis venenatis eu suscipit ligula. Maecenas pretium imperdiet sodales. </p>',
+            ]
         ]);
     }
 
@@ -396,5 +633,18 @@ class DemoData
                 self::buildCategoryTree($node['nodes'], $category);
             }
         }
+    }
+
+    /**
+     * @param $name
+     * @param $language
+     */
+    protected static function callLocalized($name, $language)
+    {
+        $method = $name . '_' . $language;
+        if (!method_exists(get_class(), $method)) {
+            $method = $name . '_en';
+        }
+        static::$method();
     }
 }

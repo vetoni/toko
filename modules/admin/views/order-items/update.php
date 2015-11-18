@@ -7,7 +7,7 @@ use yii\helpers\Url;
 
 /** @var OrderData $model */
 
-$this->title = Yii::t('app', 'Update order');
+$this->title = Yii::t('app', 'Update order item');
 
 ?>
 

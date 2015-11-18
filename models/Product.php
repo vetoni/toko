@@ -90,7 +90,8 @@ class Product extends ActiveRecord
             'status' => Yii::t('app', 'Status'),
             'old_price' => Yii::t('app', 'Old Price'),
             'price' => Yii::t('app', 'Price'),
-            'inventory' => Yii::t('app', 'Inventory')
+            'inventory' => Yii::t('app', 'Inventory'),
+            'rating' => Yii::t('app', 'Rating')
         ];
     }
 

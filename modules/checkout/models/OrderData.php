@@ -46,7 +46,7 @@ class OrderData extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'int' => Yii::t('app', 'Int'),
+            'id' => Yii::t('app', 'ID'),
             'order_id' => Yii::t('app', 'Order ID'),
             'product_id' => Yii::t('app', 'Product ID'),
             'quantity' => Yii::t('app', 'Quantity'),

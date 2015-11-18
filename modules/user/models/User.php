@@ -85,7 +85,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => \Yii::t('app', 'Id'),
+            'id' => \Yii::t('app', 'ID'),
             'name' => \Yii::t('app', 'Name'),
             'country_id' => \Yii::t('app', 'Country'),
             'address' => \Yii::t('app', 'Address'),

@@ -27,10 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-md-6">
-            <?= str_replace('%SHOP_EMAIL%', Settings::value('general', 'shopEmail'), $page->model->content)  ?>
+            <?= str_replace('%SHOP_EMAIL%', Settings::value('general', 'shopEmail'), $page->model->announce)  ?>
         </div>
         <div class="col-md-6">
-            <img src="https://api-maps.yandex.ru/services/constructor/1.0/static/?sid=E9vXA6vPbvlWDLvnMTMeXoB0B3EV46lX&width=500&height=400&lang=ru_UA&sourceType=constructor" alt=""/>
+            <?= $page->model->content ?>
         </div>
     </div>
 </div>
