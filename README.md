@@ -8,10 +8,11 @@ Includes:
 - catalog (with product categories and products)
 - news
 - pages
-- currencies
+- multi-currency
 - image manager and HTML WYSIWYG redactor
 - making orders and order history
 - searching catalog
+- comments
 
 REQUIREMENTS
 ------------

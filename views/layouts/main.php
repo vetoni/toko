@@ -1,16 +1,19 @@
 <?php
 
+use yii\bootstrap\Html;
+
 /**
  * @var $this \yii\web\View
  * @var $content string
  */
+
 ?>
 <?php $this->beginContent('@app/views/layouts/base.php') ?>
     <div class="wrap">
         <?= $this->render('//shared/admin_panel') ?>
         <?= $this->render('//shared/header') ?>
         <a class="logo" href="/">
-            <?php //echo Html::img("@web/storage/img/logo.png") ?>
+            <?php echo Html::img("@web/files/img/logo.png") ?>
         </a>
         <?= $this->render('//shared/menu') ?>
         <?php
