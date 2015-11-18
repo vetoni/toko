@@ -39,5 +39,5 @@ Open website and navigate through the installer.
 
 Admin default credentials:
 
-- email: 
+- email: admin.toko-webshop@gmail.com
 - pass: demo
