@@ -22,8 +22,7 @@ The minimum requirement by this project template that your Web server supports P
 Required php extensions:
 
 - intl
-- imagick
-- gd
+- gd or imagick
 
 
 INSTALLATION
