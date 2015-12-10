@@ -87,7 +87,7 @@ class Product extends ActiveRecord
             'description' => Yii::t('app', 'Description'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'status' => Yii::t('app', 'Status'),
+            'status' => Yii::t('app', 'Published'),
             'old_price' => Yii::t('app', 'Old Price'),
             'price' => Yii::t('app', 'Price'),
             'inventory' => Yii::t('app', 'Inventory'),

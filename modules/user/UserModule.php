@@ -14,7 +14,7 @@ class UserModule extends Module
     /**
      * @var int
      */
-    public $userLoginDuration = 3600*24*30;
+    public $userLoginDuration = 2592000;
 
     /**
      * @var int

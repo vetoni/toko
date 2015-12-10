@@ -60,8 +60,9 @@ class Page extends ActiveRecord
             'content' => Yii::t('app', 'Content'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'status' => Yii::t('app', 'Status'),
-            'is_system' => Yii::t('app', 'Is System')
+            'status' => Yii::t('app', 'Published'),
+            'is_system' => Yii::t('app', 'Is System'),
+            'image' => Yii::t('app', 'Image'),
         ];
     }
 

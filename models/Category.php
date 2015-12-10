@@ -61,7 +61,8 @@ class Category extends Tree
             'slug' => Yii::t('app', 'Slug'),
             'announce' => Yii::t('app', 'Announce'),
             'description' => Yii::t('app', 'Description'),
-            'status' => Yii::t('app', 'Status'),
+            'image' => Yii::t('app', 'Image'),
+            'status' => Yii::t('app', 'Published'),
         ];
     }
 

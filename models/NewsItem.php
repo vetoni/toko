@@ -96,7 +96,8 @@ class NewsItem extends ActiveRecord
             'image_title' => Yii::t('app', 'Image Title'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'status' => Yii::t('app', 'Status'),
+            'status' => Yii::t('app', 'Published'),
+            'image' => Yii::t('app', 'Image'),
         ];
     }
 
