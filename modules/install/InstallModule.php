@@ -58,7 +58,8 @@ class InstallModule extends Module
             Yii::$app->urlManager->rules = [];
 
             if (substr(Yii::$app->request->pathInfo, 0, 7)  !== 'install') {
-                return Yii::$app->response->redirect(['/install']);
+                Yii::$app->response->redirect(['/install']);
+                Yii::$app->end();
             }
         }
     }

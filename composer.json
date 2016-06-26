@@ -14,18 +14,18 @@
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "yiidoc/yii2-redactor": "*"
+        "yiidoc/yii2-redactor": "*",
+	"yiisoft/yii2-imagine": "~2.0.0",
+        "2amigos/yii2-file-upload-widget": "~1.0",
+        "kartik-v/yii2-tree-manager": "@dev",
+        "newerton/yii2-fancybox": "dev-master",
+        "rmrevin/yii2-fontawesome": "2.10.*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
-        "yiisoft/yii2-faker": "*",
-        "yiisoft/yii2-imagine": "~2.0.0",
-        "2amigos/yii2-file-upload-widget": "~1.0",
-        "kartik-v/yii2-tree-manager": "@dev",
-        "newerton/yii2-fancybox": "dev-master",
-        "rmrevin/yii2-fontawesome": "2.10.*"
+        "yiisoft/yii2-faker": "*"
     },
     "config": {
         "process-timeout": 1800

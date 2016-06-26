@@ -28,10 +28,10 @@ Required php extensions:
 INSTALLATION
 ------------
 
-Update composer:
+Install composer dependencies:
 
 ``` bash
-$ composer update
+$ composer install
 ```
 
 Add new virtual host to your web server config file like usual and map DocumentRoot to web directory inside TOKO folder.
